@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RZ Media — Selected Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0C;
+    --line: rgba(255,255,255,.12);
+    --chrome:#AEB5BD;
+    --chrome-dim:#6b7078;
+    --white:#F2F3F5;
+    --blue:#00AAFF;
+    --muted:#54585f;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'Space Mono', monospace; }
+  .display{ font-family:'Bricolage Grotesque', sans-serif; font-weight:700; letter-spacing:-0.01em; }
+
+  .wrap{ max-width:1040px; margin:0 auto; padding-left:clamp(20px,5vw,48px); padding-right:clamp(20px,5vw,48px); }
+
+  /* ===== Masthead ===== */
+  header{
+    border-bottom:1px solid var(--line);
+    padding:24px 0;
+  }
+  header .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px 16px;
+  }
+  .mark{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  .mark::before{ content:""; width:6px; height:6px; background:var(--blue); }
+  .mono-label{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--chrome-dim);
+  }
+
+  /* ===== List ===== */
+  main{ padding:clamp(36px,8vw,64px) 0 40px; }
+
+  .item{
+    border-top:1px solid var(--line);
+    padding:clamp(26px,6vw,40px) 0;
+  }
+  .item:last-child{ border-bottom:1px solid var(--line); }
+
+  .item-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:6px 16px;
+    margin-bottom:16px;
+  }
+
+  .item-head .client{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:700;
+    font-size:clamp(17px,4vw,20px);
+  }
+
+  .item-head .idx{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--chrome-dim);
+    white-space:nowrap;
+  }
+
+  .thumb{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    border:1px solid var(--line);
+    cursor:pointer;
+    overflow:hidden;
+  }
+  .thumb img, .thumb video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .thumb .empty{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .thumb .play{
+    position:absolute;
+    bottom:14px; left:14px;
+    font-family:'Space Mono', monospace;
+    font-size:10px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:#fff;
+    background:rgba(0,0,0,.55);
+    padding:5px 9px;
+    border:1px solid rgba(255,255,255,.25);
+  }
+
+  .why{
+    margin-top:16px;
+    font-size:14px;
+    line-height:1.6;
+    color:var(--chrome);
+    max-width:62ch;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    border-top:1px solid var(--line);
+    padding:24px 0;
+  }
+  footer .row{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:6px 16px;
+  }
+
+  /* ===== Lightbox (no motion) ===== */
+  .lightbox{
+    position:fixed; inset:0;
+    background:#050506;
+    z-index:50;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .lightbox.open{ display:flex; }
+
+  .lb-panel{
+    width:100%;
+    max-width:900px;
+    background:#0c0c10;
+    border:1px solid var(--line);
+  }
+  .lb-media{
+    aspect-ratio:16/9;
+    background:#000;
+    border-bottom:1px solid var(--line);
+  }
+  .lb-media video, .lb-media img{ width:100%; height:100%; object-fit:contain; background:#000; }
+  .lb-body{ padding:24px clamp(18px,3vw,32px) 30px; }
+  .lb-client{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:20px; margin-bottom:10px; }
+  .lb-why{ color:var(--chrome); font-size:14px; line-height:1.65; max-width:60ch; }
+
+  .lb-close, .lb-nav{
+    position:fixed;
+    width:38px; height:38px;
+    border:1px solid var(--line);
+    background:#0c0c10;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .lb-close{ top:20px; right:20px; }
+  .lb-nav.prev{ left:20px; top:50%; margin-top:-19px; }
+  .lb-nav.next{ right:20px; top:50%; margin-top:-19px; }
+  .lb-close svg, .lb-nav svg{ width:13px; height:13px; }
+
+  @media (max-width:640px){
+    .lb-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap row">
+    <div class="mark">RZ MEDIA</div>
+    <div class="mono-label">Selected Work</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="list"></div>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span class="mono-label">RZ Media — Montréal</span>
+    <span class="mono-label">rzmedia.net@gmail.com</span>
+  </div>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" id="lbClose" aria-label="Close">
+    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+  </div>
+  <div class="lb-nav prev" id="lbPrev" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="lb-nav next" id="lbNext" aria-label="Next">
+    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="lb-panel">
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-body">
+      <div class="lb-client" id="lbClient"></div>
+      <div class="lb-why" id="lbWhy"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   PROJECT DATA — edit this list only.
+   - mediaSrc: path/URL to the real video/image once uploaded. Leave null
+     until then — the thumbnail will just show "No media yet".
+   - type: "video" or "image"
+   - why: one line on why this content style fits this specific business.
+========================================================================== */
+const projects = [
+  {
+    client: "Car Healers",
+    type: "video",
+    mediaSrc: "videos/carhealers.mp4",
+    posterSrc: "videos/carhealers-poster.jpg",
+    why: "Chris on camera, in the shop, talking straight to the customer — it builds trust in the people behind the repair, not just the paint job. Since starting, Chris has become a recognizable face for the shop, with awareness growing steadily online."
+  },
+  {
+    client: "Roofstar",
+    type: "video",
+    mediaSrc: "videos/roofstar.mp4",
+    posterSrc: "videos/roofstar-poster.jpg",
+    why: "Judy leads on camera with a bold, hook-driven caption style — it turns a roofing quote into something worth watching, not skipping. It's helping build a strong online presence and a steady content library heading into the slower winter season."
+  },
+  {
+    client: "Crêpes en Rose",
+    type: "video",
+    mediaSrc: "videos/crepesenrose.mp4",
+    posterSrc: "videos/crepesenrose-poster.jpg",
+    why: "Behind-the-counter process shots with a punchy caption style — it sells the craft and the vibe of the shop, not just the menu. It helped build real hype and turnout for the launch event, well beyond what the shop could reach on its own."
+  },
+  {
+    client: "Shawarma Moods",
+    type: "video",
+    mediaSrc: "videos/shawarmamoods.mp4",
+    posterSrc: "videos/shawarmamoods-poster.jpg",
+    why: "A personality-led storytime hook pulls people in before they even know it's an ad — built for a fast scroll. It's helping the brand build a stronger, more recognizable presence online."
+  },
+  {
+    client: "MSS Tire Shine",
+    type: "video",
+    mediaSrc: "videos/msstireshine.mp4",
+    posterSrc: "videos/msstireshine-poster.jpg",
+    why: "A close-up, satisfying application shot with a clear caption — it shows exactly what the product does in the first few seconds. It's helping the brand build trust and visibility with a growing audience."
+  }
+];
+
+const list = document.getElementById('list');
+
+function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+function thumbInner(p){
+  if (p.mediaSrc && p.type === 'video') return `<video src="${p.mediaSrc}" poster="${p.posterSrc || ''}" muted playsinline preload="metadata"></video><span class="play">Play</span>`;
+  if (p.mediaSrc && p.type === 'image') return `<img src="${p.mediaSrc}" alt="${p.client}"><span class="play">View</span>`;
+  return `<div class="empty">No media yet</div>`;
+}
+
+projects.forEach((p, i) => {
+  const item = document.createElement('div');
+  item.className = 'item';
+  item.innerHTML = `
+    <div class="item-head">
+      <span class="client">${p.client}</span>
+      <span class="idx mono">${pad(i+1)} / ${pad(projects.length)}</span>
+    </div>
+    <div class="thumb" data-index="${i}">${thumbInner(p)}</div>
+    <div class="why">${p.why}</div>
+  `;
+  list.appendChild(item);
+});
+
+/* ===== Lightbox ===== */
+const lightbox = document.getElementById('lightbox');
+const lbMedia = document.getElementById('lbMedia');
+const lbClient = document.getElementById('lbClient');
+const lbWhy = document.getElementById('lbWhy');
+let currentIndex = 0;
+
+function renderLightbox(){
+  const p = projects[currentIndex];
+  lbClient.textContent = p.client;
+  lbWhy.textContent = p.why;
+  if (p.mediaSrc && p.type === 'video'){
+    lbMedia.innerHTML = `<video src="${p.mediaSrc}" poster="${p.posterSrc || ''}" controls autoplay loop playsinline></video>`;
+  } else if (p.mediaSrc && p.type === 'image'){
+    lbMedia.innerHTML = `<img src="${p.mediaSrc}" alt="${p.client}">`;
+  } else {
+    lbMedia.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;color:#54585f;letter-spacing:.05em;text-transform:uppercase;">No media uploaded yet</div>`;
+  }
+}
+function openLightbox(i){ currentIndex = i; renderLightbox(); lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeLightbox(){ lightbox.classList.remove('open'); document.body.style.overflow = ''; lbMedia.innerHTML = ''; }
+
+list.addEventListener('click', (e) => {
+  const t = e.target.closest('.thumb');
+  if (t) openLightbox(parseInt(t.dataset.index));
+});
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => { currentIndex = (currentIndex - 1 + projects.length) % projects.length; renderLightbox(); });
+document.getElementById('lbNext').addEventListener('click', () => { currentIndex = (currentIndex + 1) % projects.length; renderLightbox(); });
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + projects.length) % projects.length; renderLightbox(); }
+  if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % projects.length; renderLightbox(); }
+});
+</script>
+
+</body>
+</html>
