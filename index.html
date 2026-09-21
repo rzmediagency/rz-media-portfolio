@@ -4,13 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RZ Media — Selected Work</title>
+<meta name="description" content="Short-form video for Montréal local business.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0A0A0C;
-    --line: rgba(255,255,255,.12);
+    --panel:#0e0e12;
+    --line:rgba(255,255,255,.12);
     --chrome:#AEB5BD;
     --chrome-dim:#6b7078;
     --white:#F2F3F5;
@@ -21,173 +23,163 @@
   body{
     background:var(--bg);
     color:var(--white);
-    font-family:'Inter', -apple-system, sans-serif;
+    font-family:'Inter',-apple-system,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
   a{ color:inherit; text-decoration:none; }
-  .mono{ font-family:'Space Mono', monospace; }
-  .display{ font-family:'Bricolage Grotesque', sans-serif; font-weight:700; letter-spacing:-0.01em; }
-
-  .wrap{ max-width:1040px; margin:0 auto; padding-left:clamp(20px,5vw,48px); padding-right:clamp(20px,5vw,48px); }
+  .wrap{ max-width:1160px; margin:0 auto; padding-left:clamp(20px,5vw,48px); padding-right:clamp(20px,5vw,48px); }
+  .mono-label{
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--chrome-dim);
+  }
 
   /* ===== Masthead ===== */
-  header{
-    border-bottom:1px solid var(--line);
-    padding:24px 0;
-  }
-  header .row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:8px 16px;
-  }
-  .mark{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family:'Bricolage Grotesque', sans-serif;
-    font-weight:700;
-    font-size:16px;
-  }
+  header{ border-bottom:1px solid var(--line); padding:22px 0; }
+  header .row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; }
+  .mark{ display:flex; align-items:center; gap:8px; font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:16px; }
   .mark::before{ content:""; width:6px; height:6px; background:var(--blue); }
-  .mono-label{
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--chrome-dim);
+
+  /* ===== Intro ===== */
+  .intro{ padding:clamp(30px,6vw,52px) 0 clamp(22px,4vw,32px); }
+  .intro p{
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:700;
+    letter-spacing:-.02em; font-size:clamp(19px,3.4vw,27px); max-width:22ch; line-height:1.2;
   }
 
-  /* ===== List ===== */
-  main{ padding:clamp(36px,8vw,64px) 0 40px; }
-
-  .item{
-    border-top:1px solid var(--line);
-    padding:clamp(26px,6vw,40px) 0;
+  /* ===== Filters ===== */
+  .filters{ display:flex; flex-wrap:wrap; gap:8px; padding-bottom:26px; }
+  .chip{
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--chrome-dim); background:transparent; border:1px solid var(--line);
+    padding:8px 13px; cursor:pointer; transition:.15s;
   }
-  .item:last-child{ border-bottom:1px solid var(--line); }
+  .chip:hover{ color:var(--white); border-color:rgba(255,255,255,.28); }
+  .chip.active{ color:#04121c; background:var(--blue); border-color:var(--blue); font-weight:700; }
+  .chip .c{ opacity:.65; margin-left:5px; }
+  .chip.sort{ margin-left:auto; }
+  @media (max-width:640px){ .chip.sort{ margin-left:0; } }
 
-  .item-head{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:6px 16px;
-    margin-bottom:16px;
+  /* ===== Grid ===== */
+  main{ padding-bottom:clamp(48px,8vw,80px); }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:clamp(14px,2.4vw,22px); }
+
+  .tile{ cursor:pointer; border:0; background:none; padding:0; text-align:left; font:inherit; color:inherit; display:block; }
+  .tile .frame{
+    position:relative; width:100%; aspect-ratio:9/16;
+    background:#000; border:1px solid var(--line); overflow:hidden;
+    transition:border-color .18s, transform .18s;
+  }
+  .tile:hover .frame, .tile:focus-visible .frame{ border-color:var(--blue); transform:translateY(-3px); }
+  .tile:focus-visible .frame{ outline:2px solid var(--blue); outline-offset:2px; }
+  .tile .frame img, .tile .frame video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .tile .frame video{ position:absolute; inset:0; opacity:0; transition:opacity .2s; }
+  .tile .frame video.on{ opacity:1; }
+
+  .badge{
+    position:absolute; z-index:2;
+    font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.04em;
+    background:rgba(0,0,0,.66); border:1px solid rgba(255,255,255,.22);
+    color:#fff; padding:4px 7px;
+  }
+  .badge.dur{ bottom:10px; right:10px; }
+  .badge.views{
+    bottom:10px; left:10px; background:var(--blue); border-color:var(--blue);
+    color:#04121c; font-weight:700;
   }
 
-  .item-head .client{
-    font-family:'Bricolage Grotesque', sans-serif;
-    font-weight:700;
-    font-size:clamp(17px,4vw,20px);
-  }
-
-  .item-head .idx{
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    color:var(--chrome-dim);
-    white-space:nowrap;
-  }
-
-  .thumb{
-    position:relative;
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
-    border:1px solid var(--line);
-    cursor:pointer;
-    overflow:hidden;
-  }
-  .thumb img, .thumb video{ width:100%; height:100%; object-fit:cover; display:block; }
-
-  .thumb .empty{
-    width:100%; height:100%;
+  .playdot{
+    position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:46px; height:46px; border-radius:50%;
+    background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.4);
     display:flex; align-items:center; justify-content:center;
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:var(--muted);
+    transition:.18s; pointer-events:none;
+  }
+  .tile:hover .playdot{ background:var(--blue); border-color:var(--blue); }
+  .playdot svg{ width:14px; height:14px; margin-left:2px; }
+
+  .tile .meta{ padding:11px 2px 0; }
+  .tile .meta .cl{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:14px; }
+  .tile .meta .lb{ color:var(--chrome-dim); font-size:12.5px; line-height:1.45; margin-top:3px; }
+
+  /* ===== Empty state ===== */
+  .empty{
+    border:1px dashed var(--line); padding:clamp(34px,6vw,56px) 24px; text-align:center;
+  }
+  .empty p{ color:var(--muted); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.05em; text-transform:uppercase; }
+
+  /* ===== Lightbox ===== */
+  .lightbox{ position:fixed; inset:0; background:#050507; z-index:60; display:none; padding:clamp(14px,3vw,30px); overflow-y:auto; }
+  .lightbox.open{ display:block; }
+  .lb-inner{ min-height:100%; display:flex; align-items:center; justify-content:center; }
+  .lb-panel{ width:100%; max-width:940px; display:grid; grid-template-columns:minmax(0,320px) minmax(0,1fr); gap:clamp(18px,3vw,36px); align-items:start; }
+  .lb-media{ aspect-ratio:9/16; background:#000; border:1px solid var(--line); }
+  .lb-media video{ width:100%; height:100%; object-fit:contain; background:#000; display:block; }
+  .lb-body{ padding-top:4px; }
+  .lb-client{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:clamp(20px,3.4vw,26px); letter-spacing:-.02em; }
+  .lb-sector{ margin-top:6px; }
+  .lb-label{ margin-top:14px; font-size:15px; font-weight:600; }
+
+  /* hero view count */
+  .viewstat{
+    margin-top:22px; padding:18px 0 20px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  }
+  .viewstat .v{
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:700; color:var(--blue);
+    font-size:clamp(40px,8vw,60px); letter-spacing:-.035em; line-height:.9;
+  }
+  .viewstat .k{
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--chrome-dim);
   }
 
-  .thumb .play{
-    position:absolute;
-    bottom:14px; left:14px;
-    font-family:'Space Mono', monospace;
-    font-size:10px;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:#fff;
-    background:rgba(0,0,0,.55);
-    padding:5px 9px;
-    border:1px solid rgba(255,255,255,.25);
+  .lb-h{ margin-top:24px; }
+  .lb-why{ margin-top:9px; color:var(--chrome); font-size:14px; line-height:1.68; }
+
+  .lb-counter{ margin-top:26px; display:flex; align-items:center; gap:12px; }
+  .lb-btn{ border:1px solid var(--line); background:var(--panel); color:var(--white); width:34px; height:34px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .lb-btn:hover{ border-color:var(--blue); }
+  .lb-btn svg{ width:12px; height:12px; }
+  .lb-close{ position:fixed; top:16px; right:16px; z-index:61; width:38px; height:38px; border:1px solid var(--line); background:var(--panel); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .lb-close:hover{ border-color:var(--blue); }
+  .lb-close svg{ width:13px; height:13px; }
+
+  @media (max-width:760px){
+    .lb-panel{ grid-template-columns:1fr; max-width:400px; }
+  }
+  @media (max-width:640px){
+    .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .tile .meta .cl{ font-size:13px; }
+    .tile .meta .lb{ font-size:11.5px; }
   }
 
-  .why{
-    margin-top:16px;
-    font-size:14px;
-    line-height:1.6;
-    color:var(--chrome);
-    max-width:62ch;
+
+  /* ===== Closing CTA ===== */
+  .cta{ border-top:1px solid var(--line); padding:clamp(48px,8vw,88px) 0 clamp(44px,7vw,72px); }
+  .cta h2{
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:700; letter-spacing:-.03em;
+    font-size:clamp(28px,6vw,48px); line-height:1.05; margin-top:12px; max-width:16ch;
   }
+  .cta h2 em{ font-style:normal; color:var(--blue); }
+  .cta p{ margin-top:16px; color:var(--chrome); font-size:15px; line-height:1.65; max-width:50ch; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.07em; text-transform:uppercase;
+    padding:15px 22px; border:1px solid var(--line); transition:.16s; cursor:pointer;
+  }
+  .btn.primary{ background:var(--blue); border-color:var(--blue); color:#04121c; font-weight:700; }
+  .btn.primary:hover{ filter:brightness(1.12); }
+  .btn.ghost{ color:var(--white); }
+  .btn.ghost:hover{ border-color:var(--blue); color:var(--blue); }
+  .cta-note{ margin-top:18px; }
+  .cta-note .addr{ color:var(--chrome); user-select:all; }
 
   /* ===== Footer ===== */
-  footer{
-    border-top:1px solid var(--line);
-    padding:24px 0;
-  }
-  footer .row{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:6px 16px;
-  }
-
-  /* ===== Lightbox (no motion) ===== */
-  .lightbox{
-    position:fixed; inset:0;
-    background:#050506;
-    z-index:50;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-  }
-  .lightbox.open{ display:flex; }
-
-  .lb-panel{
-    width:100%;
-    max-width:900px;
-    background:#0c0c10;
-    border:1px solid var(--line);
-  }
-  .lb-media{
-    aspect-ratio:16/9;
-    background:#000;
-    border-bottom:1px solid var(--line);
-  }
-  .lb-media video, .lb-media img{ width:100%; height:100%; object-fit:contain; background:#000; }
-  .lb-body{ padding:24px clamp(18px,3vw,32px) 30px; }
-  .lb-client{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:20px; margin-bottom:10px; }
-  .lb-why{ color:var(--chrome); font-size:14px; line-height:1.65; max-width:60ch; }
-
-  .lb-close, .lb-nav{
-    position:fixed;
-    width:38px; height:38px;
-    border:1px solid var(--line);
-    background:#0c0c10;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-  }
-  .lb-close{ top:20px; right:20px; }
-  .lb-nav.prev{ left:20px; top:50%; margin-top:-19px; }
-  .lb-nav.next{ right:20px; top:50%; margin-top:-19px; }
-  .lb-close svg, .lb-nav svg{ width:13px; height:13px; }
-
-  @media (max-width:640px){
-    .lb-nav{ display:none; }
-  }
+  footer{ border-top:1px solid var(--line); padding:22px 0 40px; }
+  footer .row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px 16px; }
+  footer a:hover{ color:var(--blue); }
 </style>
 </head>
 <body>
@@ -195,147 +187,335 @@
 <header>
   <div class="wrap row">
     <div class="mark">RZ MEDIA</div>
-    <div class="mono-label">Selected Work</div>
+    <span class="mono-label">Montréal · FR / EN</span>
   </div>
 </header>
 
+<div class="wrap intro">
+  <p>Short-form video for Montréal local business.</p>
+</div>
+
 <main class="wrap">
-  <div id="list"></div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
 </main>
+
+<section class="cta">
+  <div class="wrap">
+    <span class="mono-label">Work with us</span>
+    <h2>Your <em>turn</em>.</h2>
+    <p>Tell us what you sell and who buys it. We film it, cut it, and hand it back ready to post.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=rzmedia.net%40gmail.com&amp;su=New%20project%20%E2%80%94%20RZ%20Media&amp;body=Hi%20RZ%20Media%2C%0A%0AMy%20business%3A%0AWhat%20I%27m%20looking%20for%3A%0A%0A%28Found%20you%20through%20your%20portfolio.%29" target="_blank" rel="noopener">
+        Start a project
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="#04121c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn ghost" href="https://ig.me/m/rzmediagency" target="_blank" rel="noopener">DM us on Instagram</a>
+    </div>
+    <p class="cta-note mono-label">or email <span class="addr">rzmedia.net@gmail.com</span> &nbsp;·&nbsp; Montréal — FR / EN</p>
+  </div>
+</section>
 
 <footer>
   <div class="wrap row">
     <span class="mono-label">RZ Media — Montréal</span>
-    <span class="mono-label">rzmedia.net@gmail.com</span>
+    <a class="mono-label" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=rzmedia.net%40gmail.com&amp;su=New%20project%20%E2%80%94%20RZ%20Media&amp;body=Hi%20RZ%20Media%2C%0A%0AMy%20business%3A%0AWhat%20I%27m%20looking%20for%3A%0A%0A%28Found%20you%20through%20your%20portfolio.%29" target="_blank" rel="noopener">rzmedia.net@gmail.com</a>
   </div>
 </footer>
 
 <!-- ============ LIGHTBOX ============ -->
-<div class="lightbox" id="lightbox">
-  <div class="lb-close" id="lbClose" aria-label="Close">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lb-close" id="lbClose" aria-label="Close" tabindex="0">
     <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
   </div>
-  <div class="lb-nav prev" id="lbPrev" aria-label="Previous">
-    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="lb-nav next" id="lbNext" aria-label="Next">
-    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="lb-panel">
-    <div class="lb-media" id="lbMedia"></div>
-    <div class="lb-body">
-      <div class="lb-client" id="lbClient"></div>
-      <div class="lb-why" id="lbWhy"></div>
+  <div class="lb-inner">
+    <div class="lb-panel">
+      <div class="lb-media" id="lbMedia"></div>
+      <div class="lb-body">
+        <div class="lb-client" id="lbClient"></div>
+        <div class="lb-sector mono-label" id="lbSector"></div>
+        <div class="lb-label" id="lbLabel"></div>
+        <div class="viewstat" id="lbStats"></div>
+        <div class="lb-h mono-label">Why it worked</div>
+        <div class="lb-why" id="lbWhy"></div>
+        <div class="lb-counter">
+          <div class="lb-btn" id="lbPrev" aria-label="Previous" tabindex="0">
+            <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="lb-btn" id="lbNext" aria-label="Next" tabindex="0">
+            <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="mono-label" id="lbCount"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
 /* ==========================================================================
-   PROJECT DATA — edit this list only.
-   - mediaSrc: path/URL to the real video/image once uploaded. Leave null
-     until then — the thumbnail will just show "No media yet".
-   - type: "video" or "image"
-   - why: one line on why this content style fits this specific business.
+   THE WORK LIST — this is the only part you edit.
+
+   A video shows on the site ONLY if it has an entry in CLIPS below.
+   Nothing is imported automatically. Delete an entry to pull that video.
+
+   To add one:
+     1. ./add-clip.sh incoming/your-video.mov carhealers "Label" FR
+     2. paste the block it prints into CLIPS
+     3. fill in views / why
 ========================================================================== */
-const projects = [
+
+const CLIENTS = {
+  carhealers:    { name: "Car Healers",     sector: "Auto body shop · Montréal" },
+  roofstar:      { name: "Roofstar",        sector: "Roofing · Greater Montréal" },
+  crepesenrose:  { name: "Crêpes en Rose",  sector: "Crêperie · Montréal" },
+  shawarmamoods: { name: "Shawarma Moods",  sector: "Restaurant · Montréal" },
+  msstireshine:  { name: "MSS Tire Shine",  sector: "Car care product" }
+};
+
+const CLIPS = [
   {
-    client: "Car Healers",
-    type: "video",
-    mediaSrc: "videos/carhealers.mp4",
-    posterSrc: "videos/carhealers-poster.jpg",
-    why: "Chris on camera, in the shop, talking straight to the customer — it builds trust in the people behind the repair, not just the paint job. Since starting, Chris has become a recognizable face for the shop, with awareness growing steadily online."
+    client: "carhealers",
+    file:   "carhealers-01",
+    label:  "Mustang build — before & after",
+    views:      4000,
+    why: "No voiceover, no pitch — just a tired Mustang going in and a finished car coming out, cut to music. A body shop only ever has to answer one question: can you make it look new again. A silent before/after answers it faster than any claim could, and because the argument is visual it still lands with the sound off, which is how most of the feed is watched."
   },
   {
-    client: "Roofstar",
-    type: "video",
-    mediaSrc: "videos/roofstar.mp4",
-    posterSrc: "videos/roofstar-poster.jpg",
-    why: "Judy leads on camera with a bold, hook-driven caption style — it turns a roofing quote into something worth watching, not skipping. It's helping build a strong online presence and a steady content library heading into the slower winter season."
+    client: "carhealers",
+    file:   "carhealers-02",
+    label:  "Accident? On s'occupe de tout",
+    views:      1500,
+    why: "The most direct piece in the set: names the problem in the first line, names the neighbourhood, and closes on a free estimate. It has the lowest view count here — and that's the trade-off worth understanding. Broad reach and booked jobs are different goals. This one isn't built to travel; it's built to catch the person who had an accident this week and needs somewhere to take the car."
   },
   {
-    client: "Crêpes en Rose",
-    type: "video",
-    mediaSrc: "videos/crepesenrose.mp4",
-    posterSrc: "videos/crepesenrose-poster.jpg",
-    why: "Behind-the-counter process shots with a punchy caption style — it sells the craft and the vibe of the shop, not just the menu. It helped build real hype and turnout for the launch event, well beyond what the shop could reach on its own."
+    client: "carhealers",
+    file:   "carhealers-03",
+    label:  "Customer testimonial — « super à l'aise »",
+    views:      5000,
+    why: "The strongest asset on this page. A real customer, on camera, says she found the shop on Instagram, read the comments, and came straight in — proof the channel works, captured inside the channel itself. Auto body is a trust-deficit trade where everyone assumes they're about to be overcharged. A stranger vouching for you dismantles that in a way the owner never can."
   },
   {
-    client: "Shawarma Moods",
-    type: "video",
-    mediaSrc: "videos/shawarmamoods.mp4",
-    posterSrc: "videos/shawarmamoods-poster.jpg",
-    why: "A personality-led storytime hook pulls people in before they even know it's an ad — built for a fast scroll. It's helping the brand build a stronger, more recognizable presence online."
+    client: "carhealers",
+    file:   "carhealers-04",
+    label:  "Shop floor — la Corvette bleue",
+    views:      4000,
+    why: "A joke opens it, then a real job carries it: a client's blue Corvette and the detail he wanted changed at the rear. The humour earns the watch, the specifics prove the competence. Every shop in the city posts the same repair photos, so the differentiator isn't the work — it's being a person people recognise. Chris has become that face for the shop."
   },
   {
-    client: "MSS Tire Shine",
-    type: "video",
-    mediaSrc: "videos/msstireshine.mp4",
-    posterSrc: "videos/msstireshine-poster.jpg",
-    why: "A close-up, satisfying application shot with a clear caption — it shows exactly what the product does in the first few seconds. It's helping the brand build trust and visibility with a growing audience."
+    client: "roofstar",
+    file:   "roofstar-01",
+    label:  "4 questions to ask before you sign",
+    views:      3000,
+    why: "The best-constructed video here. It arms the homeowner with four questions to ask any roofer — valid RBQ licence, insurance, warranty, recent work — and every one is a question Roofstar passes. You never claim to be the honest contractor; you hand people a test and let them discover you're the one who clears it. For a trade people are genuinely afraid of hiring, that's the whole game."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-02",
+    label:  "What your roof protects",
+    views:      2000,
+    why: "Short, and it sells the stakes rather than the shingles. Framing the roof as what protects the family shifts the purchase from a grudge expense to something worth doing properly. Roofing gets sold on price by default; this is the kind of piece that gives a homeowner permission to care about more than the quote."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-03",
+    label:  "See the work for yourself",
+    views:      2000,
+    why: "Drone footage is the cheat code for roofing: the customer can never actually see their own roof. Showing finished work from above delivers the one angle they can't get themselves, and it turns a portfolio into something people will watch. Proof beats persuasion in any trade where the work disappears once it's done."
+  },
+  {
+    client: "crepesenrose",
+    file:   "crepesenrose-01",
+    label:  "Bienvenue chez Crêpes en Rose",
+    views:      1500,
+    why: "A face and one concrete promise — everything prepped fresh that day. A new shop's problem isn't menu awareness, it's that nobody has attached a person to the place yet. One specific claim also outperforms the usual talk of quality and passion, because it's the kind of thing a competitor would have to match rather than just echo."
+  },
+  {
+    client: "crepesenrose",
+    file:   "crepesenrose-02",
+    label:  "Le paradis existe en 4 fromages",
+    views:      1500,
+    why: "No script — the cheese pull is the entire argument. Food doesn't travel on description, it travels on texture and sound, and this is built for the half-second where someone's thumb slows down. The caption does the positioning so the visual never has to stop being appetising."
+  },
+  {
+    client: "crepesenrose",
+    file:   "crepesenrose-03",
+    label:  "La fameuse crêpe Dubai",
+    views:      2000,
+    why: "The best performer of the crêperie set, and not by accident — it attaches the shop to the Dubai chocolate wave that already had people searching. Riding demand that exists is far cheaper than manufacturing it. For a small food business, the fastest reach usually comes from having the trending thing and saying so plainly."
+  },
+  {
+    client: "crepesenrose",
+    file:   "crepesenrose-04",
+    label:  "Quand ta crêpe mérite tous les extras",
+    views:      1500,
+    why: "An upsell disguised as a flex. Showing the fully loaded version raises what people picture before they order, so the average ticket moves without anyone being sold to. A menu board can't do this — it lists the extras, but it never makes you want them."
+  },
+  {
+    client: "shawarmamoods",
+    file:   "shawarmamoods-01",
+    label:  "Le tirage — section rouge 118",
+    views:      12600,
+    why: "A giveaway with a follow-to-enter mechanic and a named announcement date, and it pulled roughly eight times the shop's usual reach. Contests convert passive viewers into followers because entry costs a single tap, and naming the draw day buys a second visit from everyone waiting on the result."
+  },
+  {
+    client: "shawarmamoods",
+    file:   "shawarmamoods-02",
+    label:  "« Guys, j'ai une… »",
+    views:      110000,
+    why: "110K views, and nothing about it looks like an ad. It opens mid-thought from the front seat of a car — the native grammar of the feed — and the tease-then-interrupt structure holds people to the reveal. For a restaurant, being a personality people recognise is worth far more than being a menu they scroll past."
+  },
+  {
+    client: "msstireshine",
+    file:   "msstireshine-01",
+    label:  "Here's exactly how you apply it",
+    views:      2000000,
+    why: "Two million views, and the mechanic is simple: lead with the finished result, then promise the method. You watch to learn rather than because you're being sold to, and \"step one\" implies more steps, which holds the view to the end. Tutorials beat ads for any product with a visible transformation — the viewer gets something useful even if they never buy, and the demo is the advertisement."
   }
 ];
 
-const list = document.getElementById('list');
+/* ========================================================================== */
 
-function pad(n){ return n < 10 ? '0' + n : '' + n; }
-
-function thumbInner(p){
-  if (p.mediaSrc && p.type === 'video') return `<video src="${p.mediaSrc}" poster="${p.posterSrc || ''}" muted playsinline preload="metadata"></video><span class="play">Play</span>`;
-  if (p.mediaSrc && p.type === 'image') return `<img src="${p.mediaSrc}" alt="${p.client}"><span class="play">View</span>`;
-  return `<div class="empty">No media yet</div>`;
-}
-
-projects.forEach((p, i) => {
-  const item = document.createElement('div');
-  item.className = 'item';
-  item.innerHTML = `
-    <div class="item-head">
-      <span class="client">${p.client}</span>
-      <span class="idx mono">${pad(i+1)} / ${pad(projects.length)}</span>
-    </div>
-    <div class="thumb" data-index="${i}">${thumbInner(p)}</div>
-    <div class="why">${p.why}</div>
-  `;
-  list.appendChild(item);
-});
-
-/* ===== Lightbox ===== */
-const lightbox = document.getElementById('lightbox');
-const lbMedia = document.getElementById('lbMedia');
-const lbClient = document.getElementById('lbClient');
-const lbWhy = document.getElementById('lbWhy');
+const grid = document.getElementById('grid');
+const filtersEl = document.getElementById('filters');
+let activeFilter = 'all';
+let visible = [];
 let currentIndex = 0;
 
-function renderLightbox(){
-  const p = projects[currentIndex];
-  lbClient.textContent = p.client;
-  lbWhy.textContent = p.why;
-  if (p.mediaSrc && p.type === 'video'){
-    lbMedia.innerHTML = `<video src="${p.mediaSrc}" poster="${p.posterSrc || ''}" controls autoplay loop playsinline></video>`;
-  } else if (p.mediaSrc && p.type === 'image'){
-    lbMedia.innerHTML = `<img src="${p.mediaSrc}" alt="${p.client}">`;
-  } else {
-    lbMedia.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;color:#54585f;letter-spacing:.05em;text-transform:uppercase;">No media uploaded yet</div>`;
-  }
-}
-function openLightbox(i){ currentIndex = i; renderLightbox(); lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeLightbox(){ lightbox.classList.remove('open'); document.body.style.overflow = ''; lbMedia.innerHTML = ''; }
+const srcOf    = c => `media/${c.file}.mp4`;
+const posterOf = c => `media/${c.file}.jpg`;
 
-list.addEventListener('click', (e) => {
-  const t = e.target.closest('.thumb');
-  if (t) openLightbox(parseInt(t.dataset.index));
+/* ---- duration badges, read from the files themselves ---- */
+const durations = {};
+const fmtViews = n => {
+  if (n == null || n === '') return '—';
+  if (n >= 1e6) return (n/1e6).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'') + 'K';
+  return String(n);
+};
+let sortByViews = false;
+const fmt = s => `${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,'0')}`;
+function loadDurations(){
+  CLIPS.forEach(c => {
+    const v = document.createElement('video');
+    v.preload = 'metadata';
+    v.src = srcOf(c);
+    v.addEventListener('loadedmetadata', () => {
+      if (!isFinite(v.duration)) return;
+      durations[c.file] = fmt(v.duration);
+      document.querySelectorAll(`[data-dur="${c.file}"]`).forEach(el => el.textContent = durations[c.file]);
+    });
+  });
+}
+
+/* ---- filters ---- */
+function buildFilters(){
+  if (!CLIPS.length){ filtersEl.innerHTML = ''; return; }
+  const counts = {};
+  CLIPS.forEach(c => counts[c.client] = (counts[c.client]||0) + 1);
+  const opts = [{ key:'all', name:'All work', n:CLIPS.length }]
+    .concat(Object.keys(CLIENTS)
+      .filter(k => counts[k])
+      .map(k => ({ key:k, name:CLIENTS[k].name, n:counts[k] })));
+  filtersEl.innerHTML = opts.map(o =>
+    `<button class="chip${o.key===activeFilter?' active':''}" data-filter="${o.key}">${o.name}<span class="c">${o.n}</span></button>`
+  ).join('')
+  + `<button class="chip sort${sortByViews?' active':''}" data-sort="views">↓ Most viewed</button>`;
+}
+
+/* ---- grid ---- */
+function render(){
+  if (!CLIPS.length){
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>No videos added yet</p></div>`;
+    visible = [];
+    return;
+  }
+  visible = activeFilter === 'all' ? CLIPS.slice() : CLIPS.filter(c => c.client === activeFilter);
+  if (sortByViews) visible.sort((a,b) => (b.views||0) - (a.views||0));
+
+  grid.innerHTML = visible.map((c, i) => {
+    const cl = CLIENTS[c.client] || { name:c.client };
+    return `
+    <button class="tile" data-index="${i}" aria-label="Play ${cl.name} — ${c.label}">
+      <div class="frame">
+        <img src="${posterOf(c)}" alt="${cl.name} — ${c.label}" loading="lazy">
+        <video src="${srcOf(c)}" muted loop playsinline preload="none"></video>
+        ${c.views ? `<span class="badge views">${fmtViews(c.views)} views</span>` : ``}
+        <span class="badge dur" data-dur="${c.file}">${durations[c.file] || '—'}</span>
+        <span class="playdot"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg></span>
+      </div>
+      <div class="meta">
+        <div class="cl">${cl.name}</div>
+        <div class="lb">${c.label}</div>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+/* ---- hover preview ---- */
+grid.addEventListener('pointerenter', e => {
+  const tile = e.target.closest && e.target.closest('.tile'); if (!tile) return;
+  const v = tile.querySelector('video'); if (!v) return;
+  v.preload = 'metadata'; v.currentTime = 0;
+  v.play().then(() => v.classList.add('on')).catch(()=>{});
+}, true);
+grid.addEventListener('pointerleave', e => {
+  const tile = e.target.closest && e.target.closest('.tile'); if (!tile) return;
+  const v = tile.querySelector('video'); if (!v) return;
+  v.pause(); v.classList.remove('on');
+}, true);
+
+/* ---- lightbox ---- */
+const lightbox = document.getElementById('lightbox');
+const lbMedia  = document.getElementById('lbMedia');
+
+function renderLightbox(){
+  const c = visible[currentIndex]; if (!c) return;
+  const cl = CLIENTS[c.client] || { name:c.client, sector:'' };
+  document.getElementById('lbClient').textContent = cl.name;
+  document.getElementById('lbSector').textContent = cl.sector || '';
+  document.getElementById('lbLabel').textContent  = c.label;
+  document.getElementById('lbWhy').textContent    = c.why || '';
+  document.getElementById('lbCount').textContent  = `${currentIndex+1} / ${visible.length}`;
+
+  document.getElementById('lbStats').innerHTML =
+    `<span class="v">${fmtViews(c.views)}</span><span class="k">Views</span>`;
+
+  lbMedia.innerHTML = `<video src="${srcOf(c)}" poster="${posterOf(c)}" controls autoplay playsinline></video>`;
+}
+function openLightbox(i){
+  currentIndex = i; renderLightbox();
+  lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lightbox.classList.remove('open'); document.body.style.overflow = ''; lbMedia.innerHTML = '';
+}
+const step = d => { currentIndex = (currentIndex + d + visible.length) % visible.length; renderLightbox(); };
+
+/* ---- events ---- */
+filtersEl.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  if (b.dataset.sort) sortByViews = !sortByViews;
+  else activeFilter = b.dataset.filter;
+  buildFilters(); render();
+});
+grid.addEventListener('click', e => {
+  const t = e.target.closest('.tile'); if (t) openLightbox(parseInt(t.dataset.index, 10));
 });
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
-document.getElementById('lbPrev').addEventListener('click', () => { currentIndex = (currentIndex - 1 + projects.length) % projects.length; renderLightbox(); });
-document.getElementById('lbNext').addEventListener('click', () => { currentIndex = (currentIndex + 1) % projects.length; renderLightbox(); });
-lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-document.addEventListener('keydown', (e) => {
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lb-inner')) closeLightbox(); });
+document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + projects.length) % projects.length; renderLightbox(); }
-  if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % projects.length; renderLightbox(); }
+  if (e.key === 'ArrowLeft')  step(-1);
+  if (e.key === 'ArrowRight') step(1);
 });
+
+buildFilters();
+render();
+loadDurations();
 </script>
 
 </body>
