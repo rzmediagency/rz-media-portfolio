@@ -174,6 +174,14 @@
   .btn.ghost{ color:var(--white); }
   .btn.ghost:hover{ border-color:var(--blue); color:var(--blue); }
   .cta-note{ margin-top:18px; }
+  .langsw .lang{
+    background:none; border:0; padding:0 2px; cursor:pointer;
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em;
+    color:var(--chrome-dim); transition:.15s;
+  }
+  .langsw .lang:hover{ color:var(--white); }
+  .langsw .lang.on{ color:var(--blue); font-weight:700; }
+  .langsw .sep{ opacity:.4; margin:0 3px; }
   .cta-note .addr{
     color:var(--chrome); user-select:all; cursor:pointer;
     border-bottom:1px solid var(--line); padding-bottom:2px; transition:.15s;
@@ -192,12 +200,14 @@
 <header>
   <div class="wrap row">
     <div class="mark">RZ MEDIA</div>
-    <span class="mono-label">Montréal · FR / EN</span>
+    <span class="mono-label langsw">Montréal &nbsp;·&nbsp;
+      <button class="lang" data-lang="fr">FR</button><span class="sep">/</span><button class="lang" data-lang="en">EN</button>
+    </span>
   </div>
 </header>
 
 <div class="wrap intro">
-  <p>Short-form video for Montréal local business.</p>
+  <p id="introLine">Short-form video for Montréal local business.</p>
 </div>
 
 <main class="wrap">
@@ -207,17 +217,17 @@
 
 <section class="cta">
   <div class="wrap">
-    <span class="mono-label">Work with us</span>
-    <h2>Your <em>turn</em>.</h2>
-    <p>Tell us what you sell and who buys it. We film it, cut it, and hand it back ready to post.</p>
+    <span class="mono-label" id="ctaKicker">Work with us</span>
+    <h2 id="ctaH">Your <em>turn</em>.</h2>
+    <p id="ctaP">Tell us what you sell and who buys it. We film it, cut it, and hand it back ready to post.</p>
     <div class="cta-row">
-      <a class="btn primary" href="mailto:rzmedia.net@gmail.com?subject=New%20project%20%E2%80%94%20RZ%20Media&amp;body=Hi%20RZ%20Media%2C%0D%0A%0D%0ABusiness%3A%0D%0AIndustry%3A%0D%0AWhat%20I%27m%20looking%20for%3A%0D%0A%0D%0A%28Found%20you%20through%20your%20portfolio.%29">
-        Start a project
+      <a class="btn primary" href="mailto:rzmedia.net@gmail.com?subject=New%20project%20%E2%80%94%20RZ%20Media&amp;body=Hi%20RZ%20Media%2C%0D%0A%0D%0ABusiness%3A%0D%0AIndustry%3A%0D%0AWhat%20I%27m%20looking%20for%3A%0D%0A%0D%0A%28Found%20you%20through%20your%20portfolio.%29" id="ctaBtn">
+        <span id="ctaBtnText">Start a project</span>
         <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="#04121c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="btn ghost" href="https://ig.me/m/rzmediagency" target="_blank" rel="noopener">DM us on Instagram</a>
+      <a class="btn ghost" href="https://ig.me/m/rzmediagency" target="_blank" rel="noopener" id="igBtn">DM us on Instagram</a>
     </div>
-    <p class="cta-note mono-label">or copy <span class="addr" id="copyMail" role="button" tabindex="0" title="Click to copy">rzmedia.net@gmail.com</span> &nbsp;·&nbsp; Montréal — FR / EN</p>
+    <p class="cta-note mono-label"><span id="orCopy">or copy</span> <span class="addr" id="copyMail" role="button" tabindex="0" title="Click to copy">rzmedia.net@gmail.com</span> &nbsp;·&nbsp; Montréal — FR / EN</p>
   </div>
 </section>
 
@@ -241,7 +251,7 @@
         <div class="lb-sector mono-label" id="lbSector"></div>
         <div class="lb-label" id="lbLabel"></div>
         <div class="viewstat" id="lbStats"></div>
-        <div class="lb-h mono-label">Why it worked</div>
+        <div class="lb-h mono-label" id="whyHeading">Why it worked</div>
         <div class="lb-why" id="lbWhy"></div>
         <div class="lb-counter">
           <div class="lb-btn" id="lbPrev" aria-label="Previous" tabindex="0">
@@ -271,11 +281,11 @@
 ========================================================================== */
 
 const CLIENTS = {
-  carhealers:    { name: "Car Healers",     sector: "Auto body shop · Montréal" },
-  roofstar:      { name: "Roofstar",        sector: "Roofing · Greater Montréal" },
-  crepesenrose:  { name: "Crêpes en Rose",  sector: "Crêperie · Montréal" },
-  shawarmamoods: { name: "Shawarma Moods",  sector: "Restaurant · Montréal" },
-  msstireshine:  { name: "MSS Tire Shine",  sector: "Car care product" }
+  carhealers:    { name: "Car Healers",     sector: "Auto body shop · Montréal", sectorFr: "Atelier de carrosserie · Montréal" },
+  roofstar:      { name: "Roofstar",        sector: "Roofing · Greater Montréal", sectorFr: "Toiture · Grand Montréal" },
+  crepesenrose:  { name: "Crêpes en Rose",  sector: "Crêperie · Montréal", sectorFr: "Crêperie · Montréal" },
+  shawarmamoods: { name: "Shawarma Moods",  sector: "Restaurant · Montréal", sectorFr: "Restaurant · Montréal" },
+  msstireshine:  { name: "MSS Tire Shine",  sector: "Car care product", sectorFr: "Produit d'entretien auto" }
 };
 
 const CLIPS = [
@@ -283,99 +293,127 @@ const CLIPS = [
     client: "carhealers",
     file:   "carhealers-01",
     label:  "Mustang build — before & after",
+    labelFr: "Mustang — avant / après",
     views:      4000,
-    why: "No voiceover, no pitch — just a tired Mustang going in and a finished car coming out, cut to music. A body shop only ever has to answer one question: can you make it look new again. A silent before/after answers it faster than any claim could, and because the argument is visual it still lands with the sound off, which is how most of the feed is watched."
+    why: "No voiceover, no pitch — just a tired Mustang going in and a finished car coming out, cut to music. A body shop only ever has to answer one question: can you make it look new again. A silent before/after answers it faster than any claim could, and because the argument is visual it still lands with the sound off, which is how most of the feed is watched.",
+    whyFr: "Aucune narration, aucun argumentaire — juste une Mustang fatiguée qui entre et une voiture finie qui sort, montée sur la musique. Un atelier de carrosserie n'a qu'une seule question à répondre : est-ce que vous pouvez la rendre comme neuve. Un avant/après silencieux y répond plus vite que n'importe quelle promesse, et comme l'argument est visuel, il fonctionne même sans le son — c'est comme ça que le fil est regardé la plupart du temps."
   },
   {
     client: "carhealers",
     file:   "carhealers-02",
     label:  "Accident? On s'occupe de tout",
+    labelFr: "Accident? On s'occupe de tout",
     views:      1500,
-    why: "The most direct piece in the set: names the problem in the first line, names the neighbourhood, and closes on a free estimate. It has the lowest view count here — and that's the trade-off worth understanding. Broad reach and booked jobs are different goals. This one isn't built to travel; it's built to catch the person who had an accident this week and needs somewhere to take the car."
+    why: "The most direct piece in the set: names the problem in the first line, names the neighbourhood, and closes on a free estimate. It has the lowest view count here — and that's the trade-off worth understanding. Broad reach and booked jobs are different goals. This one isn't built to travel; it's built to catch the person who had an accident this week and needs somewhere to take the car.",
+    whyFr: "La vidéo la plus directe du lot : elle nomme le problème dès la première ligne, nomme le quartier, et termine sur une estimation gratuite. C'est aussi celle qui a le moins de vues — et c'est le compromis qu'il faut comprendre. La portée et les jobs bookées sont deux objectifs différents. Celle-ci n'est pas faite pour voyager; elle est faite pour attraper la personne qui a eu un accident cette semaine et qui cherche où amener son auto."
   },
   {
     client: "carhealers",
     file:   "carhealers-03",
     label:  "Customer testimonial — « super à l'aise »",
+    labelFr: "Témoignage client — « super à l'aise »",
     views:      5000,
-    why: "The strongest asset on this page. A real customer, on camera, says she found the shop on Instagram, read the comments, and came straight in — proof the channel works, captured inside the channel itself. Auto body is a trust-deficit trade where everyone assumes they're about to be overcharged. A stranger vouching for you dismantles that in a way the owner never can."
+    why: "The strongest asset on this page. A real customer, on camera, says she found the shop on Instagram, read the comments, and came straight in — proof the channel works, captured inside the channel itself. Auto body is a trust-deficit trade where everyone assumes they're about to be overcharged. A stranger vouching for you dismantles that in a way the owner never can.",
+    whyFr: "Le meilleur atout de la page. Une vraie cliente, devant la caméra, raconte qu'elle a trouvé l'atelier sur Instagram, lu les commentaires, et qu'elle est venue directement — la preuve que le canal fonctionne, captée à l'intérieur du canal lui-même. La carrosserie est un métier à déficit de confiance : le monde arrive en pensant se faire charger trop cher. Une inconnue qui vous recommande démolit ça d'une façon que le proprio ne pourra jamais faire lui-même."
   },
   {
     client: "carhealers",
     file:   "carhealers-04",
     label:  "Shop floor — la Corvette bleue",
+    labelFr: "Plancher d'atelier — la Corvette bleue",
     views:      4000,
-    why: "A joke opens it, then a real job carries it: a client's blue Corvette and the detail he wanted changed at the rear. The humour earns the watch, the specifics prove the competence. Every shop in the city posts the same repair photos, so the differentiator isn't the work — it's being a person people recognise. Chris has become that face for the shop."
+    why: "A joke opens it, then a real job carries it: a client's blue Corvette and the detail he wanted changed at the rear. The humour earns the watch, the specifics prove the competence. Every shop in the city posts the same repair photos, so the differentiator isn't the work — it's being a person people recognise. Chris has become that face for the shop.",
+    whyFr: "Une blague pour ouvrir, puis une vraie job pour tenir : la Corvette bleue d'un client et le détail qu'il voulait changer à l'arrière. L'humour achète le visionnement, les détails prouvent la compétence. Tous les ateliers de la ville publient les mêmes photos de réparation — le différenciateur, ce n'est pas le travail, c'est d'être quelqu'un que le monde reconnaît. Chris est devenu ce visage-là pour l'atelier."
   },
   {
     client: "roofstar",
     file:   "roofstar-01",
     label:  "4 questions to ask before you sign",
+    labelFr: "4 questions à poser avant de signer",
     views:      3000,
-    why: "The best-constructed video here. It arms the homeowner with four questions to ask any roofer — valid RBQ licence, insurance, warranty, recent work — and every one is a question Roofstar passes. You never claim to be the honest contractor; you hand people a test and let them discover you're the one who clears it. For a trade people are genuinely afraid of hiring, that's the whole game."
+    why: "The best-constructed video here. It arms the homeowner with four questions to ask any roofer — valid RBQ licence, insurance, warranty, recent work — and every one is a question Roofstar passes. You never claim to be the honest contractor; you hand people a test and let them discover you're the one who clears it. For a trade people are genuinely afraid of hiring, that's the whole game.",
+    whyFr: "La vidéo la mieux construite du lot. Elle arme le propriétaire de quatre questions à poser à n'importe quel couvreur — licence RBQ valide, assurances, garantie, projets récents — et chacune est une question que Roofstar passe haut la main. On ne prétend jamais être l'entrepreneur honnête : on donne un test au monde et on les laisse découvrir qui le réussit. Dans un métier où les gens ont vraiment peur de se faire avoir, c'est tout le jeu."
   },
   {
     client: "roofstar",
     file:   "roofstar-02",
     label:  "What your roof protects",
+    labelFr: "Ce que votre toit protège",
     views:      2000,
-    why: "Short, and it sells the stakes rather than the shingles. Framing the roof as what protects the family shifts the purchase from a grudge expense to something worth doing properly. Roofing gets sold on price by default; this is the kind of piece that gives a homeowner permission to care about more than the quote."
+    why: "Short, and it sells the stakes rather than the shingles. Framing the roof as what protects the family shifts the purchase from a grudge expense to something worth doing properly. Roofing gets sold on price by default; this is the kind of piece that gives a homeowner permission to care about more than the quote.",
+    whyFr: "Courte, et elle vend l'enjeu plutôt que le bardeau. Présenter la toiture comme ce qui protège la famille transforme l'achat d'une dépense qu'on subit en quelque chose qui mérite d'être bien fait. La toiture se vend sur le prix par défaut; ce genre de vidéo donne au propriétaire la permission de se soucier d'autre chose que de la soumission."
   },
   {
     client: "roofstar",
     file:   "roofstar-03",
     label:  "See the work for yourself",
+    labelFr: "Voyez le travail par vous-même",
     views:      2000,
-    why: "Drone footage is the cheat code for roofing: the customer can never actually see their own roof. Showing finished work from above delivers the one angle they can't get themselves, and it turns a portfolio into something people will watch. Proof beats persuasion in any trade where the work disappears once it's done."
+    why: "Drone footage is the cheat code for roofing: the customer can never actually see their own roof. Showing finished work from above delivers the one angle they can't get themselves, and it turns a portfolio into something people will watch. Proof beats persuasion in any trade where the work disappears once it's done.",
+    whyFr: "Le drone, c'est le raccourci ultime en toiture : le client ne peut jamais voir son propre toit. Montrer le travail fini vu d'en haut livre le seul angle qu'il ne peut pas obtenir lui-même, et ça transforme un portfolio en quelque chose que le monde va réellement regarder. La preuve bat la persuasion dans tout métier où le travail disparaît une fois qu'il est terminé."
   },
   {
     client: "crepesenrose",
     file:   "crepesenrose-01",
     label:  "Bienvenue chez Crêpes en Rose",
+    labelFr: "Bienvenue chez Crêpes en Rose",
     views:      1500,
-    why: "A face and one concrete promise — everything prepped fresh that day. A new shop's problem isn't menu awareness, it's that nobody has attached a person to the place yet. One specific claim also outperforms the usual talk of quality and passion, because it's the kind of thing a competitor would have to match rather than just echo."
+    why: "A face and one concrete promise — everything prepped fresh that day. A new shop's problem isn't menu awareness, it's that nobody has attached a person to the place yet. One specific claim also outperforms the usual talk of quality and passion, because it's the kind of thing a competitor would have to match rather than just echo.",
+    whyFr: "Un visage et une promesse concrète — tout est préparé frais le jour même. Le problème d'un commerce qui ouvre, ce n'est pas de faire connaître son menu, c'est que personne n'a encore associé une personne à la place. Une affirmation précise bat aussi le discours habituel sur la qualité et la passion, parce que c'est le genre de chose qu'un concurrent devrait égaler au lieu de simplement répéter."
   },
   {
     client: "crepesenrose",
     file:   "crepesenrose-02",
     label:  "Le paradis existe en 4 fromages",
+    labelFr: "Le paradis existe en 4 fromages",
     views:      1500,
-    why: "No script — the cheese pull is the entire argument. Food doesn't travel on description, it travels on texture and sound, and this is built for the half-second where someone's thumb slows down. The caption does the positioning so the visual never has to stop being appetising."
+    why: "No script — the cheese pull is the entire argument. Food doesn't travel on description, it travels on texture and sound, and this is built for the half-second where someone's thumb slows down. The caption does the positioning so the visual never has to stop being appetising.",
+    whyFr: "Aucun script — le fil de fromage est l'argument au complet. La bouffe ne voyage pas sur la description, elle voyage sur la texture et le son, et cette vidéo est construite pour la demi-seconde où le pouce ralentit. Le texte à l'écran fait le positionnement pour que l'image n'ait jamais à cesser d'être appétissante."
   },
   {
     client: "crepesenrose",
     file:   "crepesenrose-03",
     label:  "La fameuse crêpe Dubai",
+    labelFr: "La fameuse crêpe Dubai",
     views:      2000,
-    why: "The best performer of the crêperie set, and not by accident — it attaches the shop to the Dubai chocolate wave that already had people searching. Riding demand that exists is far cheaper than manufacturing it. For a small food business, the fastest reach usually comes from having the trending thing and saying so plainly."
+    why: "The best performer of the crêperie set, and not by accident — it attaches the shop to the Dubai chocolate wave that already had people searching. Riding demand that exists is far cheaper than manufacturing it. For a small food business, the fastest reach usually comes from having the trending thing and saying so plainly.",
+    whyFr: "La meilleure performance du lot de la crêperie, et pas par hasard — elle accroche le commerce à la vague du chocolat Dubaï que le monde cherchait déjà. Surfer sur une demande qui existe déjà coûte bien moins cher que d'en créer une. Pour un petit commerce alimentaire, la portée la plus rapide vient généralement d'avoir l'item tendance et de le dire simplement."
   },
   {
     client: "crepesenrose",
     file:   "crepesenrose-04",
     label:  "Quand ta crêpe mérite tous les extras",
+    labelFr: "Quand ta crêpe mérite tous les extras",
     views:      1500,
-    why: "An upsell disguised as a flex. Showing the fully loaded version raises what people picture before they order, so the average ticket moves without anyone being sold to. A menu board can't do this — it lists the extras, but it never makes you want them."
+    why: "An upsell disguised as a flex. Showing the fully loaded version raises what people picture before they order, so the average ticket moves without anyone being sold to. A menu board can't do this — it lists the extras, but it never makes you want them.",
+    whyFr: "Une vente incitative déguisée en flex. Montrer la version pleinement garnie élève ce que le monde imagine avant de commander, donc la facture moyenne monte sans que personne se sente vendu. Un menu au mur ne peut pas faire ça — il énumère les extras, mais il ne donne jamais envie."
   },
   {
     client: "shawarmamoods",
     file:   "shawarmamoods-01",
     label:  "Le tirage — section rouge 118",
+    labelFr: "Le tirage — section rouge 118",
     views:      12600,
-    why: "A giveaway with a follow-to-enter mechanic and a named announcement date, and it pulled roughly eight times the shop's usual reach. Contests convert passive viewers into followers because entry costs a single tap, and naming the draw day buys a second visit from everyone waiting on the result."
+    why: "A giveaway with a follow-to-enter mechanic and a named announcement date, and it pulled roughly eight times the shop's usual reach. Contests convert passive viewers into followers because entry costs a single tap, and naming the draw day buys a second visit from everyone waiting on the result.",
+    whyFr: "Un concours avec un mécanisme « follow pour participer » et une date d'annonce précise — ça a généré environ huit fois la portée habituelle du commerce. Les concours convertissent les spectateurs passifs en abonnés parce que participer coûte un seul tap, et nommer le jour du tirage achète une deuxième visite de tous ceux qui attendent le résultat."
   },
   {
     client: "shawarmamoods",
     file:   "shawarmamoods-02",
     label:  "« Guys, j'ai une… »",
+    labelFr: "« Guys, j'ai une… »",
     views:      110000,
-    why: "110K views, and nothing about it looks like an ad. It opens mid-thought from the front seat of a car — the native grammar of the feed — and the tease-then-interrupt structure holds people to the reveal. For a restaurant, being a personality people recognise is worth far more than being a menu they scroll past."
+    why: "110K views, and nothing about it looks like an ad. It opens mid-thought from the front seat of a car — the native grammar of the feed — and the tease-then-interrupt structure holds people to the reveal. For a restaurant, being a personality people recognise is worth far more than being a menu they scroll past.",
+    whyFr: "110 000 vues, et rien là-dedans ne ressemble à une pub. Ça ouvre en plein milieu d'une phrase, assis dans une auto — la grammaire naturelle du fil — et la structure « teaser puis interrompre » retient le monde jusqu'à la révélation. Pour un restaurant, être une personnalité que le monde reconnaît vaut bien plus que d'être un menu qu'on scrolle."
   },
   {
     client: "msstireshine",
     file:   "msstireshine-01",
     label:  "Here's exactly how you apply it",
+    labelFr: "Voici exactement comment l'appliquer",
     views:      2000000,
-    why: "Two million views, and the mechanic is simple: lead with the finished result, then promise the method. You watch to learn rather than because you're being sold to, and \"step one\" implies more steps, which holds the view to the end. Tutorials beat ads for any product with a visible transformation — the viewer gets something useful even if they never buy, and the demo is the advertisement."
+    why: "Two million views, and the mechanic is simple: lead with the finished result, then promise the method. You watch to learn rather than because you're being sold to, and \"step one\" implies more steps, which holds the view to the end. Tutorials beat ads for any product with a visible transformation — the viewer gets something useful even if they never buy, and the demo is the advertisement.",
+    whyFr: "Deux millions de vues, et le mécanisme est simple : on ouvre sur le résultat fini, puis on promet la méthode. On regarde pour apprendre, pas parce qu'on se fait vendre quelque chose, et « étape un » sous-entend d'autres étapes, ce qui retient jusqu'à la fin. Le tutoriel bat la pub pour tout produit avec une transformation visible — le spectateur repart avec quelque chose d'utile même s'il n'achète jamais, et la démo est la publicité."
   }
 ];
 
@@ -399,6 +437,34 @@ const fmtViews = n => {
   return String(n);
 };
 let sortByViews = false;
+
+const I18N = {
+  en: {
+    intro:"Short-form video for Montréal local business.",
+    all:"All work", mostViewed:"\u2193 Most viewed", views:"Views", viewsWord:"views",
+    why:"Why it worked", kicker:"Work with us",
+    ctaH:'Your <em>turn</em>.',
+    ctaP:"Tell us what you sell and who buys it. We film it, cut it, and hand it back ready to post.",
+    ctaBtn:"Start a project", ig:"DM us on Instagram", orCopy:"or copy",
+    mail:"mailto:rzmedia.net@gmail.com?subject=New%20project%20%E2%80%94%20RZ%20Media&body=Hi%20RZ%20Media%2C%0D%0A%0D%0ABusiness%3A%0D%0AIndustry%3A%0D%0AWhat%20I%27m%20looking%20for%3A%0D%0A%0D%0A%28Found%20you%20through%20your%20portfolio.%29"
+  },
+  fr: {
+    intro:"Vidéo courte pour les commerces de Montréal.",
+    all:"Tout", mostViewed:"\u2193 Plus vues", views:"Vues", viewsWord:"vues",
+    why:"Pourquoi ça a marché", kicker:"Travaillons ensemble",
+    ctaH:'À <em>vous</em>.',
+    ctaP:"Dites-nous ce que vous vendez et qui l'achète. On filme, on monte, et on vous le remet prêt à publier.",
+    ctaBtn:"Démarrer un projet", ig:"Écrivez-nous sur Instagram", orCopy:"ou copiez",
+    mail:"mailto:rzmedia.net@gmail.com?subject=Nouveau%20projet%20%E2%80%94%20RZ%20Media&body=Bonjour%20RZ%20Media%2C%0D%0A%0D%0ACommerce%20%3A%0D%0ASecteur%20%3A%0D%0ACe%20que%20je%20cherche%20%3A%0D%0A%0D%0A%28Trouv%C3%A9%20via%20votre%20portfolio.%29"
+  }
+};
+
+let lang = 'en';
+try { lang = localStorage.getItem('rzlang') === 'fr' ? 'fr' : 'en'; } catch(e){}
+const t  = k => I18N[lang][k];
+const L  = c => (lang === 'fr' && c.labelFr) ? c.labelFr : c.label;
+const WHY = c => (lang === 'fr' && c.whyFr) ? c.whyFr : c.why;
+const SEC = cl => (lang === 'fr' && cl.sectorFr) ? cl.sectorFr : (cl.sector || '');
 const fmt = s => `${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,'0')}`;
 function loadDurations(){
   CLIPS.forEach(c => {
@@ -418,14 +484,14 @@ function buildFilters(){
   if (!CLIPS.length){ filtersEl.innerHTML = ''; return; }
   const counts = {};
   CLIPS.forEach(c => counts[c.client] = (counts[c.client]||0) + 1);
-  const opts = [{ key:'all', name:'All work', n:CLIPS.length }]
+  const opts = [{ key:'all', name:t('all'), n:CLIPS.length }]
     .concat(Object.keys(CLIENTS)
       .filter(k => counts[k])
       .map(k => ({ key:k, name:CLIENTS[k].name, n:counts[k] })));
   filtersEl.innerHTML = opts.map(o =>
     `<button class="chip${o.key===activeFilter?' active':''}" data-filter="${o.key}">${o.name}<span class="c">${o.n}</span></button>`
   ).join('')
-  + `<button class="chip sort${sortByViews?' active':''}" data-sort="views">↓ Most viewed</button>`;
+  + `<button class="chip sort${sortByViews?' active':''}" data-sort="views">${t('mostViewed')}</button>`;
 }
 
 /* ---- grid ---- */
@@ -441,17 +507,17 @@ function render(){
   grid.innerHTML = visible.map((c, i) => {
     const cl = CLIENTS[c.client] || { name:c.client };
     return `
-    <button class="tile" data-index="${i}" aria-label="Play ${cl.name} — ${c.label}">
+    <button class="tile" data-index="${i}" aria-label="${cl.name} — ${L(c)}">
       <div class="frame">
-        <img src="${posterOf(c)}" alt="${cl.name} — ${c.label}" loading="lazy">
+        <img src="${posterOf(c)}" alt="${cl.name} — ${L(c)}" loading="lazy">
         <video src="${srcOf(c)}" muted loop playsinline preload="none"></video>
-        ${c.views ? `<span class="badge views">${fmtViews(c.views)} views</span>` : ``}
+        ${c.views ? `<span class="badge views">${fmtViews(c.views)} ${t('viewsWord')}</span>` : ``}
         <span class="badge dur" data-dur="${c.file}">${durations[c.file] || '—'}</span>
         <span class="playdot"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg></span>
       </div>
       <div class="meta">
         <div class="cl">${cl.name}</div>
-        <div class="lb">${c.label}</div>
+        <div class="lb">${L(c)}</div>
       </div>
     </button>`;
   }).join('');
@@ -478,13 +544,13 @@ function renderLightbox(){
   const c = visible[currentIndex]; if (!c) return;
   const cl = CLIENTS[c.client] || { name:c.client, sector:'' };
   document.getElementById('lbClient').textContent = cl.name;
-  document.getElementById('lbSector').textContent = cl.sector || '';
-  document.getElementById('lbLabel').textContent  = c.label;
-  document.getElementById('lbWhy').textContent    = c.why || '';
+  document.getElementById('lbSector').textContent = SEC(cl);
+  document.getElementById('lbLabel').textContent  = L(c);
+  document.getElementById('lbWhy').textContent    = WHY(c) || '';
   document.getElementById('lbCount').textContent  = `${currentIndex+1} / ${visible.length}`;
 
   document.getElementById('lbStats').innerHTML =
-    `<span class="v">${fmtViews(c.views)}</span><span class="k">Views</span>`;
+    `<span class="v">${fmtViews(c.views)}</span><span class="k">${t('views')}</span>`;
 
   lbMedia.innerHTML = `<video src="${srcOf(c)}" poster="${posterOf(c)}" controls autoplay playsinline></video>`;
 }
@@ -518,8 +584,31 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') step(1);
 });
 
-buildFilters();
-render();
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.getElementById('introLine').textContent = t('intro');
+  document.getElementById('ctaKicker').textContent = t('kicker');
+  document.getElementById('ctaH').innerHTML        = t('ctaH');
+  document.getElementById('ctaP').textContent      = t('ctaP');
+  document.getElementById('ctaBtnText').textContent= t('ctaBtn');
+  document.getElementById('igBtn').textContent     = t('ig');
+  document.getElementById('orCopy').textContent    = t('orCopy');
+  document.getElementById('whyHeading').textContent= t('why');
+  document.getElementById('ctaBtn').setAttribute('href', t('mail'));
+  document.querySelectorAll('.lang').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+  buildFilters();
+  render();
+  if (lightbox.classList.contains('open')) renderLightbox();
+}
+
+document.querySelector('.langsw').addEventListener('click', e => {
+  const b = e.target.closest('.lang'); if (!b || b.dataset.lang === lang) return;
+  lang = b.dataset.lang;
+  try { localStorage.setItem('rzlang', lang); } catch(err){}
+  applyLang();
+});
+
+applyLang();
 loadDurations();
 
 /* ---- click-to-copy the address (fallback when no mail client is set up) ---- */
