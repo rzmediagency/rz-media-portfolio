@@ -83,6 +83,10 @@
     .rundown .stat:nth-child(2){ border-right:0; }
     .rundown .stat:nth-child(-n+2){ border-bottom:1px solid var(--line); }
   }
+  .quote{ display:block; width:100%; text-align:left; background:none; color:inherit; font:inherit; cursor:pointer; border:0; border-left:3px solid var(--blue); padding:6px 0 6px 18px; margin:0 0 22px; }
+  .quote .q{ display:block; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:clamp(17px,2.6vw,22px); line-height:1.3; letter-spacing:-.01em; }
+  .quote .qby{ display:block; margin-top:8px; }
+  .quote:hover .qby{ color:var(--blue); }
   .filters{ position:sticky; top:0; z-index:20; background:var(--bg); padding:12px 0; border-bottom:1px solid var(--line); }
   .filters .chip{ white-space:nowrap; }
   @media (max-width:640px){ .filters{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } .filters::-webkit-scrollbar{ display:none; } }
@@ -253,6 +257,10 @@
 
 <main class="wrap">
   <div class="rundown" id="rundown"></div>
+  <button class="quote" id="quote" data-file="carhealers-03">
+    <span class="q">« Je vous ai trouvé sur Instagram, j'ai lu les commentaires et c'était le numéro un. »</span>
+    <span class="mono-label qby" id="quoteBy">A Car Healers customer, on camera · watch ▸</span>
+  </button>
   <nav class="filters" id="filters"></nav>
   <div id="sections"></div>
 </main>
@@ -657,6 +665,7 @@ const fmtViews = n => {
 const I18N = {
   en: {
     intro:"Short-form video for Montréal local business.",
+    quoteBy:"A Car Healers customer, on camera — \"I found you on Instagram, read the comments, and you were number one.\" · watch ▸",
     howTo:"How to watch: every section says what to look for. Tap a video to see why it worked.",
     lookFor:"Look for", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
     all:"All work", mostViewed:"\u2193 Most viewed", views:"Views", viewsWord:"views",
@@ -668,6 +677,7 @@ const I18N = {
   },
   fr: {
     intro:"Vidéo courte pour les commerces de Montréal.",
+    quoteBy:"Une cliente de Car Healers, devant la caméra · voir ▸",
     howTo:"Comment regarder : chaque section dit quoi remarquer. Touchez une vidéo pour voir pourquoi elle a marché.",
     lookFor:"À remarquer", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
     all:"Tout", mostViewed:"\u2193 Plus vues", views:"Vues", viewsWord:"vues",
@@ -807,6 +817,9 @@ filtersEl.addEventListener('click', e => {
   const target = document.getElementById('sec-' + b.dataset.sec);
   if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
 });
+document.getElementById('quote').addEventListener('click', () => {
+  const i = visible.findIndex(c => c.file === 'carhealers-03'); if (i >= 0) openLightbox(i);
+});
 sectionsEl.addEventListener('click', e => {
   const t = e.target.closest('.tile'); if (t) openLightbox(parseInt(t.dataset.index, 10));
 });
@@ -825,6 +838,7 @@ function applyLang(){
   document.documentElement.lang = lang;
   document.getElementById('introLine').textContent = t('intro');
   document.getElementById('howTo').textContent     = t('howTo');
+  document.getElementById('quoteBy').textContent   = t('quoteBy');
   buildRundown();
   document.getElementById('ctaKicker').textContent = t('kicker');
   document.getElementById('ctaH').innerHTML        = t('ctaH');
