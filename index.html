@@ -73,15 +73,20 @@
   .intro{ display:flex; align-items:center; justify-content:space-between; gap:clamp(20px,4vw,48px); }
   .intro .reel{ width:clamp(150px,22vw,230px); aspect-ratio:9/16; object-fit:cover; background:#000; border:1px solid var(--line); flex:none; }
   @media (max-width:640px){ .intro{ gap:16px; } .intro .reel{ width:36vw; } .intro .howto{ font-size:10px; } }
-  .rundown{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid var(--line); margin-bottom:22px; }
+  .rundown{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border:1px solid var(--line); margin-bottom:22px; }
   .rundown .stat{ padding:16px 18px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:6px; }
   .rundown .stat:last-child{ border-right:0; }
   .rundown .n{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:clamp(22px,4vw,32px); letter-spacing:-.02em; line-height:1; }
   .rundown .stat:first-child .n{ color:var(--blue); }
   @media (max-width:640px){
     .rundown{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .rundown .stat:nth-child(2){ border-right:0; }
-    .rundown .stat:nth-child(-n+2){ border-bottom:1px solid var(--line); }
+    .rundown .stat{ border-bottom:1px solid var(--line); }
+    .rundown .stat:nth-child(odd){ border-right:1px solid var(--line); }
+    .rundown .stat:nth-child(even){ border-right:0; }
+    .rundown .stat:first-child{ grid-column:1 / -1; border-right:0; }
+    .rundown .stat:first-child ~ .stat:nth-child(even){ border-right:1px solid var(--line); }
+    .rundown .stat:first-child ~ .stat:nth-child(odd){ border-right:0; }
+    .rundown .stat:nth-last-child(-n+2){ border-bottom:0; }
   }
   .quote{ display:block; width:100%; text-align:left; background:none; color:inherit; font:inherit; cursor:pointer; border:0; border-left:3px solid var(--blue); padding:6px 0 6px 18px; margin:0 0 22px; }
   .quote .q{ display:block; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:clamp(17px,2.6vw,22px); line-height:1.3; letter-spacing:-.01em; }
@@ -667,7 +672,7 @@ const I18N = {
     intro:"Short-form video for Montréal local business.",
     quoteBy:"A Car Healers customer, on camera — \"I found you on Instagram, read the comments, and you were number one.\" · watch ▸",
     howTo:"How to watch: every section says what to look for. Tap a video to see why it worked.",
-    lookFor:"Look for", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
+    lookFor:"Look for", statTotal:"Instagram views on reels we made with clients", statReels:"client reels posted with us", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
     all:"All work", mostViewed:"\u2193 Most viewed", views:"Views", viewsWord:"views",
     why:"Why it worked", kicker:"Work with us",
     ctaH:'Your <em>turn</em>.',
@@ -679,7 +684,7 @@ const I18N = {
     intro:"Vidéo courte pour les commerces de Montréal.",
     quoteBy:"Une cliente de Car Healers, devant la caméra · voir ▸",
     howTo:"Comment regarder : chaque section dit quoi remarquer. Touchez une vidéo pour voir pourquoi elle a marché.",
-    lookFor:"À remarquer", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
+    lookFor:"À remarquer", statTotal:"vues Instagram sur les reels faits avec nos clients", statReels:"reels clients publiés avec nous", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
     all:"Tout", mostViewed:"\u2193 Plus vues", views:"Vues", viewsWord:"vues",
     why:"Pourquoi ça a marché", kicker:"Travaillons ensemble",
     ctaH:'À <em>vous</em>.',
@@ -718,8 +723,9 @@ function buildRundown(){
   if (!CLIPS.length){ rundownEl.innerHTML = ''; return; }
   const best = Math.max(...CLIPS.map(c => c.views || 0));
   const brands = new Set(CLIPS.map(c => c.client)).size;
+  /* RZ totals, counted on Instagram 2026-10-07 (collab reels with @rzmediagency; TikTok not included) */
   rundownEl.innerHTML = [
-    [fmtViews(best), t('statBest')], [CLIPS.length, t('statVideos')], [brands, t('statBrands')], ['FR / EN', t('statLang')]
+    ['2.4M+', t('statTotal')], [fmtViews(best), t('statBest')], ['40+', t('statReels')], [brands, t('statBrands')], ['FR / EN', t('statLang')]
   ].map(([n,k]) => `<div class="stat"><span class="n">${n}</span><span class="mono-label">${k}</span></div>`).join('');
 }
 function buildFilters(){
