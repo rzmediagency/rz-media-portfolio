@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RZ Media — Selected Work</title>
 <meta name="description" content="Short-form video for Montréal local business.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rz-media-portfolio.vercel.app/">
+<meta property="og:title" content="RZ Media — Selected Work">
+<meta property="og:description" content="Short-form video for Montréal local business. 2M views on our top video.">
+<meta property="og:image" content="https://rz-media-portfolio.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rz-media-portfolio.vercel.app/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
@@ -61,6 +70,9 @@
 
   /* ===== Rundown + sections ===== */
   .intro .howto{ display:block; margin-top:14px; color:var(--chrome); }
+  .intro{ display:flex; align-items:center; justify-content:space-between; gap:clamp(20px,4vw,48px); }
+  .intro .reel{ width:clamp(150px,22vw,230px); aspect-ratio:9/16; object-fit:cover; background:#000; border:1px solid var(--line); flex:none; }
+  @media (max-width:640px){ .intro{ gap:16px; } .intro .reel{ width:36vw; } .intro .howto{ font-size:10px; } }
   .rundown{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid var(--line); margin-bottom:22px; }
   .rundown .stat{ padding:16px 18px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:6px; }
   .rundown .stat:last-child{ border-right:0; }
@@ -232,8 +244,11 @@
 </header>
 
 <div class="wrap intro">
-  <p id="introLine">Short-form video for Montréal local business.</p>
-  <span class="mono-label howto" id="howTo">How to watch: every section says what to look for. Tap a video to see why it worked.</span>
+  <div class="intro-text">
+    <p id="introLine">Short-form video for Montréal local business.</p>
+    <span class="mono-label howto" id="howTo">How to watch: every section says what to look for. Tap a video to see why it worked.</span>
+  </div>
+  <video class="reel" src="media/showreel.mp4" poster="media/showreel.jpg" autoplay muted loop playsinline preload="metadata" aria-label="RZ Media showreel"></video>
 </div>
 
 <main class="wrap">
@@ -395,7 +410,6 @@ const CLIPS = [
     cat:    "food",
     label:  "Bienvenue chez Crêpes en Rose",
     labelFr: "Bienvenue chez Crêpes en Rose",
-    views:      1500,
     why: "A face and one concrete promise — everything prepped fresh that day. A new shop's problem isn't menu awareness, it's that nobody has attached a person to the place yet. One specific claim also outperforms the usual talk of quality and passion, because it's the kind of thing a competitor would have to match rather than just echo.",
     whyFr: "Un visage et une promesse concrète — tout est préparé frais le jour même. Le problème d'un commerce qui ouvre, ce n'est pas de faire connaître son menu, c'est que personne n'a encore associé une personne à la place. Une affirmation précise bat aussi le discours habituel sur la qualité et la passion, parce que c'est le genre de chose qu'un concurrent devrait égaler au lieu de simplement répéter."
   },
@@ -405,7 +419,6 @@ const CLIPS = [
     cat:    "food",
     label:  "Le paradis existe en 4 fromages",
     labelFr: "Le paradis existe en 4 fromages",
-    views:      1500,
     why: "No script — the cheese pull is the entire argument. Food doesn't travel on description, it travels on texture and sound, and this is built for the half-second where someone's thumb slows down. The caption does the positioning so the visual never has to stop being appetising.",
     whyFr: "Aucun script — le fil de fromage est l'argument au complet. La bouffe ne voyage pas sur la description, elle voyage sur la texture et le son, et cette vidéo est construite pour la demi-seconde où le pouce ralentit. Le texte à l'écran fait le positionnement pour que l'image n'ait jamais à cesser d'être appétissante."
   },
@@ -415,7 +428,6 @@ const CLIPS = [
     cat:    "food",
     label:  "La fameuse crêpe Dubai",
     labelFr: "La fameuse crêpe Dubai",
-    views:      2000,
     why: "The best performer of the crêperie set, and not by accident — it attaches the shop to the Dubai chocolate wave that already had people searching. Riding demand that exists is far cheaper than manufacturing it. For a small food business, the fastest reach usually comes from having the trending thing and saying so plainly.",
     whyFr: "La meilleure performance du lot de la crêperie, et pas par hasard — elle accroche le commerce à la vague du chocolat Dubaï que le monde cherchait déjà. Surfer sur une demande qui existe déjà coûte bien moins cher que d'en créer une. Pour un petit commerce alimentaire, la portée la plus rapide vient généralement d'avoir l'item tendance et de le dire simplement."
   },
@@ -425,7 +437,6 @@ const CLIPS = [
     cat:    "food",
     label:  "Quand ta crêpe mérite tous les extras",
     labelFr: "Quand ta crêpe mérite tous les extras",
-    views:      1500,
     why: "An upsell disguised as a flex. Showing the fully loaded version raises what people picture before they order, so the average ticket moves without anyone being sold to. A menu board can't do this — it lists the extras, but it never makes you want them.",
     whyFr: "Une vente incitative déguisée en flex. Montrer la version pleinement garnie élève ce que le monde imagine avant de commander, donc la facture moyenne monte sans que personne se sente vendu. Un menu au mur ne peut pas faire ça — il énumère les extras, mais il ne donne jamais envie."
   },
