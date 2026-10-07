@@ -389,24 +389,6 @@ const CLIPS = [
     whyFr: "Le drone, c'est le raccourci ultime en toiture : le client ne peut jamais voir son propre toit. Montrer le travail fini vu d'en haut livre le seul angle qu'il ne peut pas obtenir lui-même, et ça transforme un portfolio en quelque chose que le monde va réellement regarder. La preuve bat la persuasion dans tout métier où le travail disparaît une fois qu'il est terminé."
   },
   {
-    client: "roofstar",
-    file:   "roofstar-04",
-    cat:    "series",
-    label:  "Rooftop vlog — Part 2",
-    labelFr: "Vlog sur le toit — Partie 2",
-    why: "A series, not a one-off. Day 3 on a commercial roof: a blooper to open, the crew working, then the owner explaining each layer in her own words — SecurPan, IKO adhesive, membrane overlap, flashing — with motion graphics building the cross-section as she talks. The personality earns the watch, the specifics prove the expertise, and the Part 3 tease brings people back for the result.",
-    whyFr: "Une série, pas une vidéo isolée. Jour 3 sur un toit commercial : un blooper pour ouvrir, l'équipe au travail, puis la propriétaire qui explique chaque couche dans ses mots — SecurPan, colle IKO, chevauchement de la membrane, solin — pendant que les animations construisent la coupe du toit. La personnalité achète le visionnement, les détails prouvent l'expertise, et le teaser de la Partie 3 ramène le monde pour le résultat."
-  },
-  {
-    client: "roofstar",
-    file:   "roofstar-05",
-    cat:    "series",
-    label:  "Roof tips — don't spray silicone",
-    labelFr: "Conseil toiture — ne vaporisez pas de silicone",
-    why: "One myth, busted in twelve seconds. The owner tells homeowners to stop spraying silicone on their shingles and says why, then closes on the free estimate. Advice people can use today builds trust before any sales pitch, and the \"Roof tips\" tag turns one clip into a recurring format.",
-    whyFr: "Un mythe démoli en douze secondes. La propriétaire dit aux propriétaires d'arrêter de vaporiser du silicone sur leurs bardeaux et explique pourquoi, puis termine sur l'estimation gratuite. Un conseil utile dès aujourd'hui bâtit la confiance avant tout argumentaire, et l'étiquette « Conseil toiture » transforme une vidéo en format récurrent."
-  },
-  {
     client: "crepesenrose",
     file:   "crepesenrose-01",
     cat:    "food",
@@ -515,11 +497,37 @@ const CLIPS = [
   }
 ];
 
+/* Archived — pulled from the site (Yafet, 2026-10-07). Not rendered; move back into CLIPS to restore.
+const ARCHIVED = [
+  {
+    client: "roofstar",
+    file:   "roofstar-04",
+    cat:    "series",
+    label:  "Rooftop vlog — Part 2",
+    labelFr: "Vlog sur le toit — Partie 2",
+    why: "A series, not a one-off. Day 3 on a commercial roof: a blooper to open, the crew working, then the owner explaining each layer in her own words — SecurPan, IKO adhesive, membrane overlap, flashing — with motion graphics building the cross-section as she talks. The personality earns the watch, the specifics prove the expertise, and the Part 3 tease brings people back for the result.",
+    whyFr: "Une série, pas une vidéo isolée. Jour 3 sur un toit commercial : un blooper pour ouvrir, l'équipe au travail, puis la propriétaire qui explique chaque couche dans ses mots — SecurPan, colle IKO, chevauchement de la membrane, solin — pendant que les animations construisent la coupe du toit. La personnalité achète le visionnement, les détails prouvent l'expertise, et le teaser de la Partie 3 ramène le monde pour le résultat."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-05",
+    cat:    "series",
+    label:  "Roof tips — don't spray silicone",
+    labelFr: "Conseil toiture — ne vaporisez pas de silicone",
+    why: "One myth, busted in twelve seconds. The owner tells homeowners to stop spraying silicone on their shingles and says why, then closes on the free estimate. Advice people can use today builds trust before any sales pitch, and the \"Roof tips\" tag turns one clip into a recurring format.",
+    whyFr: "Un mythe démoli en douze secondes. La propriétaire dit aux propriétaires d'arrêter de vaporiser du silicone sur leurs bardeaux et explique pourquoi, puis termine sur l'estimation gratuite. Un conseil utile dès aujourd'hui bâtit la confiance avant tout argumentaire, et l'étiquette « Conseil toiture » transforme une vidéo en format récurrent."
+  },
+];
+*/
+
 /* Sections, in page order. Each clip's `cat` puts it in one. */
 const SECTIONS = [
   { key:"proof", byViews:true, short:"Top numbers", shortFr:"Gros chiffres", title:"Start here — our biggest numbers", titleFr:"Commencez ici — nos plus gros chiffres",
     look:"The first second. Each of these hooks you before you know it's an ad.",
     lookFr:"La première seconde. Chacune accroche avant même qu'on sache que c'est une pub." },
+  { key:"cinematic", short:"Cinematic & 3D", shortFr:"Cinéma & 3D", title:"Cinematic, events & 3D", titleFr:"Cinématique, événements et 3D",
+    look:"Craft: camera moves, cuts on the beat, and animation when there's no footage to film.",
+    lookFr:"Le métier : mouvements de caméra, coupes sur le rythme, et l'animation quand il n'y a rien à filmer." },
   { key:"leads", short:"Bring customers", shortFr:"Amener des clients", title:"Made to bring in customers", titleFr:"Faites pour amener des clients",
     look:"Who it speaks to and what it asks for: a real problem, a local name, one clear next step.",
     lookFr:"À qui ça parle et ce que ça demande : un vrai problème, un nom local, une seule prochaine étape." },
@@ -529,9 +537,6 @@ const SECTIONS = [
   { key:"food", short:"Food", shortFr:"Bouffe", title:"Food & restaurants", titleFr:"Restos et bouffe",
     look:"Close-ups, sound and pace. It has to make you hungry with the sound off.",
     lookFr:"Gros plans, son et rythme. Ça doit donner faim même sans le son." },
-  { key:"cinematic", short:"Cinematic & 3D", shortFr:"Cinéma & 3D", title:"Cinematic, events & 3D", titleFr:"Cinématique, événements et 3D",
-    look:"Craft: camera moves, cuts on the beat, and animation when there's no footage to film.",
-    lookFr:"Le métier : mouvements de caméra, coupes sur le rythme, et l'animation quand il n'y a rien à filmer." }
 ];
 
 /* ========================================================================== */
