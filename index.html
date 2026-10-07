@@ -40,14 +40,14 @@
   .mark::before{ content:""; width:6px; height:6px; background:var(--blue); }
 
   /* ===== Intro ===== */
-  .intro{ padding:clamp(30px,6vw,52px) 0 clamp(22px,4vw,32px); }
+  .intro{ padding-top:clamp(30px,6vw,52px); padding-bottom:clamp(22px,4vw,32px); }
   .intro p{
     font-family:'Bricolage Grotesque',sans-serif; font-weight:700;
     letter-spacing:-.02em; font-size:clamp(19px,3.4vw,27px); max-width:22ch; line-height:1.2;
   }
 
   /* ===== Filters ===== */
-  .filters{ display:flex; flex-wrap:wrap; gap:8px; padding-bottom:26px; }
+  .filters{ display:flex; flex-wrap:wrap; gap:8px; }
   .chip{
     font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase;
     color:var(--chrome-dim); background:transparent; border:1px solid var(--line);
@@ -59,9 +59,34 @@
   .chip.sort{ margin-left:auto; }
   @media (max-width:640px){ .chip.sort{ margin-left:0; } }
 
+  /* ===== Rundown + sections ===== */
+  .intro .howto{ display:block; margin-top:14px; color:var(--chrome); }
+  .rundown{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid var(--line); margin-bottom:22px; }
+  .rundown .stat{ padding:16px 18px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:6px; }
+  .rundown .stat:last-child{ border-right:0; }
+  .rundown .n{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:clamp(22px,4vw,32px); letter-spacing:-.02em; line-height:1; }
+  .rundown .stat:first-child .n{ color:var(--blue); }
+  @media (max-width:640px){
+    .rundown{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .rundown .stat:nth-child(2){ border-right:0; }
+    .rundown .stat:nth-child(-n+2){ border-bottom:1px solid var(--line); }
+  }
+  .filters{ position:sticky; top:0; z-index:20; background:var(--bg); padding:12px 0; border-bottom:1px solid var(--line); }
+  .filters .chip{ white-space:nowrap; }
+  @media (max-width:640px){ .filters{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } .filters::-webkit-scrollbar{ display:none; } }
+  .sec{ padding-top:clamp(28px,5vw,44px); scroll-margin-top:64px; }
+  .sec-head{ display:grid; gap:7px; margin-bottom:18px; }
+  .sec-head h2{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:clamp(20px,3.6vw,28px); letter-spacing:-.02em; }
+  .sec-head p{ color:var(--chrome); font-size:14px; line-height:1.55; max-width:62ch; }
+  .sec-head .look{ color:var(--blue); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-right:6px; }
+  .tile.wide{ grid-column:span 2; }
+  .tile.wide .frame{ aspect-ratio:16/9; }
+  .lb-panel.wide{ grid-template-columns:1fr; max-width:900px; }
+  .lb-panel.wide .lb-media{ aspect-ratio:16/9; }
+
   /* ===== Grid ===== */
   main{ padding-bottom:clamp(48px,8vw,80px); }
-  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:clamp(14px,2.4vw,22px); }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:clamp(14px,2.4vw,22px); align-items:start; }
 
   .tile{ cursor:pointer; border:0; background:none; padding:0; text-align:left; font:inherit; color:inherit; display:block; }
   .tile .frame{
@@ -208,11 +233,13 @@
 
 <div class="wrap intro">
   <p id="introLine">Short-form video for Montréal local business.</p>
+  <span class="mono-label howto" id="howTo">How to watch: every section says what to look for. Tap a video to see why it worked.</span>
 </div>
 
 <main class="wrap">
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="grid"></div>
+  <div class="rundown" id="rundown"></div>
+  <nav class="filters" id="filters"></nav>
+  <div id="sections"></div>
 </main>
 
 <section class="cta">
@@ -285,13 +312,16 @@ const CLIENTS = {
   roofstar:      { name: "Roofstar",        sector: "Roofing · Greater Montréal", sectorFr: "Toiture · Grand Montréal" },
   crepesenrose:  { name: "Crêpes en Rose",  sector: "Crêperie · Montréal", sectorFr: "Crêperie · Montréal" },
   shawarmamoods: { name: "Shawarma Moods",  sector: "Restaurant · Montréal", sectorFr: "Restaurant · Montréal" },
-  msstireshine:  { name: "MSS Tire Shine",  sector: "Car care product", sectorFr: "Produit d'entretien auto" }
+  msstireshine:  { name: "MSS Tire Shine",  sector: "Car care product", sectorFr: "Produit d'entretien auto" },
+  carsandcoffee: { name: "Cars & Coffee",   sector: "Event recap · Lamborghini Montréal", sectorFr: "Récap d'événement · Lamborghini Montréal" },
+  rzmedia:       { name: "RZ Media",        sector: "Our own brand · 3D animation", sectorFr: "Notre propre marque · animation 3D" }
 };
 
 const CLIPS = [
   {
     client: "carhealers",
     file:   "carhealers-01",
+    cat:    "leads",
     label:  "Mustang build — before & after",
     labelFr: "Mustang — avant / après",
     views:      4000,
@@ -301,6 +331,7 @@ const CLIPS = [
   {
     client: "carhealers",
     file:   "carhealers-02",
+    cat:    "leads",
     label:  "Accident? On s'occupe de tout",
     labelFr: "Accident? On s'occupe de tout",
     views:      1500,
@@ -310,6 +341,7 @@ const CLIPS = [
   {
     client: "carhealers",
     file:   "carhealers-03",
+    cat:    "proof",
     label:  "Customer testimonial — « super à l'aise »",
     labelFr: "Témoignage client — « super à l'aise »",
     views:      5000,
@@ -319,6 +351,7 @@ const CLIPS = [
   {
     client: "carhealers",
     file:   "carhealers-04",
+    cat:    "series",
     label:  "Shop floor — la Corvette bleue",
     labelFr: "Plancher d'atelier — la Corvette bleue",
     views:      4000,
@@ -328,6 +361,7 @@ const CLIPS = [
   {
     client: "roofstar",
     file:   "roofstar-01",
+    cat:    "leads",
     label:  "4 questions to ask before you sign",
     labelFr: "4 questions à poser avant de signer",
     views:      3000,
@@ -337,6 +371,7 @@ const CLIPS = [
   {
     client: "roofstar",
     file:   "roofstar-02",
+    cat:    "leads",
     label:  "What your roof protects",
     labelFr: "Ce que votre toit protège",
     views:      2000,
@@ -346,6 +381,7 @@ const CLIPS = [
   {
     client: "roofstar",
     file:   "roofstar-03",
+    cat:    "leads",
     label:  "See the work for yourself",
     labelFr: "Voyez le travail par vous-même",
     views:      2000,
@@ -353,8 +389,27 @@ const CLIPS = [
     whyFr: "Le drone, c'est le raccourci ultime en toiture : le client ne peut jamais voir son propre toit. Montrer le travail fini vu d'en haut livre le seul angle qu'il ne peut pas obtenir lui-même, et ça transforme un portfolio en quelque chose que le monde va réellement regarder. La preuve bat la persuasion dans tout métier où le travail disparaît une fois qu'il est terminé."
   },
   {
+    client: "roofstar",
+    file:   "roofstar-04",
+    cat:    "series",
+    label:  "Rooftop vlog — Part 2",
+    labelFr: "Vlog sur le toit — Partie 2",
+    why: "A series, not a one-off. Day 3 on a commercial roof: a blooper to open, the crew working, then the owner explaining each layer in her own words — SecurPan, IKO adhesive, membrane overlap, flashing — with motion graphics building the cross-section as she talks. The personality earns the watch, the specifics prove the expertise, and the Part 3 tease brings people back for the result.",
+    whyFr: "Une série, pas une vidéo isolée. Jour 3 sur un toit commercial : un blooper pour ouvrir, l'équipe au travail, puis la propriétaire qui explique chaque couche dans ses mots — SecurPan, colle IKO, chevauchement de la membrane, solin — pendant que les animations construisent la coupe du toit. La personnalité achète le visionnement, les détails prouvent l'expertise, et le teaser de la Partie 3 ramène le monde pour le résultat."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-05",
+    cat:    "series",
+    label:  "Roof tips — don't spray silicone",
+    labelFr: "Conseil toiture — ne vaporisez pas de silicone",
+    why: "One myth, busted in twelve seconds. The owner tells homeowners to stop spraying silicone on their shingles and says why, then closes on the free estimate. Advice people can use today builds trust before any sales pitch, and the \"Roof tips\" tag turns one clip into a recurring format.",
+    whyFr: "Un mythe démoli en douze secondes. La propriétaire dit aux propriétaires d'arrêter de vaporiser du silicone sur leurs bardeaux et explique pourquoi, puis termine sur l'estimation gratuite. Un conseil utile dès aujourd'hui bâtit la confiance avant tout argumentaire, et l'étiquette « Conseil toiture » transforme une vidéo en format récurrent."
+  },
+  {
     client: "crepesenrose",
     file:   "crepesenrose-01",
+    cat:    "food",
     label:  "Bienvenue chez Crêpes en Rose",
     labelFr: "Bienvenue chez Crêpes en Rose",
     views:      1500,
@@ -364,6 +419,7 @@ const CLIPS = [
   {
     client: "crepesenrose",
     file:   "crepesenrose-02",
+    cat:    "food",
     label:  "Le paradis existe en 4 fromages",
     labelFr: "Le paradis existe en 4 fromages",
     views:      1500,
@@ -373,6 +429,7 @@ const CLIPS = [
   {
     client: "crepesenrose",
     file:   "crepesenrose-03",
+    cat:    "food",
     label:  "La fameuse crêpe Dubai",
     labelFr: "La fameuse crêpe Dubai",
     views:      2000,
@@ -382,6 +439,7 @@ const CLIPS = [
   {
     client: "crepesenrose",
     file:   "crepesenrose-04",
+    cat:    "food",
     label:  "Quand ta crêpe mérite tous les extras",
     labelFr: "Quand ta crêpe mérite tous les extras",
     views:      1500,
@@ -391,6 +449,7 @@ const CLIPS = [
   {
     client: "shawarmamoods",
     file:   "shawarmamoods-01",
+    cat:    "proof",
     label:  "Le tirage — section rouge 118",
     labelFr: "Le tirage — section rouge 118",
     views:      12600,
@@ -400,6 +459,7 @@ const CLIPS = [
   {
     client: "shawarmamoods",
     file:   "shawarmamoods-02",
+    cat:    "proof",
     label:  "« Guys, j'ai une… »",
     labelFr: "« Guys, j'ai une… »",
     views:      110000,
@@ -409,19 +469,76 @@ const CLIPS = [
   {
     client: "msstireshine",
     file:   "msstireshine-01",
+    cat:    "proof",
     label:  "Here's exactly how you apply it",
     labelFr: "Voici exactement comment l'appliquer",
     views:      2000000,
     why: "Two million views, and the mechanic is simple: lead with the finished result, then promise the method. You watch to learn rather than because you're being sold to, and \"step one\" implies more steps, which holds the view to the end. Tutorials beat ads for any product with a visible transformation — the viewer gets something useful even if they never buy, and the demo is the advertisement.",
     whyFr: "Deux millions de vues, et le mécanisme est simple : on ouvre sur le résultat fini, puis on promet la méthode. On regarde pour apprendre, pas parce qu'on se fait vendre quelque chose, et « étape un » sous-entend d'autres étapes, ce qui retient jusqu'à la fin. Le tutoriel bat la pub pour tout produit avec une transformation visible — le spectateur repart avec quelque chose d'utile même s'il n'achète jamais, et la démo est la publicité."
+  },
+  {
+    client: "carhealers",
+    file:   "carhealers-05",
+    cat:    "cinematic",
+    label:  "Classic Porsche 911 — the restoration",
+    labelFr: "Porsche 911 classique — la restauration",
+    why: "No talking, just the process: sanding, masking, primer, paint, and the crest back on a car that looks new again. Slow, close shots let the craft speak, which is exactly what someone trusting a shop with a classic needs to see. Every step on screen is proof the job isn't rushed.",
+    whyFr: "Aucune parole, juste le processus : sablage, masquage, apprêt, peinture, et l'écusson remis sur une auto qui a l'air neuve. Des plans lents et serrés laissent parler le métier — c'est exactement ce qu'un propriétaire de classique a besoin de voir avant de confier son auto. Chaque étape à l'écran prouve que la job n'est pas bâclée."
+  },
+  {
+    client: "carhealers",
+    file:   "carhealers-06",
+    cat:    "series",
+    label:  "Shahan's Harley — Part 2",
+    labelFr: "La Harley de Shahan — Partie 2",
+    why: "A customer becomes a character. His Harley parts come in, the crew sands, sprays and reveals them, and the banter between him and the shop carries the whole thing. A two-part story gives people a reason to come back, and a real client on camera does the selling for you.",
+    whyFr: "Un client devient un personnage. Les pièces de sa Harley arrivent, l'équipe sable, peint et dévoile, et les échanges entre lui et l'atelier portent toute la vidéo. Une histoire en deux parties donne une raison de revenir, et un vrai client devant la caméra vend à votre place."
+  },
+  {
+    client: "carsandcoffee",
+    file:   "events-01",
+    cat:    "cinematic",
+    wide:   true,
+    label:  "Cars & Coffee at Lamborghini Montréal — event recap",
+    labelFr: "Cars & Coffee chez Lamborghini Montréal — récap",
+    why: "A whole morning in one horizontal cut: arrivals, the crowd, the details, the roll-out. Cars, people and close-ups alternate so it never feels like the same shot twice, and every cut lands on the music. It's the kind of piece a brand or venue can use for months — on the site, on screens, and as proof the event was worth showing up to.",
+    whyFr: "Toute une matinée en un seul montage horizontal : les arrivées, la foule, les détails, le départ. Autos, gens et gros plans s'alternent pour ne jamais répéter le même plan, et chaque coupe tombe sur la musique. C'est le genre de vidéo qu'une marque ou un lieu peut utiliser pendant des mois — sur le site, sur les écrans, et comme preuve que l'événement valait le déplacement."
+  },
+  {
+    client: "rzmedia",
+    file:   "rzmedia-01",
+    cat:    "cinematic",
+    label:  "Our story — 3D animated",
+    labelFr: "Notre histoire — en animation 3D",
+    why: "Our own origin story, told with 3D-animated versions of the two of us: the 9-to-5, the late nights, the first signed client. When there's no footage of the past, animation lets you show it anyway — and a story people recognise themselves in gets watched to the end. The same approach works for any brand with a story worth telling.",
+    whyFr: "Notre propre histoire, racontée avec des versions animées en 3D de nous deux : le 9 à 5, les nuits blanches, le premier client signé. Quand il n'existe aucune image du passé, l'animation permet de le montrer quand même — et une histoire dans laquelle le monde se reconnaît se regarde jusqu'au bout. La même approche marche pour toute marque qui a une histoire à raconter."
   }
+];
+
+/* Sections, in page order. Each clip's `cat` puts it in one. */
+const SECTIONS = [
+  { key:"proof", byViews:true, short:"Top numbers", shortFr:"Gros chiffres", title:"Start here — our biggest numbers", titleFr:"Commencez ici — nos plus gros chiffres",
+    look:"The first second. Each of these hooks you before you know it's an ad.",
+    lookFr:"La première seconde. Chacune accroche avant même qu'on sache que c'est une pub." },
+  { key:"leads", short:"Bring customers", shortFr:"Amener des clients", title:"Made to bring in customers", titleFr:"Faites pour amener des clients",
+    look:"Who it speaks to and what it asks for: a real problem, a local name, one clear next step.",
+    lookFr:"À qui ça parle et ce que ça demande : un vrai problème, un nom local, une seule prochaine étape." },
+  { key:"series", short:"Series", shortFr:"Séries", title:"Series & personality", titleFr:"Séries et personnalité",
+    look:"The owner on camera. People come back for a face and a format, not a logo.",
+    lookFr:"Le proprio devant la caméra. Le monde revient pour un visage et un format, pas pour un logo." },
+  { key:"food", short:"Food", shortFr:"Bouffe", title:"Food & restaurants", titleFr:"Restos et bouffe",
+    look:"Close-ups, sound and pace. It has to make you hungry with the sound off.",
+    lookFr:"Gros plans, son et rythme. Ça doit donner faim même sans le son." },
+  { key:"cinematic", short:"Cinematic & 3D", shortFr:"Cinéma & 3D", title:"Cinematic, events & 3D", titleFr:"Cinématique, événements et 3D",
+    look:"Craft: camera moves, cuts on the beat, and animation when there's no footage to film.",
+    lookFr:"Le métier : mouvements de caméra, coupes sur le rythme, et l'animation quand il n'y a rien à filmer." }
 ];
 
 /* ========================================================================== */
 
-const grid = document.getElementById('grid');
-const filtersEl = document.getElementById('filters');
-let activeFilter = 'all';
+const sectionsEl = document.getElementById('sections');
+const filtersEl  = document.getElementById('filters');
+const rundownEl  = document.getElementById('rundown');
 let visible = [];
 let currentIndex = 0;
 
@@ -436,11 +553,12 @@ const fmtViews = n => {
   if (n >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'') + 'K';
   return String(n);
 };
-let sortByViews = false;
 
 const I18N = {
   en: {
     intro:"Short-form video for Montréal local business.",
+    howTo:"How to watch: every section says what to look for. Tap a video to see why it worked.",
+    lookFor:"Look for", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
     all:"All work", mostViewed:"\u2193 Most viewed", views:"Views", viewsWord:"views",
     why:"Why it worked", kicker:"Work with us",
     ctaH:'Your <em>turn</em>.',
@@ -450,6 +568,8 @@ const I18N = {
   },
   fr: {
     intro:"Vidéo courte pour les commerces de Montréal.",
+    howTo:"Comment regarder : chaque section dit quoi remarquer. Touchez une vidéo pour voir pourquoi elle a marché.",
+    lookFor:"À remarquer", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
     all:"Tout", mostViewed:"\u2193 Plus vues", views:"Vues", viewsWord:"vues",
     why:"Pourquoi ça a marché", kicker:"Travaillons ensemble",
     ctaH:'À <em>vous</em>.',
@@ -479,35 +599,30 @@ function loadDurations(){
   });
 }
 
-/* ---- filters ---- */
+/* ---- rundown + section nav ---- */
+const ST   = sec => (lang === 'fr' && sec.titleFr) ? sec.titleFr : sec.title;
+const LOOK = sec => (lang === 'fr' && sec.lookFr) ? sec.lookFr : sec.look;
+const usedSections = () => SECTIONS.filter(sec => CLIPS.some(c => c.cat === sec.key));
+
+function buildRundown(){
+  if (!CLIPS.length){ rundownEl.innerHTML = ''; return; }
+  const best = Math.max(...CLIPS.map(c => c.views || 0));
+  const brands = new Set(CLIPS.map(c => c.client)).size;
+  rundownEl.innerHTML = [
+    [fmtViews(best), t('statBest')], [CLIPS.length, t('statVideos')], [brands, t('statBrands')], ['FR / EN', t('statLang')]
+  ].map(([n,k]) => `<div class="stat"><span class="n">${n}</span><span class="mono-label">${k}</span></div>`).join('');
+}
 function buildFilters(){
-  if (!CLIPS.length){ filtersEl.innerHTML = ''; return; }
-  const counts = {};
-  CLIPS.forEach(c => counts[c.client] = (counts[c.client]||0) + 1);
-  const opts = [{ key:'all', name:t('all'), n:CLIPS.length }]
-    .concat(Object.keys(CLIENTS)
-      .filter(k => counts[k])
-      .map(k => ({ key:k, name:CLIENTS[k].name, n:counts[k] })));
-  filtersEl.innerHTML = opts.map(o =>
-    `<button class="chip${o.key===activeFilter?' active':''}" data-filter="${o.key}">${o.name}<span class="c">${o.n}</span></button>`
-  ).join('')
-  + `<button class="chip sort${sortByViews?' active':''}" data-sort="views">${t('mostViewed')}</button>`;
+  filtersEl.innerHTML = usedSections().map((sec,i) =>
+    `<button class="chip" data-sec="${sec.key}">${String(i+1).padStart(2,'0')} · ${(lang === 'fr' && sec.shortFr) ? sec.shortFr : (sec.short || ST(sec))}</button>`
+  ).join('');
 }
 
-/* ---- grid ---- */
-function render(){
-  if (!CLIPS.length){
-    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>No videos added yet</p></div>`;
-    visible = [];
-    return;
-  }
-  visible = activeFilter === 'all' ? CLIPS.slice() : CLIPS.filter(c => c.client === activeFilter);
-  if (sortByViews) visible.sort((a,b) => (b.views||0) - (a.views||0));
-
-  grid.innerHTML = visible.map((c, i) => {
-    const cl = CLIENTS[c.client] || { name:c.client };
-    return `
-    <button class="tile" data-index="${i}" aria-label="${cl.name} — ${L(c)}">
+/* ---- sections ---- */
+function tileHTML(c, i){
+  const cl = CLIENTS[c.client] || { name:c.client };
+  return `
+    <button class="tile${c.wide?' wide':''}" data-index="${i}" aria-label="${cl.name} — ${L(c)}">
       <div class="frame">
         <img src="${posterOf(c)}" alt="${cl.name} — ${L(c)}" loading="lazy">
         <video src="${srcOf(c)}" muted loop playsinline preload="none"></video>
@@ -520,17 +635,38 @@ function render(){
         <div class="lb">${L(c)}</div>
       </div>
     </button>`;
+}
+function render(){
+  visible = [];
+  if (!CLIPS.length){
+    sectionsEl.innerHTML = `<div class="empty"><p>No videos added yet</p></div>`;
+    return;
+  }
+  sectionsEl.innerHTML = usedSections().map((sec, si) => {
+    const items = CLIPS.filter(c => c.cat === sec.key);
+    if (sec.byViews) items.sort((x,y) => (y.views||0) - (x.views||0));
+    const tiles = items
+      .map(c => tileHTML(c, visible.push(c) - 1)).join('');
+    return `
+    <section class="sec" id="sec-${sec.key}">
+      <div class="sec-head">
+        <span class="mono-label">${String(si+1).padStart(2,'0')}</span>
+        <h2>${ST(sec)}</h2>
+        <p><span class="look">${t('lookFor')}</span>${LOOK(sec)}</p>
+      </div>
+      <div class="grid">${tiles}</div>
+    </section>`;
   }).join('');
 }
 
 /* ---- hover preview ---- */
-grid.addEventListener('pointerenter', e => {
+sectionsEl.addEventListener('pointerenter', e => {
   const tile = e.target.closest && e.target.closest('.tile'); if (!tile) return;
   const v = tile.querySelector('video'); if (!v) return;
   v.preload = 'metadata'; v.currentTime = 0;
   v.play().then(() => v.classList.add('on')).catch(()=>{});
 }, true);
-grid.addEventListener('pointerleave', e => {
+sectionsEl.addEventListener('pointerleave', e => {
   const tile = e.target.closest && e.target.closest('.tile'); if (!tile) return;
   const v = tile.querySelector('video'); if (!v) return;
   v.pause(); v.classList.remove('on');
@@ -549,8 +685,10 @@ function renderLightbox(){
   document.getElementById('lbWhy').textContent    = WHY(c) || '';
   document.getElementById('lbCount').textContent  = `${currentIndex+1} / ${visible.length}`;
 
-  document.getElementById('lbStats').innerHTML =
-    `<span class="v">${fmtViews(c.views)}</span><span class="k">${t('views')}</span>`;
+  const stats = document.getElementById('lbStats');
+  stats.style.display = c.views ? '' : 'none';
+  stats.innerHTML = c.views ? `<span class="v">${fmtViews(c.views)}</span><span class="k">${t('views')}</span>` : '';
+  document.querySelector('.lb-panel').classList.toggle('wide', !!c.wide);
 
   lbMedia.innerHTML = `<video src="${srcOf(c)}" poster="${posterOf(c)}" controls autoplay playsinline></video>`;
 }
@@ -566,11 +704,10 @@ const step = d => { currentIndex = (currentIndex + d + visible.length) % visible
 /* ---- events ---- */
 filtersEl.addEventListener('click', e => {
   const b = e.target.closest('.chip'); if (!b) return;
-  if (b.dataset.sort) sortByViews = !sortByViews;
-  else activeFilter = b.dataset.filter;
-  buildFilters(); render();
+  const target = document.getElementById('sec-' + b.dataset.sec);
+  if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
 });
-grid.addEventListener('click', e => {
+sectionsEl.addEventListener('click', e => {
   const t = e.target.closest('.tile'); if (t) openLightbox(parseInt(t.dataset.index, 10));
 });
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
@@ -587,6 +724,8 @@ document.addEventListener('keydown', e => {
 function applyLang(){
   document.documentElement.lang = lang;
   document.getElementById('introLine').textContent = t('intro');
+  document.getElementById('howTo').textContent     = t('howTo');
+  buildRundown();
   document.getElementById('ctaKicker').textContent = t('kicker');
   document.getElementById('ctaH').innerHTML        = t('ctaH');
   document.getElementById('ctaP').textContent      = t('ctaP');
