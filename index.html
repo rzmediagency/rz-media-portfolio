@@ -667,7 +667,7 @@ const I18N = {
     intro:"Short-form video for Montréal local business.",
     quoteBy:"A Car Healers customer, on camera — \"I found you on Instagram, read the comments, and you were number one.\" · watch ▸",
     howTo:"How to watch: every section says what to look for. Tap a video to see why it worked.",
-    lookFor:"Look for", r1n:"$20K", r1:"in sales in one day · Roofstar", r2n:"1,000+", r2:"sales from one organic video · MSS Tire Shine", r3n:"FR / EN", r3:"film · edit · post · ads, one team", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
+    lookFor:"Look for", r1n:"$20K", r1:"in sales in one day · Roofstar", r2n:"1,000+", r2:"sales from one organic video · MSS Tire Shine", r3n:"FR / EN", r3:"film · edit · post · ads, one team", r4n:"30+", r4:"qualified leads a month · Car Healers", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
     all:"All work", mostViewed:"\u2193 Most viewed", views:"Views", viewsWord:"views",
     why:"Why it worked", kicker:"Work with us",
     ctaH:'Your <em>turn</em>.',
@@ -679,7 +679,7 @@ const I18N = {
     intro:"Vidéo courte pour les commerces de Montréal.",
     quoteBy:"Une cliente de Car Healers, devant la caméra · voir ▸",
     howTo:"Comment regarder : chaque section dit quoi remarquer. Touchez une vidéo pour voir pourquoi elle a marché.",
-    lookFor:"À remarquer", r1n:"20 000 $", r1:"de ventes en une journée · Roofstar", r2n:"1 000+", r2:"ventes avec une seule vidéo organique · MSS Tire Shine", r3n:"FR / EN", r3:"tournage · montage · publication · pubs, une seule équipe", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
+    lookFor:"À remarquer", r1n:"20 000 $", r1:"de ventes en une journée · Roofstar", r2n:"1 000+", r2:"ventes avec une seule vidéo organique · MSS Tire Shine", r3n:"FR / EN", r3:"tournage · montage · publication · pubs, une seule équipe", r4n:"30+", r4:"leads qualifiés par mois · Car Healers", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
     all:"Tout", mostViewed:"\u2193 Plus vues", views:"Vues", viewsWord:"vues",
     why:"Pourquoi ça a marché", kicker:"Travaillons ensemble",
     ctaH:'À <em>vous</em>.',
@@ -718,9 +718,9 @@ function buildRundown(){
   if (!CLIPS.length){ rundownEl.innerHTML = ''; return; }
   const best = Math.max(...CLIPS.map(c => c.views || 0));
   const brands = new Set(CLIPS.map(c => c.client)).size;
-  /* Client results — figures given by Yafet, 2026-10-07 */
+  /* Client results — figures given by Yafet, 2026-10-07 (Car Healers 30+ includes calls/walk-ins, per Yafet) */
   rundownEl.innerHTML = [
-    [t('r1n'), t('r1')], [t('r2n'), t('r2')], [t('r3n'), t('r3')]
+    [t('r1n'), t('r1')], [t('r4n'), t('r4')], [t('r2n'), t('r2')], [t('r3n'), t('r3')]
   ].map(([n,k]) => `<div class="stat"><span class="n">${n}</span><span class="mono-label">${k}</span></div>`).join('');
 }
 function buildFilters(){
