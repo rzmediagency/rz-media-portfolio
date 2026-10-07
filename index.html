@@ -86,7 +86,7 @@
 
   /* ===== Grid ===== */
   main{ padding-bottom:clamp(48px,8vw,80px); }
-  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:clamp(14px,2.4vw,22px); align-items:start; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:clamp(14px,2.4vw,22px); align-items:start; grid-auto-flow:row dense; }
 
   .tile{ cursor:pointer; border:0; background:none; padding:0; text-align:left; font:inherit; color:inherit; display:block; }
   .tile .frame{
@@ -314,6 +314,7 @@ const CLIENTS = {
   shawarmamoods: { name: "Shawarma Moods",  sector: "Restaurant · Montréal", sectorFr: "Restaurant · Montréal" },
   msstireshine:  { name: "MSS Tire Shine",  sector: "Car care product", sectorFr: "Produit d'entretien auto" },
   carsandcoffee: { name: "Cars & Coffee",   sector: "Event recap · Lamborghini Montréal", sectorFr: "Récap d'événement · Lamborghini Montréal" },
+  builtfrombroken: { name: "Built From Broken", sector: "Motorcycle short film · Montréal", sectorFr: "Court métrage moto · Montréal" },
   rzmedia:       { name: "RZ Media",        sector: "Our own brand · 3D animation", sectorFr: "Notre propre marque · animation 3D" }
 };
 
@@ -477,6 +478,86 @@ const CLIPS = [
     labelFr: "La Harley de Shahan — Partie 1",
     why: "A customer becomes a character. His Harley parts come in, the crew sands, sprays and reveals them, and the banter between him and the shop carries the whole thing. A two-part story gives people a reason to come back, and a real client on camera does the selling for you.",
     whyFr: "Un client devient un personnage. Les pièces de sa Harley arrivent, l'équipe sable, peint et dévoile, et les échanges entre lui et l'atelier portent toute la vidéo. Une histoire en deux parties donne une raison de revenir, et un vrai client devant la caméra vend à votre place."
+  },
+  {
+    client: "carhealers",
+    file:   "carhealers-07",
+    cat:    "series",
+    views:      4117,
+    label:  "Shahan's Harley — Part 2",
+    labelFr: "La Harley de Shahan — Partie 2",
+    why: "The payoff episode. The parts come home, the bike goes back together, and Shahan gets the last word: he loves the colour, but it's missing a dragon. A finished story with a punchline gives everyone who watched Part 1 a reason to come back, and it shows the whole job, from teardown to delivery.",
+    whyFr: "L'épisode qui conclut. Les pièces reviennent à la maison, la moto est remontée, et Shahan a le dernier mot : il aime la couleur, mais il manque un dragon. Une histoire bouclée avec une chute donne à tous ceux qui ont vu la Partie 1 une raison de revenir, et elle montre toute la job, du démontage à la livraison."
+  },
+  {
+    client: "carhealers",
+    file:   "carhealers-09",
+    cat:    "series",
+    views:      6913,
+    label:  "POV: the customer who begged for the biggest discount",
+    labelFr: "POV : le client qui a négocié le plus gros rabais",
+    why: "A nine-second inside joke every shop owner recognises, and every customer laughs at. Relatable humour travels further than any repair photo, and it makes the shop feel like people, not a price list.",
+    whyFr: "Une blague de neuf secondes que tous les propriétaires d'atelier reconnaissent, et dont tous les clients rient. L'humour qui touche voyage plus loin que n'importe quelle photo de réparation, et il donne un visage humain à l'atelier plutôt qu'une liste de prix."
+  },
+  {
+    client: "carhealers",
+    file:   "carhealers-10",
+    cat:    "series",
+    views:      5213,
+    label:  "If you had a bad day in auto body…",
+    labelFr: "Si t'as eu une mauvaise journée en carrosserie…",
+    why: "Eight seconds, one line of text, one satisfying shot. Made for people in the trade, it gets shared inside the industry and keeps the account showing up in feeds between the bigger productions.",
+    whyFr: "Huit secondes, une ligne de texte, un plan satisfaisant. Pensée pour les gens du métier, elle se partage dans l'industrie et garde le compte présent dans le fil entre les plus grosses productions."
+  },
+  {
+    client: "carhealers",
+    file:   "carhealers-11",
+    cat:    "series",
+    views:      4141,
+    label:  "Rodrigo — « je parle pas français »",
+    labelFr: "Rodrigo — « je parle pas français »",
+    why: "The painter, introduced in his own words: he doesn't speak French, but car paint, he's a pro. Putting the team on camera turns a body shop into a crew people recognise, and a little self-deprecation makes the skill claim land.",
+    whyFr: "Le peintre, présenté dans ses propres mots : il parle pas français, mais la peinture d'auto, il est pro. Mettre l'équipe devant la caméra transforme un atelier en une gang que le monde reconnaît, et un peu d'autodérision fait passer la compétence."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-06",
+    cat:    "leads",
+    views:      4068,
+    label:  "When a bucket isn't enough",
+    labelFr: "Quand une chaudière ne suffit plus",
+    why: "A leak so bad a bucket couldn't keep up, so they used a truck bed. The visual proves the problem in one second, then the call to action gives the number and a free quote. Showing the worst case is what makes homeowners stop putting the repair off.",
+    whyFr: "Une fuite tellement grosse qu'une chaudière ne suffisait plus, alors on a sorti la boîte du pickup. L'image prouve le problème en une seconde, puis l'appel à l'action donne le numéro et la soumission gratuite. Montrer le pire cas, c'est ce qui pousse les propriétaires à arrêter de remettre la réparation à plus tard."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-08",
+    cat:    "leads",
+    views:      2959,
+    label:  "Would you wait until your brakes fail?",
+    labelFr: "Attendrais-tu que tes freins lâchent?",
+    why: "An analogy everyone gets instantly: nobody waits for their brakes to fail, so why wait for the roof to leak? Borrowing a fear people already have makes the case for early repairs without a single technical word.",
+    whyFr: "Une analogie que tout le monde comprend tout de suite : personne n'attend que ses freins lâchent, alors pourquoi attendre que le toit coule? Emprunter une peur que le monde a déjà justifie une réparation rapide sans un seul mot technique."
+  },
+  {
+    client: "builtfrombroken",
+    file:   "carhealers-08",
+    cat:    "cinematic",
+    wide:   true,
+    views:      3087,
+    label:  "Built From Broken — night ride",
+    labelFr: "Built From Broken — virée de nuit",
+    why: "A short film, not an ad: a rider, a Harley, a parking lot at night, and one line about getting back up. Cinematic framing and a voice-over give a brand a mood people remember, the kind of piece that works as a trailer or a launch.",
+    whyFr: "Un court métrage, pas une pub : un motard, une Harley, un stationnement de nuit, et une phrase sur le fait de se relever. Le cadrage cinéma et la narration donnent à une marque une ambiance dont on se souvient, le genre de pièce qui sert de bande-annonce ou de lancement."
+  },
+  {
+    client: "roofstar",
+    file:   "roofstar-07",
+    cat:    "cinematic",
+    label:  "Six hours, one new roof — from the drone",
+    labelFr: "Six heures, un toit neuf — vu du drone",
+    why: "Opens on the promise (six hours to bring the house back to life), then lets the drone do the selling: tear-off, new shingles, the finished roof from above. It's the one angle a homeowner can never see for themselves.",
+    whyFr: "Ouvre sur la promesse (six heures pour redonner vie à la maison), puis laisse le drone vendre : arrachage, bardeaux neufs, le toit fini vu d'en haut. C'est le seul angle qu'un propriétaire ne peut jamais voir lui-même."
   },
   {
     client: "carsandcoffee",
