@@ -55,6 +55,32 @@
     letter-spacing:-.02em; font-size:clamp(19px,3.4vw,27px); max-width:22ch; line-height:1.2;
   }
 
+
+  /* ===== Team carousel ===== */
+  .team{ padding-top:clamp(28px,6vw,52px); border-bottom:1px solid var(--line); padding-bottom:clamp(24px,4vw,36px); }
+  .kick{ display:block; color:var(--blue); margin-bottom:12px; }
+  .team-h{ font-family:'Bricolage Grotesque',sans-serif; font-weight:700; letter-spacing:-.03em; font-size:clamp(30px,6vw,52px); line-height:1.02; }
+  .team-p{ margin-top:10px; color:var(--chrome); font-size:clamp(15px,2.2vw,18px); }
+  .tc-wrap{ position:relative; max-width:1160px; margin:clamp(20px,3vw,28px) auto 0; }
+  .tc{ display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:0 clamp(20px,5vw,48px); scroll-padding:0 clamp(20px,5vw,48px); scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .tc::-webkit-scrollbar{ display:none; }
+  .tcard{ flex:none; width:clamp(220px,68vw,280px); scroll-snap-align:start; }
+  .tcard .v{ position:relative; aspect-ratio:9/16; background:#000; border:1px solid var(--line); overflow:hidden; cursor:pointer; }
+  .tcard video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .tcard .play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(transparent 55%,rgba(0,0,0,.55)); transition:opacity .2s; }
+  .tcard .play span{ width:58px; height:58px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; }
+  .tcard .play svg{ margin-left:4px; }
+  .tcard.playing .play{ opacity:0; pointer-events:none; }
+  .tcard .badge{ position:absolute; top:10px; left:10px; background:var(--blue); color:#04121c; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:5px 8px; }
+  .tcard.playing .badge{ opacity:0; }
+  .tcard .cap{ margin-top:10px; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:16px; }
+  .tcard .num{ color:var(--chrome-dim); font-family:'Space Mono',monospace; font-size:11px; margin-right:6px; }
+  .tc-nav{ position:absolute; top:calc(50% - 40px); width:42px; height:42px; border-radius:50%; border:1px solid var(--line); background:rgba(10,10,12,.85); color:var(--white); font-size:24px; line-height:1; cursor:pointer; display:none; }
+  .tc-nav.prev{ left:6px; } .tc-nav.next{ right:6px; }
+  .tc-nav:hover{ border-color:var(--blue); color:var(--blue); }
+  @media (hover:hover) and (min-width:900px){ .tc-nav{ display:block; } }
+  .tc-hint{ display:block; margin-top:14px; }
+
   /* ===== Filters ===== */
   .filters{ display:flex; flex-wrap:wrap; gap:8px; }
   .chip{
@@ -247,12 +273,25 @@
   </div>
 </header>
 
+<section class="team">
+  <div class="wrap">
+    <span class="mono-label kick" id="teamKick">01 · The team</span>
+    <h1 class="team-h" id="teamH">Hi, we're Yafet &amp; Ryan.</h1>
+    <p class="team-p" id="introLine">Short-form video for Montréal local business.</p>
+  </div>
+  <div class="tc-wrap">
+    <div class="tc" id="tc"></div>
+    <button class="tc-nav prev" id="tcPrev" aria-label="Previous">‹</button>
+    <button class="tc-nav next" id="tcNext" aria-label="Next">›</button>
+  </div>
+  <div class="wrap"><span class="mono-label tc-hint" id="tcHint">Swipe → · tap to play with sound</span></div>
+</section>
+
 <div class="wrap intro">
   <div class="intro-text">
-    <p id="introLine">Short-form video for Montréal local business.</p>
+    <span class="mono-label kick" id="workKick">02 · Our work</span>
     <span class="mono-label howto" id="howTo">How to watch: every section says what to look for. Tap a video to see why it worked.</span>
   </div>
-  <video class="reel" src="media/showreel.mp4" poster="media/showreel.jpg" autoplay muted loop playsinline preload="metadata" aria-label="RZ Media showreel"></video>
 </div>
 
 <main class="wrap">
@@ -675,7 +714,8 @@ const fmtViews = n => {
 
 const I18N = {
   en: {
-    intro:"Short-form video for Montréal local business.",
+    intro:"We film, edit and run ads for local businesses in Montréal. Swipe to see us at work.",
+    teamKick:"01 · The team", teamH:"Hi, we're Yafet &amp; Ryan.", workKick:"02 · Our work", tcHint:"Swipe → · tap to play with sound", start:"Start here",
     quoteBy:"A Car Healers customer, on camera — \"I found you on Instagram, read the comments, and you were number one.\" · watch ▸",
     howTo:"How to watch: every section says what to look for. Tap a video to see why it worked.",
     lookFor:"Look for", r1n:"$20K", r1:"in sales in one day · Roofstar", r2n:"1,000+", r2:"sales from one organic video · MSS Tire Shine", r3n:"FR / EN", r3:"film · edit · post · ads, one team", r4n:"30+", r4:"qualified leads a month · Car Healers", statBest:"views on our top video", statVideos:"videos below", statBrands:"brands", statLang:"we shoot in both",
@@ -687,7 +727,8 @@ const I18N = {
     mail:"mailto:rzmedia.net@gmail.com?subject=New%20project%20%E2%80%94%20RZ%20Media&body=Hi%20RZ%20Media%2C%0D%0A%0D%0ABusiness%3A%0D%0AIndustry%3A%0D%0AWhat%20I%27m%20looking%20for%3A%0D%0A%0D%0A%28Found%20you%20through%20your%20portfolio.%29"
   },
   fr: {
-    intro:"Vidéo courte pour les commerces de Montréal.",
+    intro:"On filme, on monte et on gère les pubs des commerces de Montréal. Glissez pour nous voir à l'œuvre.",
+    teamKick:"01 · L'équipe", teamH:"Salut, c'est Yafet &amp; Ryan.", workKick:"02 · Nos projets", tcHint:"Glissez → · touchez pour jouer avec le son", start:"Commencez ici",
     quoteBy:"Une cliente de Car Healers, devant la caméra · voir ▸",
     howTo:"Comment regarder : chaque section dit quoi remarquer. Touchez une vidéo pour voir pourquoi elle a marché.",
     lookFor:"À remarquer", r1n:"20 000 $", r1:"de ventes en une journée · Roofstar", r2n:"1 000+", r2:"ventes avec une seule vidéo organique · MSS Tire Shine", r3n:"FR / EN", r3:"tournage · montage · publication · pubs, une seule équipe", r4n:"30+", r4:"leads qualifiés par mois · Car Healers", statBest:"vues sur notre meilleure vidéo", statVideos:"vidéos ci-dessous", statBrands:"marques", statLang:"on tourne dans les deux",
@@ -846,10 +887,45 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') step(1);
 });
 
+/* ---- team carousel (intro first) ---- */
+const TEAM = [
+  { f:'team-01-intro',   en:'How RZ Media started',       fr:'Comment RZ Media a commencé' },
+  { f:'team-02-clients', en:'How we find clients',        fr:'Comment on trouve nos clients' },
+  { f:'team-03-ads',     en:'Our ads, explained',         fr:'Nos pubs, expliquées' },
+  { f:'team-04-ep01',    en:'Ep. 01 · Job site, Laval',   fr:'Ép. 01 · Chantier, Laval' },
+  { f:'team-05-ep06',    en:'Ep. 06 · Lamborghini Urus',  fr:'Ép. 06 · Lamborghini Urus' },
+];
+const tc = document.getElementById('tc');
+function buildTeam(){
+  tc.innerHTML = TEAM.map((v,i) => `
+    <div class="tcard" data-i="${i}">
+      <div class="v">
+        <video src="media/${v.f}.mp4" poster="media/${v.f}.jpg" playsinline preload="${i===0?'metadata':'none'}"></video>
+        <div class="play"><span><svg viewBox="0 0 24 24" width="22" height="22"><path d="M7 4l13 8-13 8z" fill="#0A0A0C"/></svg></span></div>
+        ${i===0 ? `<span class="badge">${t('start')}</span>` : ''}
+      </div>
+      <div class="cap"><span class="num">${String(i+1).padStart(2,'0')}</span>${lang==='fr'?v.fr:v.en}</div>
+    </div>`).join('');
+}
+tc.addEventListener('click', e => {
+  const card = e.target.closest('.tcard'); if (!card) return;
+  const vid = card.querySelector('video');
+  tc.querySelectorAll('.tcard').forEach(c => { if (c !== card){ c.querySelector('video').pause(); c.classList.remove('playing'); } });
+  if (vid.paused){ vid.muted = false; vid.controls = true; vid.play(); card.classList.add('playing'); }
+});
+tc.addEventListener('ended', e => { const c = e.target.closest('.tcard'); if (c) c.classList.remove('playing'); }, true);
+const tcStep = () => (tc.querySelector('.tcard')?.offsetWidth || 280) + 14;
+document.getElementById('tcPrev').onclick = () => tc.scrollBy({ left:-tcStep(), behavior:'smooth' });
+document.getElementById('tcNext').onclick = () => tc.scrollBy({ left: tcStep(), behavior:'smooth' });
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 function applyLang(){
   document.documentElement.lang = lang;
   document.getElementById('introLine').textContent = t('intro');
   document.getElementById('howTo').textContent     = t('howTo');
+  ['teamKick','workKick','tcHint'].forEach(id => document.getElementById(id).textContent = t(id));
+  document.getElementById('teamH').innerHTML = t('teamH');
+  buildTeam();
   document.getElementById('quoteBy').textContent   = t('quoteBy');
   buildRundown();
   document.getElementById('ctaKicker').textContent = t('kicker');
