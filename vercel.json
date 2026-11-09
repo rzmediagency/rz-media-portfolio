@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "rz-media-portfolio.vercel.app" }], "destination": "https://www.rzmedia.ca/:path*", "permanent": true },
+    { "source": "/portfolio-v1.html", "destination": "/", "permanent": true }
+  ]
+}
