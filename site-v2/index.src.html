@@ -1,0 +1,346 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RZ Media — Vidéos courtes qui amènent des clients</title>
+<meta name="description" content="Montréal agency. We film your real work, edit 8–12 short videos a month and run Meta & Google ads that bring local customers.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0605;--card:#140d0b;--line:rgba(255,255,255,.08);--fg:#f6efe9;--mute:#a69a92;--or:#ff6a2b;--or2:#ff9a5c;--ok:#5fe0a0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'Inter Tight',Inter,sans-serif;letter-spacing:-.025em;font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+/* background glow + stars */
+.glow{position:absolute;inset:-200px auto auto -260px;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,43,.95),rgba(255,106,43,.35) 35%,transparent 68%);filter:blur(30px);pointer-events:none;animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{50%{transform:translate(40px,30px) scale(1.06);opacity:.85}}
+#stars{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0}
+body>*{position:relative;z-index:1}
+.streaks{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 7px);-webkit-mask:linear-gradient(#000 0%,#000 55%,transparent 85%);mask:linear-gradient(#000 0%,#000 55%,transparent 85%);animation:drift 30s linear infinite}
+@keyframes drift{to{background-position:140px 0}}
+.beam{position:absolute;left:50%;top:0;width:min(1100px,92vw);height:520px;transform:translateX(-50%);clip-path:polygon(22% 0,78% 0,100% 100%,0 100%);background:linear-gradient(rgba(255,106,43,.28),rgba(255,106,43,.04) 50%,transparent 75%);pointer-events:none;opacity:0;transition:opacity 1.6s ease}
+.beam.in{opacity:1}
+.aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;transition:translate .8s cubic-bezier(.2,.8,.2,1)}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);mix-blend-mode:screen;opacity:.85}
+.orb.a{width:620px;height:620px;background:radial-gradient(circle,var(--or),transparent 65%);animation:orbA 22s ease-in-out infinite}
+.orb.b{width:520px;height:520px;background:radial-gradient(circle,#ff3d6e,transparent 65%);opacity:.45;animation:orbB 28s ease-in-out infinite}
+.orb.c{width:460px;height:460px;background:radial-gradient(circle,#ffb347,transparent 65%);opacity:.55;animation:orbC 25s ease-in-out infinite}
+@keyframes orbA{0%,100%{left:-12%;top:-30%}33%{left:55%;top:-38%}66%{left:20%;top:5%}}
+@keyframes orbB{0%,100%{left:75%;top:-25%}40%{left:5%;top:-10%}70%{left:60%;top:15%}}
+@keyframes orbC{0%,100%{left:35%;top:20%}50%{left:80%;top:-30%}}
+.sweep{position:absolute;inset:-20% -50%;background:linear-gradient(105deg,transparent 42%,rgba(255,180,120,.10) 50%,transparent 58%);animation:sweep 9s ease-in-out infinite;pointer-events:none}
+@keyframes sweep{0%{transform:translateX(-40%)}60%,100%{transform:translateX(40%)}}
+.spot{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,106,43,.10),transparent 60%);transform:translate(-50%,-50%);z-index:0;transition:opacity .4s}
+@media (prefers-reduced-motion:reduce){.orb,.sweep,.streaks{animation:none}}
+.glow2{position:absolute;right:-260px;top:40%;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,43,.35),transparent 65%);filter:blur(40px);pointer-events:none;animation:breathe 12s ease-in-out infinite reverse}
+.prob{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;text-align:left}
+.prob .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;position:relative;overflow:hidden}
+.prob .card .big{font-family:'Inter Tight';font-size:38px;font-weight:600;color:var(--or2)}
+.prob .card h3{font-size:20px;margin-top:10px}.prob .card p{color:var(--mute);font-size:15px;margin-top:6px}
+@media (max-width:900px){.prob{grid-template-columns:1fr}}
+/* nav */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(1180px,calc(100% - 32px));z-index:50;display:flex;align-items:center;gap:20px;padding:10px 10px 10px 18px;border:1px solid var(--line);border-radius:18px;background:rgba(20,13,11,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+nav .logo{display:flex;align-items:center;gap:10px;font-weight:600}
+nav .logo svg{width:30px;height:auto;color:#fff}
+nav .links{display:flex;gap:22px;margin:0 auto;color:var(--mute);font-size:14px}
+nav .links a:hover{color:var(--fg)}
+.lang{all:unset;cursor:pointer;font-size:13px;font-weight:600;color:var(--mute);border:1px solid var(--line);border-radius:10px;padding:8px 10px}.lang:hover{color:var(--fg);border-color:var(--or)}
+@media (max-width:900px){.lang{margin-left:auto}nav .lang+.btn{margin-left:0}}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:11px 18px;font-weight:500;font-size:15px;transition:transform .2s,box-shadow .2s;cursor:pointer;border:0}
+.btn:hover{transform:translateY(-2px)}
+.btn.w{background:#fff;color:#120a07}
+.btn.o{background:linear-gradient(180deg,var(--or2),var(--or));color:#fff;box-shadow:0 10px 30px -10px var(--or),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn.g{border:1px solid rgba(255,106,43,.45);color:var(--fg);background:rgba(255,106,43,.06)}
+.arr{font-size:13px}
+/* hero */
+header.hero{position:relative;padding:170px 0 0;text-align:center;overflow:hidden}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;padding:6px 14px;font-size:13px;color:#e8dcd4}
+.badge b{color:var(--or2)}
+.hero h1{font-size:clamp(40px,6.4vw,76px);line-height:1.02;margin:22px auto 0;max-width:900px}
+.hero h1 span{background:linear-gradient(90deg,#fff,var(--or2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:var(--mute);font-size:18px;max-width:600px;margin:20px auto 0}
+.ctas{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+/* curved video wall */
+.wall{position:relative;height:430px;margin-top:64px;perspective:1100px;perspective-origin:50% 0%}
+.track{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;gap:14px;transform-style:preserve-3d}
+.tile{flex:none;width:190px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#1d1310;box-shadow:0 30px 60px -20px #000;border:1px solid var(--line);position:relative;transition:transform .5s}
+.tile video{width:100%;height:100%;object-fit:cover;display:block}
+.tile .v{position:absolute;left:10px;bottom:10px;font-size:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:3px 8px;border-radius:999px}
+.fade{position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(transparent,var(--bg))}
+.pills{position:relative;display:inline-flex;gap:18px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:10px 20px;margin:-40px auto 0;background:rgba(20,13,11,.7);backdrop-filter:blur(10px);color:#e8dcd4;font-size:14px;z-index:2}
+.pills i{width:7px;height:7px;background:var(--or);transform:rotate(45deg);display:inline-block}
+/* sections */
+section{position:relative;padding:120px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--mute);font-size:13px;border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:rgba(255,255,255,.03)}
+.eyebrow:before,.eyebrow:after{content:"";width:10px;height:1.5px;background:var(--or)}
+h2{font-size:clamp(32px,4.6vw,54px);line-height:1.05;margin-top:18px}
+.sub{color:var(--mute);max-width:560px;margin-top:14px}
+.center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}
+/* proof numbers */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.stat{background:linear-gradient(180deg,rgba(255,106,43,.10),rgba(255,106,43,.02) 60%),var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 22px}
+.stat .n{font-family:'Inter Tight';font-size:40px;font-weight:600;letter-spacing:-.03em}
+.stat .n small{font-size:22px;color:var(--mute)}
+.stat .l{color:var(--mute);font-size:14px;margin-top:6px}
+.logos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;margin-top:44px;color:#cdbfb6;font-family:'Inter Tight';font-weight:600;font-size:19px;opacity:.75}
+/* case studies */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s}
+.case:hover{border-color:rgba(255,106,43,.5)}
+.case .media{aspect-ratio:4/5;overflow:hidden;position:relative}
+.case video{width:100%;height:100%;object-fit:cover}
+.case .tag{position:absolute;top:12px;left:12px;font-size:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:4px 10px;border-radius:999px}
+.case .body{padding:20px 22px 24px}
+.case h3{font-size:22px}
+.case .what{color:var(--mute);font-size:14px;margin-top:2px}
+.case .res{display:flex;align-items:baseline;gap:10px;margin-top:16px;font-family:'Inter Tight';font-size:30px;font-weight:600}
+.case .res .arrow{color:var(--or)}
+.case .res .to{color:var(--ok)}
+.case .cap{color:var(--mute);font-size:13px}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
+.step .k{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(255,106,43,.14);color:var(--or2);font-weight:600}
+.step h3{font-size:21px;margin-top:18px}
+.step p{color:var(--mute);font-size:15px;margin-top:8px}
+/* founders */
+.founders{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.fvid{border-radius:22px;overflow:hidden;border:1px solid var(--line);aspect-ratio:9/16;max-height:560px;margin-left:auto;box-shadow:0 40px 80px -30px rgba(255,106,43,.35)}
+.fvid video{width:100%;height:100%;object-fit:cover}
+.checks{list-style:none;padding:0;margin-top:22px;display:grid;gap:10px}
+.checks li{display:flex;gap:10px;color:#e8dcd4}.checks li:before{content:"✓";color:var(--or2)}
+/* work grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.grid .tile{width:auto}
+/* cta */
+.cta{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;padding:80px 24px;text-align:center;background:radial-gradient(600px 300px at 50% 0%,rgba(255,106,43,.35),transparent 70%),var(--card)}
+footer{color:var(--mute);font-size:14px;padding:40px 0 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),filter .9s}
+.rv.in{opacity:1;transform:none;filter:none}
+@media (max-width:900px){
+ nav .links{display:none}nav .btn{margin-left:auto;padding:9px 14px}
+ .stats{grid-template-columns:1fr 1fr}.cases,.steps{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}
+ .founders{grid-template-columns:1fr}.fvid{margin:0 auto;max-height:480px}
+ .wall{height:330px}.tile{width:140px}
+ .pills{font-size:12px;gap:10px;padding:8px 14px}
+ section{padding:84px 0}
+}
+
+/* ===== WOW pass: bold v1 vibe, RZ electric blue, crafted details ===== */
+:root{--bg:#04060a;--card:#0b0f16;--line:rgba(160,200,255,.09);--line2:rgba(160,200,255,.18);--fg:#f3f7fc;--mute:#8e9aab;--ac:#3b9cff;--ac2:#8fd3ff;--or:#3b9cff;--or2:#8fd3ff;--ok:#8fd3ff}
+::selection{background:rgba(59,156,255,.35)}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3{letter-spacing:-.035em}
+/* glow: big, blue, alive */
+.orb.a{width:760px;height:760px;opacity:.95;filter:blur(70px);background:radial-gradient(circle,#2f8cff 0%,rgba(47,140,255,.45) 35%,transparent 68%);animation:orbA 26s ease-in-out infinite}
+.orb.b{width:520px;height:520px;opacity:.35;background:radial-gradient(circle,#7a5cff,transparent 65%);animation:orbB 32s ease-in-out infinite}
+.orb.c{display:none}.sweep,.spot{display:none}
+.streaks{opacity:.8;animation:drift 40s linear infinite}
+.beam{background:linear-gradient(rgba(59,156,255,.22),rgba(59,156,255,.03) 55%,transparent 80%)}
+/* nav: glass + gradient hairline */
+nav{background:rgba(6,9,15,.55);border:1px solid transparent;background-clip:padding-box;box-shadow:0 0 0 1px rgba(160,200,255,.10),0 20px 40px -20px rgba(0,0,0,.6)}
+/* badge */
+.badge{border-color:var(--line2);background:rgba(59,156,255,.06);color:#d6e6f7}
+.badge b{color:var(--ac2)}
+/* headline: words rise in, second line shimmers */
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(22px);filter:blur(10px);animation:wIn .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes wIn{to{opacity:1;transform:none;filter:none}}
+.hero h1 span.hl{background:linear-gradient(100deg,#fff 0%,var(--ac2) 30%,var(--ac) 55%,#fff 80%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s ease-in-out 1.4s infinite}
+.hero h1 span.hl.w{animation-name:wIn,shine;animation-duration:.9s,6s;animation-timing-function:cubic-bezier(.2,.8,.2,1),ease-in-out;animation-iteration-count:1,infinite;animation-fill-mode:forwards,none;animation-delay:.45s,1.6s!important}
+.ready .hero h1 .w,.ready .hero p.lead,.ready .hero .ctas{opacity:1!important;transform:none!important;filter:none!important}
+@keyframes shine{0%{background-position:100% 0}50%{background-position:0 0}100%{background-position:100% 0}}
+.hero p.lead,.ctas{opacity:0;animation:wIn 1s 1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero .ctas{animation-delay:1.15s}
+/* buttons: primary with orbiting light border */
+.btn{border-radius:12px}
+.btn.o{position:relative;background:linear-gradient(180deg,#4aa6ff,#1f7fff);color:#fff;box-shadow:0 10px 30px -10px rgba(47,140,255,.8),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn.o:before{content:"";position:absolute;inset:-1px;border-radius:13px;padding:1px;background:conic-gradient(from var(--a,0deg),transparent 0 70%,#fff 85%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 3.5s linear infinite;opacity:.8}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--a:360deg}}
+.btn.g{border:1px solid var(--line2);background:rgba(59,156,255,.05)}
+.btn .arr{display:inline-block;transition:transform .25s}.btn:hover .arr{transform:translate(2px,-2px)}
+/* video wall: endless 3D carousel with reflection */
+.wall{height:470px;perspective:1200px}
+.track{position:relative;height:100%;display:block}
+.track .tile{position:absolute;left:50%;top:0;margin-left:-95px;will-change:transform,opacity;transition:none;-webkit-box-reflect:below 8px linear-gradient(transparent 72%,rgba(255,255,255,.16))}
+.tile .v{border:1px solid rgba(255,255,255,.12)}
+.pills{border-color:var(--line2)}
+.pills i{background:var(--ac)}
+/* sections */
+.eyebrow:before,.eyebrow:after{background:var(--ac)}
+.stat{background:linear-gradient(180deg,rgba(59,156,255,.10),rgba(59,156,255,.015) 60%),var(--card)}
+.stat .n{font-variant-numeric:tabular-nums}
+.case,.step,.prob .card{box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.case{transform-style:preserve-3d;transition:transform .25s ease,border-color .3s}
+.case .glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(143,211,255,.14),transparent 45%);opacity:0;transition:opacity .3s}
+.case:hover .glare{opacity:1}
+.case .res .arrow{color:var(--ac)}
+.prob .card .big{color:var(--ac2)}
+.step .k{background:rgba(59,156,255,.12);color:var(--ac2)}
+.checks li:before{color:var(--ac2)}
+/* client marquee */
+.logos{display:block;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.logos .row{display:flex;gap:56px;width:max-content;animation:marq 28s linear infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+.more{color:var(--mute);font-size:13px;margin-top:18px}
+.lead{position:relative;max-width:640px;margin:34px auto 0}
+.lead .fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.lead input{all:unset;box-sizing:border-box;width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--fg);font-size:15px;transition:border-color .2s,background .2s}
+.lead input::placeholder{color:var(--mute)}
+.lead input:focus{border-color:var(--ac);background:rgba(59,156,255,.06)}
+.lead input.bad{border-color:#ff6b6b}
+.lead .hp{display:none}
+.btn.big{width:100%;justify-content:center;margin-top:10px;padding:15px 18px;font-size:16px}
+.lead .fine{color:var(--mute);font-size:12.5px;margin-top:10px}
+.lead .ok{margin-top:14px;font-size:16px;color:var(--ac2)}
+.calls{position:relative;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;color:var(--mute);font-size:14px;align-items:center}
+.calls a{border:1px solid var(--line2);border-radius:999px;padding:7px 14px;color:var(--fg);transition:border-color .2s}
+.calls a:hover{border-color:var(--ac)}
+@media (max-width:700px){.lead .fields{grid-template-columns:1fr}}
+.cta{background:radial-gradient(600px 300px at 50% 0%,rgba(59,156,255,.30),transparent 70%),var(--card)}
+.cta .glow{background:radial-gradient(circle,rgba(47,140,255,.9),rgba(47,140,255,.3) 35%,transparent 68%)}
+@media (max-width:900px){.wall{height:360px}.track .tile{margin-left:-70px}}
+@media (prefers-reduced-motion:reduce){.orb,.streaks,.logos .row,.btn.o:before,.hero h1 span.hl{animation:none}}
+</style></head><body>
+<nav><a class="logo" href="#">@@LOGO@@ RZ Media</a>
+ <div class="links"><a href="#results" data-en="Results">Résultats</a><a href="#work" data-en="Work">Projets</a><a href="#process" data-en="Process">Méthode</a><a href="#team" data-en="Team">Équipe</a></div>
+ <button class="lang" id="lang" aria-label="English">EN</button><a class="btn w" href="#contact" data-en="Book a call &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;">Réserver un appel <span class="arr">↗</span></a></nav>
+
+<header class="hero">
+ <div class="aurora" id="glow"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div><div class="sweep"></div></div><div class="streaks"></div>
+ <div class="wrap" style="position:relative">
+  <span class="badge" data-en="&lt;b&gt;✦&lt;/b&gt; 40M+ views generated for the brands we work with"><b>✦</b> 40M+ vues générées pour les marques avec qui on travaille</span>
+  <h1 data-en="Short-form video that &lt;span class=&quot;hl&quot;&gt;actually brings customers&lt;/span&gt;">Des vidéos courtes qui <span class="hl">amènent de vrais clients</span></h1>
+  <p class="lead" data-en="We film your real work, edit 8–12 videos a month and run Meta &amp; Google ads that put them in front of the right people near you.">On filme votre vrai travail, on monte 8 à 12 vidéos par mois et on lance de la pub Meta et Google pour les montrer aux bonnes personnes près de chez vous.</p>
+  <div class="ctas"><a class="btn o" href="#contact" data-en="Book a call &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;">Réserver un appel <span class="arr">↗</span></a><a class="btn g" href="#work" data-en="See our work">Voir nos projets</a></div>
+ </div>
+ <div class="wall"><div class="track" id="track"></div><div class="fade"></div></div>
+ <div class="pills" data-en="&lt;span&gt;Short-form video&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;Meta &amp; Google ads&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;Content strategy&lt;/span&gt;"><span>Vidéo courte</span><i></i><span>Pub Meta & Google</span><i></i><span>Stratégie de contenu</span></div>
+</header>
+
+<section id="problem"><div class="beam"></div><div class="wrap center">
+ <span class="eyebrow rv" data-en="The problem">Le problème</span>
+ <h2 class="rv" data-en="Great work.&lt;br&gt;So why isn&#x27;t your phone ringing?">Du bon travail.<br>Mais pourquoi le téléphone ne sonne pas?</h2>
+ <p class="sub rv" data-en="Most local businesses do great work that nobody sees. Here&#x27;s where it breaks.">La plupart des entreprises locales font du bon travail que personne ne voit. Voici où ça bloque.</p>
+ <div class="prob">
+  <div class="card rv"><div class="big" data-en="Views ≠ calls">Vues ≠ appels</div><h3 data-en="Videos that don&#x27;t convert">Des vidéos qui ne convertissent pas</h3><p data-en="Views come in, calls don&#x27;t. Nobody told the viewer why to pick you.">Les vues rentrent, les appels non. Personne n'a dit au client pourquoi vous choisir.</p></div>
+  <div class="card rv"><div class="big" data-en="No system">Aucun système</div><h3 data-en="Posting without a system">Publier sans système</h3><p data-en="A post when there&#x27;s time. The algorithm forgets you, and so do buyers.">Un post quand on a le temps. L'algorithme vous oublie, et les clients aussi.</p></div>
+  <div class="card rv"><div class="big" data-en="No proof">Aucune preuve</div><h3 data-en="Ads sent to an empty page">De la pub vers une page vide</h3><p data-en="Paying to send strangers to a page with no proof. They look, doubt, and leave.">Payer pour envoyer des inconnus vers une page sans preuve. Ils regardent, doutent, et partent.</p></div>
+ </div>
+</div></section>
+
+<section id="results"><div class="beam"></div><div class="wrap center">
+ <span class="eyebrow rv" data-en="Proof">Preuves</span>
+ <h2 class="rv" data-en="Numbers, not promises.">Des chiffres, pas des promesses.</h2>
+ <p class="sub rv" data-en="Ad spend in. Sales out. Every number below comes from a real client account.">De la pub qui entre, des ventes qui sortent. Chaque chiffre vient du compte d’un vrai client.</p>
+ <div class="stats">
+  <div class="stat rv"><div class="n" data-to="40" data-fmt="m">0</div><div class="l" data-en="views generated">vues générées</div></div>
+  <div class="stat rv"><div class="n" data-to="29" data-fmt="x">0</div><div class="l" data-en="return on ad spend, body shop">de retour sur la pub, carrosserie</div></div>
+  <div class="stat rv"><div class="n" data-to="40" data-fmt="k">0</div><div class="l" data-en="in sales from $1,955 of ads, roofer">en ventes avec 1 955 $ de pub, couvreur</div></div>
+  <div class="stat rv"><div class="n" data-to="100" data-fmt="p">0</div><div class="l" data-en="qualified leads a month">leads qualifiés par mois</div></div>
+ </div>
+ <div class="logos rv"><div class="row"><span>Car Healers</span><span>Roofstar</span><span>MSS Tire Shine</span><span>Crêpes en Rose</span><span>Shawarma Moods</span><span>Cars & Coffee</span><span>Lamborghini Montréal</span><span>Maison Godefroi</span><span>Car Healers</span><span>Roofstar</span><span>MSS Tire Shine</span><span>Crêpes en Rose</span><span>Shawarma Moods</span><span>Cars & Coffee</span><span>Lamborghini Montréal</span><span>Maison Godefroi</span></div></div>
+ <p class="more rv" data-en="…and many more businesses across Greater Montréal.">…et plusieurs autres entreprises du Grand Montréal.</p>
+</div></section>
+
+<section><div class="wrap">
+ <span class="eyebrow rv" data-en="Case studies">Études de cas</span>
+ <h2 class="rv" data-en="What happens when the right people see your work.">Ce qui arrive quand les bonnes personnes voient votre travail.</h2>
+ <div class="cases">
+  <article class="case rv"><div class="media"><video muted loop playsinline preload="none" poster="../media/carhealers-01.jpg" data-src="../media/carhealers-01.mp4"></video><span class="glare"></span><span class="tag" data-en="Auto body · Mirabel">Carrosserie · Mirabel</span></div><div class="body"><h3>Car Healers</h3><div class="what" data-en="Organic Reels + Meta ads">Reels organiques + pub Meta</div><div class="res">$367 <span class="arrow">→</span> <span class="to">$10,650</span></div><div class="cap" data-en="in jobs closed from ads · 100+ qualified leads a month">en jobs conclus grâce à la pub · 100+ leads qualifiés par mois</div></div></article>
+  <article class="case rv"><div class="media"><video muted loop playsinline preload="none" poster="../media/roofstar-01.jpg" data-src="../media/roofstar-01.mp4"></video><span class="glare"></span><span class="tag" data-en="Roofing · Greater Montréal">Toiture · Grand Montréal</span></div><div class="body"><h3>Roofstar</h3><div class="what" data-en="Google Ads + Reels">Google Ads + Reels</div><div class="res">$1,955 <span class="arrow">→</span> <span class="to">$40K</span></div><div class="cap" data-en="in sales · 51 tracked calls">en ventes · 51 appels suivis</div></div></article>
+  <article class="case rv"><div class="media"><video muted loop playsinline preload="none" poster="../media/msstireshine-01.jpg" data-src="../media/msstireshine-01.mp4"></video><span class="glare"></span><span class="tag" data-en="Car care product">Produit d'entretien auto</span></div><div class="body"><h3>MSS Tire Shine</h3><div class="what" data-en="Organic content">Contenu organique</div><div class="res" data-en="&lt;span class=&quot;to&quot;&gt;2M&lt;/span&gt; views"><span class="to">2M</span> vues</div><div class="cap" data-en="on one product video · 1,000+ sales">sur une seule vidéo produit · 1 000+ ventes</div></div></article>
+ </div>
+</div></section>
+
+<section id="process"><div class="wrap">
+ <span class="eyebrow rv" data-en="How we work">Notre méthode</span>
+ <h2 class="rv" data-en="A done-for-you system. You run the business.">Un système clé en main. Vous gérez votre entreprise.</h2>
+ <div class="steps">
+  <div class="step rv"><div class="k">01</div><h3 data-en="We find what makes you stand out">On trouve ce qui vous rend unique</h3><p data-en="The owner with personality, the team member who loves the camera, the work that makes people stop scrolling.">Le proprio qui a de la personnalité, le gars de l'équipe pas gêné devant la caméra, le travail qui fait arrêter de scroller.</p></div>
+  <div class="step rv"><div class="k">02</div><h3 data-en="We film &amp; edit 8–12 videos a month">On filme et monte 8 à 12 vidéos par mois</h3><p data-en="On site, in French or English. Your page starts looking like the obvious choice, and people trust you before they call.">Sur place, en français ou en anglais. Votre page devient le choix évident, et les gens vous font confiance avant même d'appeler.</p></div>
+  <div class="step rv"><div class="k">03</div><h3 data-en="We put them in front of buyers">On les montre aux acheteurs</h3><p data-en="Meta and Google ads aimed at people near you who are ready to buy. Month to month, no long contract.">De la pub Meta et Google qui vise les gens près de chez vous, prêts à acheter. Mois à mois, sans long contrat.</p></div>
+ </div>
+</div></section>
+
+<section id="work"><div class="wrap center">
+ <span class="eyebrow rv" data-en="Work">Projets</span>
+ <h2 class="rv" data-en="Made for the feed. Built to sell.">Fait pour le feed. Conçu pour vendre.</h2>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="team"><div class="wrap founders">
+ <div><span class="eyebrow rv" data-en="The team">L'équipe</span>
+  <h2 class="rv" data-en="Yafet &amp; Ryan.&lt;br&gt;Two founders, on every project.">Yafet & Ryan.<br>Deux fondateurs, sur chaque projet.</h2>
+  <p class="sub rv" data-en="No account managers, no handoffs. The people you meet are the people who film, edit and run your ads.">Pas de gestionnaire de compte, pas d'intermédiaire. Ceux que vous rencontrez sont ceux qui filment, montent et gèrent vos pubs.</p>
+  <ul class="checks rv"><li data-en="Based in Montréal, on site anywhere in the Greater Montréal area">Basés à Montréal, sur place partout dans le Grand Montréal</li><li data-en="French and English">Français et anglais</li><li data-en="Month to month, no long contract">Mois à mois, sans long contrat</li></ul>
+ </div>
+ <div class="fvid rv"><video muted loop playsinline preload="none" poster="../media/team-01-intro.jpg" data-src="../media/team-01-intro.mp4"></video></div>
+</div></section>
+
+<section id="contact"><div class="wrap"><div class="cta">
+ <div class="glow" style="inset:-300px auto auto 50%;transform:translateX(-50%);opacity:.5"></div>
+ <h2 class="rv" style="position:relative" data-en="Want numbers like these?">Vous voulez des chiffres comme ça?</h2>
+ <p class="sub rv" style="position:relative;margin:14px auto 0" data-en="Leave your number. We call you in 60 seconds, 24/7. We&#x27;ll show you exactly what we&#x27;d film for your business and how to get it in front of buyers. If we&#x27;re not a fit, we&#x27;ll tell you.">Laissez votre numéro. On vous appelle en 60 secondes, 24/7. On vous montre exactement ce qu'on filmerait pour votre entreprise et comment le mettre devant des acheteurs. Si on n'est pas un fit, on vous le dit.</p>
+ <form class="lead rv" id="leadf" novalidate>
+  <input type="hidden" name="access_key" value="a2d1f444-9771-4f14-a43c-d5307c319177">
+  <input type="hidden" name="subject" value="🔥 Nouveau lead — rappeler en 60 s">
+  <input type="hidden" name="from_name" value="Site RZ Media">
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+  <div class="fields">
+   <input name="name" required autocomplete="name" placeholder="Votre prénom" data-ph-en="Your first name">
+   <input name="phone" required type="tel" autocomplete="tel" inputmode="tel" placeholder="Votre cellulaire" data-ph-en="Your phone number">
+   <input name="business" autocomplete="organization" placeholder="Entreprise (optionnel)" data-ph-en="Business (optional)">
+  </div>
+  <button class="btn o big" type="submit"><span data-en="Call me in 60 seconds">Appelez-moi en 60 secondes</span> <span class="arr">↗</span></button>
+  <p class="fine" data-en="24/7. No commitment. We call, you listen 9 min 59, you decide.">24/7. Sans engagement. On appelle, vous écoutez 9 min 59, vous décidez.</p>
+  <p class="ok" id="leadok" hidden></p>
+ </form>
+ <div class="calls rv"><span data-en="Prefer to call?">Vous préférez appeler?</span> <a href="tel:+15146063668">Yafet · 514-606-3668</a><a href="tel:+15145492601">Ryan · 514-549-2601</a></div>
+</div>
+<footer><span>© 2026 RZ Media · Montréal</span><span>rzmedia.net@gmail.com</span></footer></div></section>
+
+<canvas id="stars"></canvas><div class="spot" id="spot"></div>
+<script>
+const WALL=[['carhealers-08','164K'],['shawarmamoods-02','110K'],['carhealers-07','6.9K'],['msstireshine-01','2M'],['crepesenrose-01','12.8K'],['carhealers-02','5.6K'],['roofstar-01','3K'],['carhealers-05','4.6K'],['events-01','2.9K']];
+const GRID=['carhealers-03','roofstar-06','carhealers-10','crepesenrose-02','godefroi-01','carhealers-04','roofstar-03','shawarmamoods-01'];
+let LANG='fr';try{LANG=localStorage.getItem('rz-lang')||'fr'}catch(e){}
+function setLang(l){document.querySelectorAll('[data-en]').forEach(el=>{if(el.dataset.fr===undefined)el.dataset.fr=el.innerHTML;el.innerHTML=l==='en'?el.dataset.en:el.dataset.fr});document.documentElement.lang=l;document.querySelectorAll('[data-ph-en]').forEach(i=>{if(!i.dataset.phFr)i.dataset.phFr=i.placeholder;i.placeholder=l==='en'?i.dataset.phEn:i.dataset.phFr});const b=document.getElementById('lang');b.textContent=l==='en'?'FR':'EN';b.setAttribute('aria-label',l==='en'?'Français':'English');if(document.querySelector('.hero h1').dataset.en)splitH&&setTimeout(splitH,0);LANG=l;try{localStorage.setItem('rz-lang',l)}catch(e){}}
+document.getElementById('lang').onclick=()=>setLang(LANG==='en'?'fr':'en');
+const vid=(f)=>`<video muted loop playsinline preload="none" poster="../media/${f}.jpg" data-src="../media/${f}.mp4"></video>`;
+const track=document.getElementById('track'), mid=(WALL.length-1)/2;
+const tiles=WALL.map(([f,v])=>{const el=document.createElement('div');el.className='tile';el.innerHTML=vid(f)+`<span class="v">▶ ${v} <span data-en="views">vues</span></span>`;track.appendChild(el);return el});
+let off=0,spd=.0016,hover=false,last=performance.now();track.addEventListener('pointerenter',()=>hover=true);track.addEventListener('pointerleave',()=>hover=false);
+(function spin(t){const dt=t-last;last=t;off+=(hover?.25:1)*spd*dt;const n=tiles.length,W=innerWidth<900?150:204;
+ tiles.forEach((el,i)=>{let d=((i-off)%n+n)%n;if(d>n/2)d-=n;const a=Math.abs(d);el.style.transform=`translateX(${d*W}px) translateZ(${-a*a*14}px) rotateY(${-d*8}deg) translateY(${a*a*5}px)`;el.style.opacity=Math.max(0,1-Math.max(0,a-3.2)*1.2);el.style.zIndex=100-Math.round(a*10)});
+ requestAnimationFrame(spin)})(performance.now());
+document.getElementById('grid').innerHTML=GRID.map(f=>`<div class="tile rv">${vid(f)}</div>`).join('');
+if(LANG==='en')setLang('en');
+function splitH(){const h=document.querySelector('.hero h1');let k=0;h.childNodes.forEach(nd=>{if(nd.nodeType===3){const sp=document.createElement('span');sp.innerHTML=nd.textContent.split(/(\s+)/).map(w=>w.trim()?`<span class="w" style="animation-delay:${.15+(k++)*.07}s">${w}</span>`:w).join('');nd.replaceWith(sp)}else{nd.classList.add('w');nd.style.animationDelay=(.15+(k++)*.07)+'s'}})}splitH();setTimeout(()=>document.documentElement.classList.add('ready'),2600);
+// lazy play videos in view
+const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target; if(e.isIntersecting){if(!v.src){v.src=v.dataset.src} v.play().catch(()=>{})} else v.pause()}),{rootMargin:'200px'});
+document.querySelectorAll('video[data-src]').forEach(v=>io.observe(v));
+// reveal + counters
+const fmt={m:n=>Math.round(n)+'M+',x:n=>Math.round(n)+'×',k:n=>'$'+Math.round(n)+'K',p:n=>Math.round(n)+'+'};
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return; e.target.classList.add('in'); ro.unobserve(e.target);
+ e.target.querySelectorAll('[data-to]').forEach(n=>{const to=+n.dataset.to,f=fmt[n.dataset.fmt],t0=performance.now();const s=t=>{const p=Math.min(1,(t-t0)/1400);n.textContent=f(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)};requestAnimationFrame(s)})}),{threshold:.15});
+document.querySelectorAll('.beam').forEach(b=>ro.observe(b));
+document.querySelectorAll('.rv,.stat').forEach((el,i)=>{el.style.transitionDelay=(i%4)*90+'ms';ro.observe(el)});
+document.querySelectorAll('.case').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.transform=`perspective(900px) rotateX(${(.5-y)*6}deg) rotateY(${(x-.5)*8}deg) translateY(-4px)`;c.style.setProperty('--mx',x*100+'%');c.style.setProperty('--my',y*100+'%')});c.addEventListener('pointerleave',()=>c.style.transform='')});
+
+const lf=document.getElementById('leadf');
+lf.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(lf),nm=lf.name.value.trim(),ph=lf.phone.value.replace(/\D/g,'');
+ lf.name.classList.toggle('bad',!nm);lf.phone.classList.toggle('bad',ph.length<10);if(!nm||ph.length<10)return;
+ const b=lf.querySelector('button');b.disabled=true;b.style.opacity=.6;const ok=document.getElementById('leadok');
+ f.append('page',location.href);f.append('language',LANG);
+ try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{Accept:'application/json'},body:f});const j=await r.json();if(!j.success)throw 0;
+  lf.querySelector('.fields').style.display='none';b.style.display='none';ok.hidden=false;ok.textContent=LANG==='en'?`Got it, ${nm}. Your phone rings in about 60 seconds.`:`Reçu, ${nm}! Votre téléphone sonne dans environ 60 secondes.`}
+ catch(_){b.disabled=false;b.style.opacity=1;ok.hidden=false;ok.textContent=LANG==='en'?'Something went wrong. Call us directly below.':'Oups, ça n\'a pas passé. Appelez-nous directement ci-dessous.'}});
+// stars
+const c=document.getElementById('stars'),x=c.getContext('2d');let S=[];
+function sz(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;S=[...Array(85)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+.3,p:Math.random()*6,v:(Math.random()*.1+.02)*devicePixelRatio,sp:Math.random()<.08}))}
+sz();addEventListener('resize',sz);
+const D=devicePixelRatio;(function tw(t){x.clearRect(0,0,c.width,c.height);S.forEach(s=>{s.y-=s.v;if(s.y<-10){s.y=c.height+10;s.x=Math.random()*c.width}x.globalAlpha=.15+.5*Math.abs(Math.sin(t/1800+s.p));x.fillStyle=s.sp?'#9fd8ff':'#fff';if(s.sp){const L=(4+s.r*3)*D;x.fillRect(s.x-L,s.y-.5*D,2*L,1*D);x.fillRect(s.x-.5*D,s.y-L,1*D,2*L)}else{x.beginPath();x.arc(s.x,s.y,s.r*D,0,7);x.fill()}});requestAnimationFrame(tw)})(0);
+const g=document.getElementById('glow'),sp=document.getElementById('spot');addEventListener('pointermove',e=>{g.style.translate=((e.clientX/innerWidth-.5)*50)+'px '+((e.clientY/innerHeight-.5)*30)+'px';sp.style.left=e.clientX+'px';sp.style.top=e.clientY+'px'},{passive:true});
+if(matchMedia('(hover:none)').matches)sp.style.opacity=0;
+</script></body></html>
