@@ -245,6 +245,25 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
  .step{flex-direction:column;align-items:flex-start;justify-content:space-between;min-height:270px;padding:26px}.step .big{font-size:5rem}.step h3{font-size:1.9rem}
  #how{padding:20px 0 100px}#services{padding:40px 0 100px}#work{padding:50px 0 80px}#team{padding:60px 0 110px}.tv{width:min(100%,340px)}}
 @media(min-width:1100px){.svc{height:330px}}
+
+#offer{padding:30px 0 70px}
+.osub{margin-top:16px;color:#c1cad7;font-size:1.1rem}
+.og{display:grid;gap:12px;margin-top:30px}
+.of{position:relative;display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:26px;padding:22px 20px;background:linear-gradient(165deg,#0c111a,#05070b);overflow:hidden;transition:transform .5s var(--ez),border-color .4s,opacity .9s var(--ez)}
+.of::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--gx,80%) var(--gy,0%),rgba(59,156,255,.16),transparent 60%);opacity:.6;transition:opacity .4s;pointer-events:none}
+.of::after{content:"";position:absolute;left:0;top:22px;bottom:22px;width:2px;background:var(--ac);transform:scaleY(0);transform-origin:top;transition:transform .7s .2s var(--ez);box-shadow:0 0 14px var(--ac)}
+.of.in::after{transform:scaleY(1)}
+@media(hover:hover){.of.in:hover{transform:translateY(-5px);border-color:rgba(59,156,255,.45)}.of:hover::before{opacity:1}}
+.of>*{position:relative}
+.on{flex:none;font-size:2.6rem;font-weight:800;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1px var(--ac)}
+.of h3{font-size:clamp(1.45rem,2.4vw,2rem);letter-spacing:-.035em;line-height:1.05;font-weight:800}
+.of p{margin-top:10px;color:#c1cad7;font-size:1rem;line-height:1.5}
+.oc{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.oc span{font-size:12px;letter-spacing:.08em;border:1px solid var(--line);border-radius:99px;padding:6px 11px;color:var(--ac2)}
+.op{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;font-size:.98rem}
+.op b{font-weight:600;color:var(--mute)}.op i{color:var(--ac);font-style:normal}.op .hi{color:var(--fg);font-weight:800}
+.tg{grid-template-columns:1fr}
+@media(min-width:900px){#offer{padding:40px 0 100px}.og{grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}.of{padding:34px 32px;gap:24px}.on{font-size:3.6rem}.tg{grid-template-columns:1fr .8fr}}
 </style>
 </head>
 <body class="lock">
@@ -267,7 +286,7 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 <path fill="currentColor" fill-rule="evenodd" d="M392.82 99.20 L1216.82 99.20 C1355.82 99.20 1467.82 225.20 1467.82 380.20 C1467.82 490.20 1416.82 559.20 1356.82 626.20 L1002.82 1006.20 L1396.82 1006.20 L1533.82 1163.20 L655.82 1163.20 L1066.82 699.70 L740.82 699.70 L603.82 540.70 L1188.82 540.70 C1247.82 540.70 1295.82 473.20 1295.82 390.20 C1295.82 315.20 1244.82 255.20 1181.82 255.20 L522.82 255.20 Z M100.59 1360.20 L225.82 1359.71 L237.82 1362.71 L247.82 1369.11 L255.95 1380.20 L259.20 1391.20 L259.24 1422.20 L256.41 1434.20 L249.82 1445.44 L240.82 1452.39 L233.82 1455.66 L212.82 1456.34 L211.49 1458.20 L238.82 1487.98 L265.12 1513.20 L264.82 1515.90 L232.82 1515.26 L189.82 1468.40 L175.82 1456.32 L125.82 1457.13 L125.19 1515.20 L116.82 1516.52 L100.04 1515.20 L99.20 1365.20 Z M817.79 1360.20 L843.82 1359.94 L912.82 1446.68 L914.94 1446.20 L927.18 1431.20 L982.82 1360.00 L1008.65 1360.20 L1008.82 1515.62 L986.82 1516.29 L983.46 1513.20 L984.82 1395.80 L982.82 1395.76 L976.82 1402.48 L924.82 1469.57 L915.82 1479.16 L912.82 1479.71 L907.82 1476.00 L842.82 1394.73 L841.08 1397.20 L841.95 1514.20 L839.82 1516.28 L817.82 1515.24 Z M1152.64 1360.20 L1306.82 1360.04 L1309.01 1364.20 L1309.10 1379.20 L1304.82 1381.85 L1178.27 1382.20 L1177.89 1425.20 L1276.82 1425.89 L1277.87 1443.20 L1275.82 1446.70 L1178.82 1446.88 L1177.32 1449.20 L1177.18 1492.20 L1178.82 1494.71 L1307.82 1494.71 L1309.45 1497.20 L1308.82 1515.68 L1152.36 1515.20 L1151.26 1364.20 Z M1443.29 1360.20 L1561.82 1359.75 L1576.82 1362.77 L1590.70 1369.20 L1598.82 1375.22 L1608.82 1387.20 L1612.20 1394.20 L1615.33 1404.20 L1615.97 1417.20 L1615.30 1469.20 L1609.14 1487.20 L1602.82 1496.40 L1585.82 1509.70 L1567.82 1515.57 L1442.62 1515.20 L1441.63 1364.20 Z M1744.89 1360.20 L1769.82 1359.71 L1771.82 1362.20 L1771.44 1513.20 L1769.82 1516.05 L1748.82 1516.19 L1744.32 1514.20 Z M1973.02 1360.20 L2000.82 1359.71 L2004.82 1363.87 L2059.32 1467.20 L2074.82 1500.12 L2083.30 1513.20 L2082.82 1516.33 L2055.82 1515.61 L2040.71 1486.20 L2034.82 1480.69 L1939.82 1481.82 L1936.82 1483.20 L1920.47 1515.20 L1896.82 1516.11 L1893.82 1514.85 L1933.38 1434.20 Z M127.82 1382.20 L215.82 1381.70 L226.82 1383.92 L231.84 1388.20 L233.36 1396.20 L232.32 1427.20 L226.82 1433.30 L222.82 1434.65 L126.82 1435.48 L124.85 1432.20 L125.12 1385.20 Z M1469.26 1382.20 L1553.82 1381.81 L1565.82 1383.85 L1578.63 1390.20 L1587.23 1402.20 L1590.63 1414.20 L1590.52 1458.20 L1587.55 1472.20 L1581.71 1482.20 L1569.82 1490.80 L1555.82 1494.00 L1468.82 1494.22 Z M1986.40 1382.20 L1989.69 1382.20 L2025.36 1454.20 L2025.82 1460.32 L1950.82 1460.45 L1948.77 1459.20 L1948.90 1456.20 L1956.99 1443.20 Z"/>
 <path fill="#2AA0F4" fill-rule="evenodd" d="M385.59 1360.20 L541.64 1360.20 L541.99 1371.20 L538.82 1377.85 L427.40 1493.20 L428.82 1495.35 L541.82 1494.77 L541.04 1515.20 L379.48 1515.20 L379.88 1507.20 L497.58 1383.20 L495.82 1381.65 L387.82 1382.63 L384.78 1379.20 Z"/>
 </svg></a>
- <nav class="mid"><a href="#results" data-en="Results">Résultats</a><a href="#services">Services</a><a href="#how" data-en="How it works">Méthode</a><a href="#work" data-en="Work">Projets</a><a href="#team" data-en="Founders">Fondateurs</a></nav>
+ <nav class="mid"><a href="#results" data-en="Results">Résultats</a><a href="#offer" data-en="The offer">L'offre</a><a href="#work" data-en="Work">Projets</a><a href="#team" data-en="Founders">Fondateurs</a></nav>
  <div class="rt"><button class="lang" id="lang" aria-label="Language"><b>FR</b> / EN</button><a class="pill" href="#cta" data-h><i></i><span data-en="Book a call">Réserver un appel</span></a></div>
 </header>
 
@@ -288,7 +307,7 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 
 <section id="results"><div class="wrap">
  <span class="eyebrow rv" data-en="Results">Résultats</span>
- <h2 class="io"><span class="mask"><span data-en="Small budget.">Petit budget.</span></span><span class="mask"><span data-en="&lt;em&gt;Big&lt;/em&gt; numbers."><em>Gros</em> chiffres.</span></span></h2>
+ <h2 class="io"><span class="mask"><span data-en="What it">Ce que ça</span></span><span class="mask"><span data-en="&lt;em&gt;brings in.&lt;/em&gt;"><em>rapporte.</em></span></span></h2>
  <div class="resg">
   <article class="res io" style="--r:3%">
    <div class="rtop"><span class="chip" data-en="Meta Ads · Body shop">Meta Ads · Carrosserie</span><span class="mult">29×</span></div>
@@ -305,41 +324,25 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
  <p class="rnote rv" data-en="Real client results. Yours will depend on your market, your offer and your budget.">Résultats réels de clients. Les vôtres dépendent de votre marché, de votre offre et de votre budget.</p>
 </div></section>
 
-<section id="services"><div class="wrap">
- <span class="eyebrow rv">Services</span>
- <h2 class="io"><span class="mask"><span data-en="Four ways">Quatre façons</span></span><span class="mask"><span data-en="to get &lt;em&gt;seen.&lt;/em&gt;">d'être <em>vu.</em></span></span></h2>
- <div class="svg">
-  <div class="svc rv" data-h><div class="in3">
-   <div class="face f" data-n="1"><span class="n">01</span><h3 data-en="Organic&lt;br&gt;Reels">Reels<br>organiques</h3><span class="hint" data-en="Flip">Retourner</span></div>
-   <div class="face b"><h3 data-en="Organic Reels">Reels organiques</h3><p data-en="We come to you, film and edit. Short videos where people see your face, your crew and your work.">On se déplace, on filme et on monte. Des vidéos courtes où on voit votre face, votre équipe et votre travail.</p><ul><li data-en="On-site shoots">Tournage sur place</li><li data-en="Editing + captions">Montage + sous-titres</li><li data-en="Clear hooks">Hooks clairs</li></ul></div>
-  </div></div>
-  <div class="svc rv" data-h><div class="in3">
-   <div class="face f" data-n="2"><span class="n">02</span><h3 data-en="Social media&lt;br&gt;management">Gestion des<br>réseaux</h3><span class="hint" data-en="Flip">Retourner</span></div>
-   <div class="face b"><h3 data-en="Social media management">Gestion des réseaux</h3><p data-en="We plan what to post and publish every week. You run your business, we run your pages.">On planifie quoi publier et on publie chaque semaine. Vous gérez votre business, on gère vos pages.</p><ul><li>Instagram</li><li>Facebook</li><li>TikTok</li></ul></div>
-  </div></div>
-  <div class="svc rv" data-h><div class="in3">
-   <div class="face f" data-n="3"><span class="n">03</span><h3>Meta<br>Ads</h3><span class="hint" data-en="Flip">Retourner</span></div>
-   <div class="face b"><h3>Meta Ads</h3><p data-en="Your best videos become Facebook and Instagram ads that bring calls, not just likes.">Vos meilleures vidéos deviennent des pubs Facebook et Instagram qui amènent des appels, pas juste des likes.</p><ul><li data-en="$367 in ads → $10,650 in sales">367 $ en pub → 10 650 $ en ventes</li></ul></div>
-  </div></div>
-  <div class="svc rv" data-h><div class="in3">
-   <div class="face f" data-n="4"><span class="n">04</span><h3>Google<br>Ads</h3><span class="hint" data-en="Flip">Retourner</span></div>
-   <div class="face b"><h3>Google Ads</h3><p data-en="We show up in front of people already searching for your service, right when they need it.">On vous place devant ceux qui cherchent déjà votre service, au moment où ils en ont besoin.</p><ul><li data-en="$1,955 in ads → $40,000 in sales">1 955 $ en pub → 40 000 $ en ventes</li></ul></div>
-  </div></div>
+<section id="offer"><div class="wrap">
+ <span class="eyebrow rv" data-en="The offer">L'offre</span>
+ <h2 class="io"><span class="mask"><span data-en="What we do">Ce qu'on fait</span></span><span class="mask"><span data-en="&lt;em&gt;for you.&lt;/em&gt;"><em>pour vous.</em></span></span></h2>
+ <p class="osub rv" data-en="Four things, done for you from A to Z.">Quatre choses, faites pour vous de A à Z.</p>
+ <div class="og">
+  <article class="of rv"><span class="on">01</span><div><h3 data-en="Your personality on screen">Votre personnalité à l'écran</h3>
+   <p data-en="People buy from people. It's the best rule there is, and it's what we focus on. We come film you, your crew and your work, then edit it into short videos.">Les gens achètent des gens. C'est la meilleure règle, et c'est là-dessus qu'on mise. On vient vous filmer, vous, votre équipe et votre travail, puis on en fait des vidéos courtes.</p>
+   <div class="oc"><span data-en="On-site shoots">Tournage sur place</span><span data-en="Editing">Montage</span><span data-en="Captions">Sous-titres</span></div></div></article>
+  <article class="of rv"><span class="on">02</span><div><h3 data-en="Consistency">La constance</h3>
+   <p data-en="We post every week so people in your area see you again and again. We plan the content and run your pages for you.">On publie chaque semaine pour que les gens de votre coin vous voient encore et encore. On planifie le contenu et on gère vos pages pour vous.</p>
+   <div class="oc"><span>Instagram</span><span>Facebook</span><span>TikTok</span></div></div></article>
+  <article class="of rv"><span class="on">03</span><div><h3>Meta Ads</h3>
+   <p data-en="Your best videos become Facebook and Instagram ads, shown to people in your area. The goal: calls and quote requests.">Vos meilleures vidéos deviennent des pubs Facebook et Instagram, montrées aux gens de votre secteur. Le but : des appels et des demandes de soumission.</p>
+   <div class="op"><b data-en="$367 in ads">367 $ en pub</b><i>→</i><b class="hi" data-en="$10,650 in sales">10 650 $ en ventes</b></div></div></article>
+  <article class="of rv"><span class="on">04</span><div><h3>Google Ads</h3>
+   <p data-en="When someone searches Google for your service, you are the one they find.">Quand quelqu'un cherche votre service sur Google, c'est vous qu'il trouve.</p>
+   <div class="op"><b data-en="$1,955 in ads">1 955 $ en pub</b><i>→</i><b class="hi" data-en="$40,000 in sales">40 000 $ en ventes</b></div></div></article>
  </div>
 </div></section>
-
-<section id="how">
- <div class="hpin">
-  <div class="hhead"><div><span class="eyebrow" data-en="How it works">Méthode</span><h2><span data-en="Four steps. &lt;em&gt;Every week.&lt;/em&gt;">Quatre étapes. <em>Chaque semaine.</em></span></h2></div></div>
-  <div class="hprog"><i id="hbar"></i></div>
-  <div class="htrack" id="htrack">
-   <div class="step"><div class="big">01</div><div><h3 data-en="Shoot">On tourne</h3><p data-en="We come to your shop or job site and film your crew and your real work.">On se déplace à votre atelier ou sur vos chantiers et on filme votre équipe et votre vrai travail.</p></div></div>
-   <div class="step"><div class="big">02</div><div><h3 data-en="Edit">On monte</h3><p data-en="Tight cuts, captions and a clear hook in the first second.">Montage serré, sous-titres et un hook clair dès la première seconde.</p></div></div>
-   <div class="step"><div class="big">03</div><div><h3 data-en="Post weekly">On publie chaque semaine</h3><p data-en="New videos every week, so the whole town keeps seeing you.">Des nouvelles vidéos chaque semaine, pour que toute la ville continue de vous voir.</p><div class="pl"><span>Instagram</span><span>Facebook</span><span>TikTok</span></div></div></div>
-   <div class="step"><div class="big">04</div><div><h3 data-en="Scale with ads">On scale avec la pub</h3><p data-en="The videos that work become Meta and Google ads that make the phone ring.">Les vidéos qui marchent deviennent des pubs Meta et Google qui font sonner le téléphone.</p><div class="pl"><span>Meta Ads</span><span>Google Ads</span></div></div></div>
-  </div>
- </div>
-</section>
 
 <section id="work"><div class="wrap">
  <div class="whead"><div><span class="eyebrow rv" data-en="Work">Projets</span><h2 class="io"><span class="mask"><span data-en="Grab it. &lt;em&gt;Spin it.&lt;/em&gt;">Attrapez. <em>Tournez.</em></span></span></h2></div><p class="rv" data-en="Real Reels shot for local businesses. Drag to spin.">Des vrais Reels tournés pour des entreprises locales. Glissez pour faire tourner.</p></div>
@@ -349,13 +352,13 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 </section>
 
 <section id="team"><div class="wrap tg">
- <div class="tv rv" id="tv"><video muted loop playsinline preload="none" poster="media/team-01-intro.jpg" data-src="media/team-01-intro.mp4"></video></div>
  <div class="tt">
   <span class="eyebrow rv" data-en="Founders">Fondateurs</span>
   <h2 class="io"><span class="mask"><span>Yafet <em>&amp;</em> Ryan.</span></span></h2>
   <p class="rv" data-en="Two guys from here, on every project. No account managers, no handoffs. The people you meet are the people who film, edit and run your ads.">Deux gars d'ici, sur chaque projet. Pas de gestionnaire de compte, pas d'intermédiaire. Ceux que vous rencontrez sont ceux qui filment, montent et gèrent vos pubs.</p>
   <div class="who rv"><div><b>Ryan</b><span data-en="Shoots · your main contact">Tournage · votre contact principal</span></div><div><b>Yafet</b><span data-en="Editing · ads · strategy">Montage · pubs · stratégie</span></div><div><b data-en="Us">Nous</b><span data-en="Laval / Montréal · French and English">Laval / Montréal · français et anglais</span></div></div>
  </div>
+ <div class="tv rv" id="tv"><video muted loop playsinline preload="none" poster="media/team-01-intro.jpg" data-src="media/team-01-intro.mp4"></video></div>
 </div></section>
 
 <section id="cta"><div class="wrap cg">
@@ -435,8 +438,10 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
 $$('.rv,.io').forEach((e,i)=>io.observe(e));
 $$('.svc').forEach((s,i)=>{s.style.transitionDelay=(i%4)*90+'ms';s.addEventListener('click',()=>{if(!fine)s.classList.toggle('flip')})});
 
+if(fine)$$('.of').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--gx',e.clientX-r.left+'px');c.style.setProperty('--gy',e.clientY-r.top+'px')}));
+
 /* ---------- WebGL hero ---------- */
-const CL=['carhealers-08','msstireshine-01','roofstar-01','shawarmamoods-02','confort-01','crepesenrose-01','carhealers-07','events-01','godefroi-01','roofstar-03'];
+const CL=['godefroi-01','carhealers-08','msstireshine-01','roofstar-01','shawarmamoods-02','confort-01','crepesenrose-01','carhealers-07','events-01','roofstar-03'];
 let GL=null;
 function initGL(){
  const cv=$('#gl'),R=new THREE.WebGLRenderer({canvas:cv,antialias:!mob,alpha:true,powerPreference:'high-performance'});
@@ -483,7 +488,7 @@ function initGL(){
 try{if(!window.THREE)throw 0;initGL()}catch(e){document.documentElement.classList.add('nogl');$('#gl').style.display='none';GL=null}
 
 /* ---------- portfolio ring ---------- */
-const PF=[['carhealers-08','164K'],['msstireshine-01','2M'],['shawarmamoods-02','110K'],['confort-01','18K'],['roofstar-01','3K'],['crepesenrose-01','12.8K'],['godefroi-01',''],['events-01','2.9K']];
+const PF=[['godefroi-01','600K'],['carhealers-08','164K'],['msstireshine-01','2M'],['shawarmamoods-02','110K'],['confort-01','18K'],['roofstar-01','3K'],['crepesenrose-01','12.8K'],['events-01','2.9K']];
 const ring=$('#ring'),stage=$('#stage');
 ring.innerHTML=PF.map(([n,v])=>`<div class="pc" style="background-image:url(media/${n}.jpg)"><video muted loop playsinline preload="none" data-src="media/${n}.mp4"></video>${v?`<span class="v">${v}</span>`:''}</div>`).join('');
 const pcs=$$('.pc',ring),PN=pcs.length,ST=360/PN;let rad=400,ang=0,vel=0,drag=false,lx=0,ringOn=false,front=-1;
