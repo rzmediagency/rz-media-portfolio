@@ -310,7 +310,7 @@ nav{background:rgba(6,9,15,.55);border:1px solid transparent;background-clip:pad
 
 <canvas id="stars"></canvas><div class="spot" id="spot"></div>
 <script>
-const WALL=[['confort-01',''],['carhealers-08','164K'],['shawarmamoods-02','110K'],['carhealers-07','6.9K'],['msstireshine-01','2M'],['crepesenrose-01','12.8K'],['carhealers-02','5.6K'],['roofstar-01','3K'],['carhealers-05','4.6K'],['events-01','2.9K']];
+const WALL=[['confort-01','18K'],['carhealers-08','164K'],['shawarmamoods-02','110K'],['carhealers-07','6.9K'],['msstireshine-01','2M'],['crepesenrose-01','12.8K'],['carhealers-02','5.6K'],['roofstar-01','3K'],['carhealers-05','4.6K'],['events-01','2.9K']];
 const GRID=['confort-01','carhealers-03','roofstar-06','carhealers-10','crepesenrose-02','godefroi-01','carhealers-04','roofstar-03'];
 let LANG='fr';try{LANG=localStorage.getItem('rz-lang')||'fr'}catch(e){}
 function setLang(l){document.querySelectorAll('[data-en]').forEach(el=>{if(el.dataset.fr===undefined)el.dataset.fr=el.innerHTML;el.innerHTML=l==='en'?el.dataset.en:el.dataset.fr});document.documentElement.lang=l;document.querySelectorAll('[data-ph-en]').forEach(i=>{if(!i.dataset.phFr)i.dataset.phFr=i.placeholder;i.placeholder=l==='en'?i.dataset.phEn:i.dataset.phFr});const b=document.getElementById('lang');b.textContent=l==='en'?'FR':'EN';b.setAttribute('aria-label',l==='en'?'Français':'English');if(document.querySelector('.hero h1').dataset.en)splitH&&setTimeout(splitH,0);LANG=l;try{localStorage.setItem('rz-lang',l)}catch(e){}}
