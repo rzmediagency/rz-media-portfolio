@@ -251,7 +251,7 @@ nav{background:rgba(6,9,15,.55);border:1px solid transparent;background-clip:pad
   <div class="stat rv"><div class="n" data-to="40" data-fmt="k">0</div><div class="l" data-en="in sales from $1,955 of ads, roofer">en ventes avec 1 955 $ de pub, couvreur</div></div>
   <div class="stat rv"><div class="n" data-to="100" data-fmt="p">0</div><div class="l" data-en="qualified leads a month">leads qualifiés par mois</div></div>
  </div>
- <div class="logos rv"><div class="row"><span>Car Healers</span><span>Roofstar</span><span>MSS Tire Shine</span><span>Crêpes en Rose</span><span>Shawarma Moods</span><span>Cars & Coffee</span><span>Lamborghini Montréal</span><span>Maison Godefroi</span><span>Car Healers</span><span>Roofstar</span><span>MSS Tire Shine</span><span>Crêpes en Rose</span><span>Shawarma Moods</span><span>Cars & Coffee</span><span>Lamborghini Montréal</span><span>Maison Godefroi</span></div></div>
+ <div class="logos rv"><div class="row"><span>Car Healers</span><span>Roofstar</span><span>MSS Tire Shine</span><span>Crêpes en Rose</span><span>Shawarma Moods</span><span>Cars & Coffee</span><span>Lamborghini Montréal</span><span>Cordonnerie Confort Atelier</span><span>Maison Godefroi</span><span>Car Healers</span><span>Roofstar</span><span>MSS Tire Shine</span><span>Crêpes en Rose</span><span>Shawarma Moods</span><span>Cars & Coffee</span><span>Lamborghini Montréal</span><span>Cordonnerie Confort Atelier</span><span>Maison Godefroi</span></div></div>
  <p class="more rv" data-en="…and many more businesses across Greater Montréal.">…et plusieurs autres entreprises du Grand Montréal.</p>
 </div></section>
 
@@ -314,14 +314,14 @@ nav{background:rgba(6,9,15,.55);border:1px solid transparent;background-clip:pad
 
 <canvas id="stars"></canvas><div class="spot" id="spot"></div>
 <script>
-const WALL=[['carhealers-08','164K'],['shawarmamoods-02','110K'],['carhealers-07','6.9K'],['msstireshine-01','2M'],['crepesenrose-01','12.8K'],['carhealers-02','5.6K'],['roofstar-01','3K'],['carhealers-05','4.6K'],['events-01','2.9K']];
-const GRID=['carhealers-03','roofstar-06','carhealers-10','crepesenrose-02','godefroi-01','carhealers-04','roofstar-03','shawarmamoods-01'];
+const WALL=[['confort-01',''],['carhealers-08','164K'],['shawarmamoods-02','110K'],['carhealers-07','6.9K'],['msstireshine-01','2M'],['crepesenrose-01','12.8K'],['carhealers-02','5.6K'],['roofstar-01','3K'],['carhealers-05','4.6K'],['events-01','2.9K']];
+const GRID=['confort-01','carhealers-03','roofstar-06','carhealers-10','crepesenrose-02','godefroi-01','carhealers-04','roofstar-03'];
 let LANG='fr';try{LANG=localStorage.getItem('rz-lang')||'fr'}catch(e){}
 function setLang(l){document.querySelectorAll('[data-en]').forEach(el=>{if(el.dataset.fr===undefined)el.dataset.fr=el.innerHTML;el.innerHTML=l==='en'?el.dataset.en:el.dataset.fr});document.documentElement.lang=l;document.querySelectorAll('[data-ph-en]').forEach(i=>{if(!i.dataset.phFr)i.dataset.phFr=i.placeholder;i.placeholder=l==='en'?i.dataset.phEn:i.dataset.phFr});const b=document.getElementById('lang');b.textContent=l==='en'?'FR':'EN';b.setAttribute('aria-label',l==='en'?'Français':'English');if(document.querySelector('.hero h1').dataset.en)splitH&&setTimeout(splitH,0);LANG=l;try{localStorage.setItem('rz-lang',l)}catch(e){}}
 document.getElementById('lang').onclick=()=>setLang(LANG==='en'?'fr':'en');
 const vid=(f)=>`<video muted loop playsinline preload="none" poster="media/${f}.jpg" data-src="media/${f}.mp4"></video>`;
 const track=document.getElementById('track'), mid=(WALL.length-1)/2;
-const tiles=WALL.map(([f,v])=>{const el=document.createElement('div');el.className='tile';el.innerHTML=vid(f)+`<span class="v">▶ ${v} <span data-en="views">vues</span></span>`;track.appendChild(el);return el});
+const tiles=WALL.map(([f,v])=>{const el=document.createElement('div');el.className='tile';el.innerHTML=vid(f)+(v?`<span class="v">▶ ${v} <span data-en="views">vues</span></span>`:'');track.appendChild(el);return el});
 let off=0,spd=.0011,hover=false,last=performance.now();track.addEventListener('pointerenter',()=>hover=true);track.addEventListener('pointerleave',()=>hover=false);
 (function spin(t){const dt=t-last;last=t;off+=(hover?.25:1)*spd*dt;const n=tiles.length,W=innerWidth<900?150:204;
  tiles.forEach((el,i)=>{let d=((i-off)%n+n)%n;if(d>n/2)d-=n;const a=Math.abs(d);el.style.transform=`translate3d(${(d*W).toFixed(1)}px,${(a*a*5).toFixed(1)}px,${(-a*a*14).toFixed(1)}px) rotateY(${(-d*8).toFixed(2)}deg)`;const v=el.querySelector('video'),on=a<(innerWidth<900?1.6:2.6);if(on!==el._on){el._on=on;if(on){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else v.pause()}el.style.opacity=Math.max(0,1-Math.max(0,a-3.2)*1.2);el.style.zIndex=100-Math.round(a*10)});
