@@ -285,6 +285,13 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 .curve .ar{opacity:0;transition:opacity 1.6s 1.3s}
 .v40.in .ln{stroke-dashoffset:0}.v40.in .ar{opacity:1}
 @media(min-width:900px){.v40{margin-top:24px}.v40g{grid-template-columns:auto 1fr;gap:50px}.curve{height:150px}}
+
+.rcta{display:flex;justify-content:center;margin-top:34px}
+.fab{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:10px;white-space:nowrap;background:var(--ac);color:#02040a;font-weight:700;font-size:1rem;padding:16px 22px;border-radius:99px;box-shadow:0 12px 40px -6px rgba(59,156,255,.75),0 0 0 1px rgba(255,255,255,.15) inset;transform:translate(-50%,160%);opacity:0;transition:transform .6s var(--ez),opacity .4s}
+.fab.on{transform:translate(-50%,0);opacity:1}
+.fab i{width:7px;height:7px;border-radius:50%;background:#02040a;animation:pu2 1.8s infinite}
+@keyframes pu2{0%{box-shadow:0 0 0 0 rgba(2,4,10,.5)}70%{box-shadow:0 0 0 8px rgba(2,4,10,0)}100%{box-shadow:0 0 0 0 rgba(2,4,10,0)}}
+@media(min-width:900px){.fab{display:none}}
 </style>
 </head>
 <body class="lock">
@@ -300,6 +307,8 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 </svg></div></div><span class="tag">Laval · Montréal</span><span class="pct">0</span></div>
 <div id="grain"></div><div id="c1"></div><div id="c2"></div>
 <canvas id="gl"></canvas>
+
+<a class="fab" id="fab" href="#cta"><i></i><span data-en="Book an 11-min call">Réserver un appel de 11 min</span><span class="ar">→</span></a>
 
 <header class="nav">
  <a href="#hero" aria-label="RZ Media"><svg class="logo" role="img" aria-label="RZ Media" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2182.51 1615.73">
@@ -352,6 +361,7 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
   </div>
  </article>
  <p class="rnote rv" data-en="Real client results. Yours will depend on your market, your offer and your budget.">Résultats réels de clients. Les vôtres dépendent de votre marché, de votre offre et de votre budget.</p>
+ <div class="rcta rv"><a class="btn" href="#cta" data-mag data-h><span data-en="Book an 11-min call">Réserver un appel de 11 min</span><span class="ar">→</span></a></div>
 </div></section>
 
 <section id="offer"><div class="wrap">
@@ -539,7 +549,7 @@ function ringTick(){if(!ringOn)return;if(!drag){ang+=vel;vel*=.94;if(Math.abs(ve
 
 /* ---------- main loop ---------- */
 const hero=$('#hero'),htxt=$('#htxt'),shh=$('#sh'),how=$('#how'),htrack=$('#htrack'),hbar=$('#hbar'),steps=$$('.step'),nav=$('.nav'),pin=$('.pin'),glc=$('#gl');
-let lastY=0;
+let lastY=0;const fab=$('#fab'),ctaS=$('#cta');
 function loop(ts){const t=ts/1000,y=scrollY,vh=innerHeight;
  if(lenis)lenis.raf(ts);
  const hp=cl(y/vh)*.36,heroOn=y<hero.offsetHeight;
@@ -547,7 +557,7 @@ function loop(ts){const t=ts/1000,y=scrollY,vh=innerHeight;
  shh.style.opacity=1-cl(hp/.05);pin.style.setProperty('--vg',lerp(1,.25,sm(.1,.5,hp)));
  
  if(GL){glc.style.visibility=heroOn?'visible':'hidden';GL.play(heroOn&&!document.hidden);if(heroOn)GL.draw(t,hp)}
- nav.classList.toggle('scrolled',y>vh*.5);nav.classList.toggle('hide',y>lastY&&y>hero.offsetHeight);lastY=y;
+ nav.classList.toggle('scrolled',y>vh*.5);nav.classList.toggle('hide',innerWidth<900&&y>lastY&&y>hero.offsetHeight);fab.classList.toggle('on',y>vh*.8&&ctaS.getBoundingClientRect().top>vh*.85);lastY=y;
  ringTick();requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 
