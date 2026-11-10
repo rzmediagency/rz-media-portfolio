@@ -264,6 +264,27 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 .op b{font-weight:600;color:var(--mute)}.op i{color:var(--ac);font-style:normal}.op .hi{color:var(--fg);font-weight:800}
 .tg{grid-template-columns:1fr}
 @media(min-width:900px){#offer{padding:40px 0 100px}.og{grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}.of{padding:34px 32px;gap:24px}.on{font-size:3.6rem}.tg{grid-template-columns:1fr .8fr}}
+
+.nums{display:grid;gap:18px;margin-top:30px;align-items:start}
+.spend b{transform:none;transition:font-size 2s .5s var(--ez),color 2s .5s}
+.res.in .spend b{transform:none;font-size:1.7rem;color:var(--mute)}
+.res.in .spend{margin-right:0}
+.rx{display:flex;align-items:baseline;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.rx b{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--ac2)}
+.rx span{color:#c1cad7}
+.v40{margin-top:18px}
+.v40g{display:grid;gap:8px;margin-top:24px;align-items:end}
+.v40g small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.vb{display:block;font-size:clamp(3.4rem,10.5vw,7rem);font-weight:800;letter-spacing:-.06em;line-height:.9;white-space:nowrap;background:linear-gradient(100deg,#fff 30%,var(--ac2) 60%,var(--ac));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tops{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.tops u{text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-right:4px}
+.tops span{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.tops span::before{content:"▶ ";color:var(--ac);font-size:10px}
+.curve{width:100%;height:100px;display:block;overflow:visible}
+.curve .ln{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s .4s var(--ez);filter:drop-shadow(0 0 8px rgba(59,156,255,.8))}
+.curve .ar{opacity:0;transition:opacity 1.6s 1.3s}
+.v40.in .ln{stroke-dashoffset:0}.v40.in .ar{opacity:1}
+@media(min-width:900px){.v40{margin-top:24px}.v40g{grid-template-columns:auto 1fr;gap:50px}.curve{height:150px}}
 </style>
 </head>
 <body class="lock">
@@ -313,14 +334,23 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
    <div class="rtop"><span class="chip" data-en="Meta Ads · Body shop">Meta Ads · Carrosserie</span><span class="mult">29×</span></div>
    <div class="nums"><div class="spend"><small data-en="Ad spend">Investi en pub</small><b data-n="367" data-static>367 $</b></div><div class="sales"><small data-en="Sales">Ventes</small><b data-n="10650">0 $</b></div></div>
    <div class="bars"><div><u data-en="Ads">Pub</u><i class="bs"></i></div><div><u data-en="Sales">Ventes</u><i class="bv"></i></div></div>
+   <div class="rx"><b>40</b><span data-en="qualified leads per month">leads qualifiés par mois</span></div>
   </article>
   <article class="res io" style="--r:4.2%">
    <div class="rtop"><span class="chip" data-en="Google Ads · Roofing">Google Ads · Toiture</span><span class="mult">20×</span></div>
    <div class="nums"><div class="spend"><small data-en="Ad spend">Investi en pub</small><b data-n="1955" data-static>1 955 $</b></div><div class="sales"><small data-en="Sales">Ventes</small><b data-n="40000">0 $</b></div></div>
    <div class="bars"><div><u data-en="Ads">Pub</u><i class="bs"></i></div><div><u data-en="Sales">Ventes</u><i class="bv"></i></div></div>
+   <div class="rx"><b>100</b><span data-en="qualified phone calls in 7 months">appels qualifiés en 7 mois</span></div>
   </article>
  </div>
- <div class="stat40 rv"><b>40M+</b><span data-en="organic views for our clients">vues organiques pour nos clients</span></div>
+ <article class="res v40 io">
+  <div class="rtop"><span class="chip" data-en="Organic · No ad spend">Organique · Sans pub</span></div>
+  <div class="v40g">
+   <div><small data-en="Organic views">Vues organiques</small><b class="vb" data-c="40">0M+</b>
+    <div class="tops"><u data-en="Top Reels">Meilleurs Reels</u><span>2M</span><span>600K</span><span>164K</span><span>110K</span></div></div>
+   <svg class="curve" viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b9cff" stop-opacity=".45"/><stop offset="1" stop-color="#3b9cff" stop-opacity="0"/></linearGradient></defs><path class="ar" d="M0,140 C80,136 120,128 170,112 C230,92 260,70 310,40 C345,20 375,10 400,6 L400,150 L0,150Z" fill="url(#cg)"/><path class="ln" pathLength="1" d="M0,140 C80,136 120,128 170,112 C230,92 260,70 310,40 C345,20 375,10 400,6" fill="none" stroke="#8fd3ff" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+  </div>
+ </article>
  <p class="rnote rv" data-en="Real client results. Yours will depend on your market, your offer and your budget.">Résultats réels de clients. Les vôtres dépendent de votre marché, de votre offre et de votre budget.</p>
 </div></section>
 
@@ -434,7 +464,7 @@ if(fine){document.documentElement.classList.add('cur');const c1=$('#c1'),c2=$('#
 /* ---------- reveals + counters ---------- */
 function count(b){const to=+b.dataset.n,t0=performance.now(),D=2400;(function f(t){const k=cl((t-t0)/D),e=1-Math.pow(1-k,4);b.textContent=money(to*e);if(k<1)requestAnimationFrame(f);else b.dataset.done=1})(t0)}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add('in');io.unobserve(el);
- if(el.classList.contains('res'))setTimeout(()=>$$('.sales b',el).forEach(count),450)}),{threshold:.2,rootMargin:'0px 0px -6% 0px'});
+ if(el.classList.contains('res'))setTimeout(()=>{$$('.sales b',el).forEach(count);$$('[data-c]',el).forEach(b=>{const to=+b.dataset.c,t0=performance.now();(function f(t){const k=cl((t-t0)/2200);b.textContent=Math.round(to*(1-Math.pow(1-k,4)))+'M+';if(k<1)requestAnimationFrame(f)})(t0)})},450)}),{threshold:.2,rootMargin:'0px 0px -6% 0px'});
 $$('.rv,.io').forEach((e,i)=>io.observe(e));
 $$('.svc').forEach((s,i)=>{s.style.transitionDelay=(i%4)*90+'ms';s.addEventListener('click',()=>{if(!fine)s.classList.toggle('flip')})});
 
