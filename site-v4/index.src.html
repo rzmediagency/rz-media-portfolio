@@ -306,6 +306,37 @@ h2{font-size:clamp(2.2rem,6vw,5rem)}
 
 .fl2{display:flex;gap:18px;flex-wrap:wrap}
 footer a{transition:color .3s}footer a:hover{color:var(--fg)}
+
+/* testimonial */
+#proof{padding:30px 0 90px;overflow:hidden}
+.pg{display:grid;gap:44px;align-items:center}
+.pv{position:relative;width:min(100%,360px);margin-inline:auto}
+.pvf{position:relative;aspect-ratio:9/16;border-radius:30px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#0b0f16 url(media/testimonial-roofstar.jpg) center/cover;box-shadow:0 60px 140px -40px rgba(59,156,255,.6);z-index:1;transform:perspective(1200px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .5s var(--ez)}
+.pvf video{width:100%;height:100%;object-fit:cover;display:block}
+.halo{position:absolute;inset:-14%;background:conic-gradient(from var(--ha,0deg),transparent,rgba(59,156,255,.55),transparent 35%,rgba(143,211,255,.35),transparent 70%);filter:blur(40px);animation:hspin 8s linear infinite;z-index:0;border-radius:50%}
+@property --ha{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes hspin{to{--ha:360deg}}
+.snd{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;white-space:nowrap;background:rgba(4,6,10,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:12px 18px;font-weight:700;font-size:14px;transition:background .3s,transform .4s var(--ez)}
+.snd:hover{background:var(--ac);color:#02040a;transform:translateX(-50%) scale(1.05)}
+.snd.on{opacity:.0;pointer-events:none}
+.pvf:hover .snd.on{opacity:1;pointer-events:auto}
+.eq{display:flex;gap:2px;align-items:flex-end;height:14px}
+.eq i{width:3px;background:currentColor;border-radius:2px;height:5px;animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{50%{height:14px}}
+.pbar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.12)}
+.pbar i{display:block;height:100%;width:0;background:var(--ac);box-shadow:0 0 12px var(--ac)}
+blockquote{font-size:clamp(2.2rem,5.4vw,4.6rem);line-height:.98;letter-spacing:-.045em;font-weight:800;margin-top:18px}
+.who2{display:flex;align-items:center;gap:12px;margin-top:26px}
+.who2 .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--ac);color:#02040a;font-weight:800;font-size:1.1rem}
+.who2 b{display:block;font-size:1.1rem}.who2 div span{color:var(--mute);font-size:14px}
+.pst{display:grid;grid-template-columns:1fr;gap:12px;margin-top:28px}@media(min-width:520px){.pst{grid-template-columns:1.4fr 1fr}}
+.pst div{border:1px solid var(--line);border-radius:20px;padding:16px 18px;background:linear-gradient(160deg,#0c111a,#06080d);min-width:0}
+.pst small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac2)}
+.pst b{display:block;font-size:clamp(1.25rem,2.1vw,1.75rem);font-weight:800;letter-spacing:-.04em;margin-top:6px;line-height:1.05;white-space:nowrap}
+.pst span{color:var(--mute);font-size:13px}
+.pq{margin-top:22px;color:#c1cad7;font-size:15px;max-width:520px;border-left:2px solid var(--ac);padding-left:14px}
+@media(min-width:900px){#proof{padding:50px 0 120px}.pg{grid-template-columns:.8fr 1fr;gap:80px}.pv{width:min(100%,380px)}}
 </style>
 </head>
 <body class="lock">
@@ -318,7 +349,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--fg)}
 
 <header class="nav">
  <a href="#hero" aria-label="RZ Media">@@LOGO@@</a>
- <nav class="mid"><a href="#results" data-en="Results">Résultats</a><a href="#offer" data-en="The offer">L'offre</a><a href="#work" data-en="Work">Projets</a><a href="#team" data-en="Founders">Fondateurs</a></nav>
+ <nav class="mid"><a href="#results" data-en="Results">Résultats</a><a href="#proof" data-en="Testimonial">Témoignage</a><a href="#offer" data-en="The offer">L'offre</a><a href="#work" data-en="Work">Projets</a><a href="#team" data-en="Founders">Fondateurs</a></nav>
  <div class="rt"><button class="lang" id="lang" aria-label="Language"><b>FR</b> / EN</button><a class="pill" href="#cta" data-h><i></i><span data-en="Book a call">Réserver un appel</span></a></div>
 </header>
 
@@ -364,6 +395,26 @@ footer a{transition:color .3s}footer a:hover{color:var(--fg)}
  </article>
  <p class="rnote rv" data-en="Real client results. Yours will depend on your market, your offer and your budget.">Résultats réels de clients. Les vôtres dépendent de votre marché, de votre offre et de votre budget.</p>
  <div class="rcta rv"><a class="btn" href="#cta" data-mag data-h><span data-en="Book an 11-min call">Réserver un appel de 11 min</span><span class="ar">→</span></a></div>
+</div></section>
+
+<section id="proof"><div class="wrap pg">
+ <div class="pv rv" id="pv">
+  <div class="pvf"><video id="tvid" muted loop playsinline preload="none" poster="media/testimonial-roofstar.jpg" data-src="media/testimonial-roofstar.mp4"></video>
+   <button class="snd" id="snd" type="button" data-h><span class="eq"><i></i><i></i><i></i></span><b id="sndt" data-en="Watch with sound">Regarder avec le son</b></button>
+   <div class="pbar"><i id="pbar"></i></div>
+  </div>
+  <div class="halo"></div>
+ </div>
+ <div class="pt">
+  <span class="eyebrow rv" data-en="Client testimonial">Témoignage client</span>
+  <blockquote class="io"><span class="mask"><span data-en="&ldquo;I had to ask you guys">« J'ai dû vous demander</span></span><span class="mask"><span data-en="to &lt;em&gt;stop the ads.&lt;/em&gt;">d'<em>arrêter les pubs.</em></span></span><span class="mask"><span data-en="I'm fully booked.&rdquo;">Je suis booké au complet. »</span></span></blockquote>
+  <div class="who2 rv"><span class="av">J</span><div><b>Joudy</b><span data-en="Roofstar · Roofing">Roofstar · Toiture</span></div></div>
+  <div class="pst rv">
+   <div><small data-en="Google Ads">Google Ads</small><b data-en="$1,955 → $40,000">1 955 $ → 40 000 $</b><span data-en="in sales">en ventes</span></div>
+   <div><small data-en="Leads">Leads</small><b>100</b><span data-en="qualified calls in 7 months">appels qualifiés en 7 mois</span></div>
+  </div>
+  <p class="pq rv" data-en="&ldquo;Absolutely, I already did. I will keep on doing it.&rdquo; Joudy, when asked if she would refer us.">« Absolument, je l'ai déjà fait. Et je vais continuer. » Joudy, quand on lui a demandé si elle nous recommanderait.</p>
+ </div>
 </div></section>
 
 <section id="offer"><div class="wrap">
@@ -548,6 +599,16 @@ function ringTick(){if(!ringOn)return;if(!drag){ang+=vel;vel*=.94;if(Math.abs(ve
 
 /* ---------- founders video ---------- */
 {const v=$('#tv video');new IntersectionObserver(e=>{if(e[0].isIntersecting){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else v.pause()},{threshold:.3}).observe(v)}
+
+/* ---------- testimonial ---------- */
+{const v=$('#tvid'),b=$('#snd'),bt=$('#sndt'),bar=$('#pbar'),f=$('.pvf');let loud=false;
+ new IntersectionObserver(e=>{if(e[0].isIntersecting){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else{v.pause()}},{threshold:.35}).observe(v);
+ v.addEventListener('timeupdate',()=>{if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%'});
+ b.addEventListener('click',()=>{if(!v.src)v.src=v.dataset.src;loud=!loud;v.muted=!loud;if(loud){v.currentTime=0;v.loop=false;v.play().catch(()=>{})}else v.loop=true;
+  b.classList.toggle('on',loud);bt.textContent=loud?(lang==='fr'?'Couper le son':'Mute'):(lang==='fr'?'Regarder avec le son':'Watch with sound')});
+ v.addEventListener('ended',()=>{loud=false;v.muted=true;v.loop=true;v.play().catch(()=>{});b.classList.remove('on');bt.textContent=lang==='fr'?'Regarder avec le son':'Watch with sound'});
+ if(fine){f.addEventListener('mousemove',e=>{const r=f.getBoundingClientRect();f.style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*12+'deg');f.style.setProperty('--rx',-((e.clientY-r.top)/r.height-.5)*8+'deg')});
+  f.addEventListener('mouseleave',()=>{f.style.setProperty('--ry','0deg');f.style.setProperty('--rx','0deg')})}}
 
 /* ---------- main loop ---------- */
 const hero=$('#hero'),htxt=$('#htxt'),shh=$('#sh'),how=$('#how'),htrack=$('#htrack'),hbar=$('#hbar'),steps=$$('.step'),nav=$('.nav'),pin=$('.pin'),glc=$('#gl');
